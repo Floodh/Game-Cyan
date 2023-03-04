@@ -31,7 +31,7 @@ jobs:
     - name: Set up OpenGL
       uses: openrndr/setup-opengl@v1.1
 
-    - run: xvfb-run glxinfo  
+    #- run: xvfb-run glxinfo  
 
     - name: make
       run: make
