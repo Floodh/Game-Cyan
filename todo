@@ -1,0 +1,43 @@
+will do:
+
+    -   Implement terrain generation based on the pixels in .bmp files
+        Each pixel colors determine what type will be generated in a coresponding world area.
+        Basic terrain generation should contain one color for standard landmass and one for water.
+
+    -   Create a 2d grid of vertexes where quads are drawn from, each vertex position should be moved around
+        semi-randomly to create primitive water animation. 
+        The color of each vertex should normaly be blue unless its spawned within or on the edge of a landmass, in which case it should be white.
+
+    -   Create a player model that can move around on suitable terrain, collosion detection with
+        terrain should primary be done using .bmp files
+
+    -   The Camera should be placed above the player, it should be looking at the player and it should be sligthly tiled.
+
+    -   Implement a main menu which allows the user to start a game.
+
+
+might do:
+
+    -   Enhance terrain generation. Add more terrain types.
+
+    -   Water reflections and/or make the landmass cast shadows on the water. (not in real time)
+
+    -   Animate the player model.
+    
+    -   Add visual effects such as dust when walking.
+
+    -   Hold middle mouse button to move the position of the camera around the player.
+        When realesed the camera should return to its original position.
+
+    -   Add background music.
+
+    -   Add sound effects.
+
+    -   Add gameplay element: pussels.
+
+    -   Add gameplay element: enemies.
+
+    -   Add gameplay element: Multiplayer.
+
+    -   Add a menu that can be accesed mid game, should contain the option to exit to main menu or exit to desktop.
+
