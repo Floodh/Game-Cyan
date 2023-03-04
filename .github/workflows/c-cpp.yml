@@ -23,20 +23,21 @@ jobs:
 
 
     steps:
-    - name: Install
-        run: sudo apt-get install build-essential
-    # - name: Install python
-    #   with:
-    #     python-version: '3.8'
     - uses: actions/checkout@v3
 
+    - name: Install
+        run: sudo apt-get install build-essential
 
-    # Set up OpenGL ? ======>problem here
     - name: Set up OpenGL
       uses: openrndr/setup-opengl@v1.1
 
-    #- run: xvfb-run glxinfo  
+    - run: xvfb-run glxinfo  
 
     - name: make
       run: make
+
+
+    # - name: Install python
+    #   with:
+    #     python-version: '3.8'
 
