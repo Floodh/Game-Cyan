@@ -15,6 +15,6 @@ else
 #	Linux
 #	consider using diffrent flags for sdl2, specificaly -lmingw32 might be specific for windows(maybe)
 cyan : $(codeDir)main.cpp $(codeDir)GraphicUnit.cpp
-	gcc -Wall -o output -m64 $(codeDir)main.cpp $(codeDir)GraphicUnit.cpp -I$(headerDir) -I$(sdl2Include) -lmingw32 -lSDL2main -lSDL2 -L$(sdl2LibWindows) -L$(sdl2Bin) -lXt -lX11 -lGL -lstdc++
+	gcc -Wall -o output -m64 $(codeDir)main.cpp $(codeDir)GraphicUnit.cpp -I$(headerDir) -I$(sdl2Include) -lmingw32 -lSDL2main -lSDL2 -L$(sdl2LibWindows) -L$(sdl2Bin) -lXt -lX11 -lGL -ldl -lglfw -lstdc++
 
 endif
