@@ -1,7 +1,9 @@
 #pragma once
 
+#include "GL_utilities.h"
+
 #include "SDL.h"
-#include <gl/gl.h>
+
 
 class Terrain
 {
@@ -18,6 +20,7 @@ class Terrain
         //  water model
             // vertex array object
             unsigned int vertexArrayObjID;
+            unsigned int vertexBufferObjID;
             GLfloat* landmassVertices;
             GLuint shader;
     

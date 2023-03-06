@@ -1,8 +1,7 @@
 
 #include <iostream>
-#include <gl/gl.h>
 #include "math.h"
-//#include <GL/glu.h>
+
 
 
 #include "SDL.h"

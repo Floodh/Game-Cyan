@@ -1,8 +1,7 @@
 #pragma once
 
 #include "SDL.h"
-#include <gl/gl.h>
-
+#include "GL_utilities.h"
 
 class GraphicUnit{
 

@@ -1,7 +1,8 @@
 #include "Terrain.hpp"
+#include "GL_utilities.h"
 
 #include "SDL.h"
-#include <gl/gl.h>
+
 
 
 Terrain::Terrain()
@@ -13,7 +14,7 @@ Terrain::Terrain()
         };
 
     this->landmassVertices = vertices;
-    this = loadShaders("shader/water.vert", "shader/water.frag");
+    this->shader = loadShaders("shader/water.vert", "shader/water.frag");
 
 	glGenVertexArrays(1, &this->vertexArrayObjID);
 	glBindVertexArray(this->vertexArrayObjID);
@@ -30,6 +31,6 @@ Terrain::Terrain()
 
 void Terrain::Draw()
 {
-	glBindVertexArray(vertexArrayObjID);	// Select VAO
-	glDrawArrays(GL_TRIANGLES, 0, 3);	// draw object  
+	glBindVertexArray(this->vertexArrayObjID);	// Select VAO
+	glDrawArrays(GL_TRIANGLES, 0, 3);	    // draw object  
 }
