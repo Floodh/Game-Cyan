@@ -88,15 +88,12 @@ int main(int argc, char *argv[])
             // RENDERING GOES HERE:
             // ...
             // Clear the screen to WHITE:
-            glClearColor(1.f, 1.f, 1.f, 1.f);
+            glClearColor(0.f, 0.f, 0.2f, 1.f);
             glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
             t.Draw();
 
-            // DRAW A ROUND RECTANGLE WITH AN OUTLINE:
-            float rect_w = 250.f, rect_h = 250.f;
-
-            // PRESENT BACKBUFFER:
+            //  swap buffers
             SDL_GL_SwapWindow(main_window);
         }
     }

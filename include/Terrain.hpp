@@ -3,18 +3,16 @@
 #include "SDL.h"
 #include "GL_utilities.h"
 
-// #include "GL_utilities.h"
-// #include "SDL.h"
-// #include "SDL_opengl.h"
-// #include <GL/gl.h>
+#include "IDrawObject.hpp"
 
-class Terrain
+class Terrain : public IDrawObject
 {
     public:
 
         //  the constructor should later receive the path to a .bmp file.
+        //~Terrain() override = default;
         Terrain();
-        void Draw();
+        void Draw() override;
 
     private:
 
