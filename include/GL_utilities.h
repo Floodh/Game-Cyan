@@ -10,7 +10,7 @@ extern "C" {
 	#include <OpenGL/gl3.h>
 #else
 	#if defined(_WIN32)
-		#include "glew.h"
+		#include "glad.h"
 		#include <GL/gl.h>
 	#else
 		#include <GL/gl.h>

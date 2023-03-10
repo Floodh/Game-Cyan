@@ -1,9 +1,12 @@
 #pragma once
 
+#include "SDL.h"
 #include "GL_utilities.h"
 
-#include "SDL.h"
-
+// #include "GL_utilities.h"
+// #include "SDL.h"
+// #include "SDL_opengl.h"
+// #include <GL/gl.h>
 
 class Terrain
 {

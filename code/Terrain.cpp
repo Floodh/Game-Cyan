@@ -1,9 +1,8 @@
 #include "Terrain.hpp"
-#include "GL_utilities.h"
 
-#include "SDL.h"
+#include <iostream>
 
-
+using namespace std;
 
 Terrain::Terrain()
 {
@@ -13,9 +12,10 @@ Terrain::Terrain()
             0.5f,-0.5f,0.0f
         };
 
+	std::cout << "1" << std::endl;
     this->landmassVertices = vertices;
     this->shader = loadShaders("shader/water.vert", "shader/water.frag");
-
+	std::cout << "2" << std::endl;
 	glGenVertexArrays(1, &this->vertexArrayObjID);
 	glBindVertexArray(this->vertexArrayObjID);
 	// Allocate Vertex Buffer Objects
