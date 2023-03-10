@@ -1,11 +1,15 @@
+//  these needs to be included in this order,
+//  openGl is not allowed to be included before GL_utilities
 #include "SDL.h"
 #include "GL_utilities.h"
+
+
 #include <string>
 #include <iostream>
 #include <iomanip> // for setw
 
 
-//#include "Terrain.hpp"
+#include "Terrain.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -61,7 +65,7 @@ int main(int argc, char *argv[])
         std::cout << std::setw(34) << std::left << "OpenGL Renderer:" << (char *)glGetString(GL_RENDERER) << std::endl;
 
         //auto gProgramID = glCreateProgram();
-        //Terrain t = Terrain();
+        Terrain t = Terrain();
 
         // GAME LOOP:
         while (!should_quit) {
@@ -87,7 +91,7 @@ int main(int argc, char *argv[])
             glClearColor(1.f, 1.f, 1.f, 1.f);
             glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-
+            t.Draw();
 
             // DRAW A ROUND RECTANGLE WITH AN OUTLINE:
             float rect_w = 250.f, rect_h = 250.f;
