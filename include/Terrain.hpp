@@ -4,25 +4,29 @@
 #include "GL_utilities.h"
 
 #include "IDrawObject.hpp"
+#include "Camera.hpp"
+
+#include "Land.hpp"
+#include "Water.hpp"
+
+//  read https://stackoverflow.com/questions/5751749/how-can-i-read-bmp-pixel-values-into-an-array
 
 class Terrain : public IDrawObject
 {
     public:
 
         //  the constructor should later receive the path to a .bmp file.
-        //~Terrain() override = default;
-        Terrain();
+        
+        Terrain() = delete;
+        //  when we define the constructor, we also need to define all its members
+        Terrain(Camera& camera);
         void Draw() override;
 
     private:
 
-        //  landmass model
-
+        //  land model
+        Land land;
         //  water model
-            // vertex array object
-            unsigned int vertexArrayObjID;
-            unsigned int vertexBufferObjID;
-            GLfloat* landmassVertices;
-            GLuint shader;
-    
+        Water water;
+
 };

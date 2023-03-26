@@ -2,3 +2,4 @@
 .vscode
 SDL2-2.26.3-win32-x64
 *.zip
+*.aseprite
