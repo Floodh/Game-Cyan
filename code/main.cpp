@@ -32,13 +32,14 @@ int main(int argc, char *argv[])
                 case SDL_QUIT:
                     should_quit = true;
                     break;
-                case SDL_KEYDOWN:
+                default:
                     //  call Keyboard.HandleEvent here!!!!!!!!
-                    switch (event.key.keysym.sym) {
-                    case SDLK_ESCAPE:
-                        should_quit = true;
-                        break;
-                    }
+                    game.HandleEvent(event);
+                    // switch (event.key.keysym.sym) {
+                    // case SDLK_ESCAPE:
+                    //     should_quit = true;
+                    //     break;
+                    // }
                     break;
                 }
             }

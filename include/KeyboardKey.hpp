@@ -13,5 +13,5 @@ struct KeyboardKey
     SDL_Keycode keycode;    //  SDLK_*, check documentation(which does not exist anymore FFFFFFFFFFFFFFF!CK), is singed int tho
     bool keydown;
     bool keyup; 
-    bool pressed;   //  if the most recent down event has not been followed by a up event
+    bool keypress;   //  if the most recent down event has not been followed by a up event
 };

@@ -4,6 +4,7 @@
 #include "GL_utilities.h"
 
 #include "IDrawObject.hpp"
+#include "Keyboard.hpp"
 
 #include <vector>
 
@@ -20,7 +21,7 @@ class Game
         void Update();  //  may change its state
         void Draw();
         //  this function only needs to pass through the event to Keyboard
-        void HandleEvent(const SDL_KeyboardEvent& event);
+        void HandleEvent(const SDL_Event& event);
 
 
     private:
@@ -29,5 +30,6 @@ class Game
         int windowWidth, windowHeight;
         SDL_Window * window = nullptr;
         SDL_GLContext glContext = nullptr;
+        Keyboard keyboard;
 
 };

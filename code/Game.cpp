@@ -55,6 +55,12 @@ Game::Game(int windowWidth, int windowHeight)
     std::cout << std::setw(34) << std::left << "OpenGL Vendor:" << (char *)glGetString(GL_VENDOR) << std::endl;
     std::cout << std::setw(34) << std::left << "OpenGL Renderer:" << (char *)glGetString(GL_RENDERER) << std::endl;
 
+
+
+    //  other
+    this->keyboard = Keyboard();
+
+
 }
 
 Game::~Game()
@@ -66,7 +72,28 @@ Game::~Game()
 
 void Game::Draw()
 {
+
+    //  rendering here
+
+
+    //  end
+
     SDL_GL_SwapWindow(this->window);
+}
+
+
+void Game::HandleEvent(const SDL_Event& event)
+{
+    switch (event.type)
+    {
+        case SDL_KEYDOWN:
+            this->keyboard.HandleKeydown(event.key.keysym.sym);
+            break;
+        case SDL_KEYUP:
+            this->keyboard.HandleKeydown(event.key.keysym.sym);
+            break;
+    }
+
 }
 
 
