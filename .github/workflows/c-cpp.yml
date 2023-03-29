@@ -17,25 +17,18 @@ jobs:
     - name: make
       run: make
 
+
   buildUbuntu:
 
     runs-on: ubuntu-latest
 
-
     steps:
-    # - uses: actions/checkout@v2
-    # - uses: openrndr/setup-opengl@v1.1
-    # - name: get_opengL
-    #   run: xvfb-run glxinfo
-
     - uses: actions/checkout@v3
     - name: install_dependencies
       run: |
         sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
         sudo apt-get update -y -qq
         sudo apt-get install libsdl2-dev freeglut3-dev mesa-utils
-
-      # -lXt -lX11 -lGL -lm -lstdc++
 
     - uses: actions/checkout@v3
     - name: make
