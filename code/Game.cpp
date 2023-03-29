@@ -37,24 +37,24 @@ Game::Game(int windowWidth, int windowHeight)
     if (0 == (this->window = SDL_CreateWindow("OpenGL Init Example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowWidth, SDL_WINDOW_OPENGL))) {
         throw(std::string("Failed to create window: ") + SDL_GetError());
     }
-
     // CREATE THE OPENGL CONTEXT AND MAKE IT CURRENT:
     if(NULL == (this->glContext = SDL_GL_CreateContext(this->window))) {
         throw(std::string("Failed to create OpenGL context"));
     }
     else SDL_GL_MakeCurrent(this->window, this->glContext);
-
+    
+    #if defined(_WIN32)
     // INITIALIZE GLAD:
     if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
         throw(std::string("Failed to initialize GLAD"));
     }
 
-    // LOG OPENGL VERSION, VENDOR (IMPLEMENTATION), RENDERER, GLSL, ETC.:
+    LOG OPENGL VERSION, VENDOR (IMPLEMENTATION), RENDERER, GLSL, ETC.:
     std::cout << std::setw(34) << std::left << "OpenGL Version: " << GLVersion.major << "." << GLVersion.minor << std::endl;
     std::cout << std::setw(34) << std::left << "OpenGL Shading Language Version: " << (char *)glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     std::cout << std::setw(34) << std::left << "OpenGL Vendor:" << (char *)glGetString(GL_VENDOR) << std::endl;
     std::cout << std::setw(34) << std::left << "OpenGL Renderer:" << (char *)glGetString(GL_RENDERER) << std::endl;
-
+    #endif
 
 
     //  other
