@@ -23,10 +23,15 @@ class Terrain : public IDrawObject
         void Draw() override;
 
     private:
+    
+        //  reference to camera
+        Camera& camera;
 
         //  land model
-        Land land;
+        //Land land;
         //  water model
         Water water;
+
+
 
 };

@@ -1,9 +1,5 @@
 #include "Game.hpp"
 
-#include <string>
-#include <iostream>
-#include <iomanip> // for setw
-
 using namespace std;
 
 
@@ -60,6 +56,8 @@ Game::Game(int windowWidth, int windowHeight)
     //  other
     this->keyboard = Keyboard();
 
+    //  the world will be created when the user clicks on a button
+    this->world = NULL;
 
 }
 
@@ -69,11 +67,20 @@ Game::~Game()
     if (this->window) SDL_DestroyWindow(this->window);
 }
 
+void Game::NewGame(int level)
+{
+    //  level should be used to fetch the right bitmap
+    //  this bitmap should later be sent to the world constructor
+    this->world = new World();
+}
+
 
 void Game::Draw()
 {
 
     //  rendering here
+    if (this->world != NULL)
+        this->world->Draw();
 
 
     //  end
@@ -90,7 +97,7 @@ void Game::HandleEvent(const SDL_Event& event)
             this->keyboard.HandleKeydown(event.key.keysym.sym);
             break;
         case SDL_KEYUP:
-            this->keyboard.HandleKeydown(event.key.keysym.sym);
+            this->keyboard.HandleKeyup(event.key.keysym.sym);
             break;
     }
 

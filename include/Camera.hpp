@@ -20,16 +20,18 @@ class Camera
 
     private:
 
-        GLfloat yaw;
-        GLfloat pitch;
+        GLfloat yaw;        //  left right
+        GLfloat pitch;      //  up down
         GLfloat maxPitch;
         GLfloat minPitch;
 
         GLfloat x, y, z;
+        GLfloat lookAtX, lookAtY, lookAtZ;
 
         //  this matrix needs to be updated
-        //  DO NOT REINTILIZE THIS POINTER, you can modify it, but don't change where it points in memory
+        //  DO NOT REINITILIZE THIS POINTER, you can modify it, but don't change where it points in memory
         GLfloat* viewMatrix;
+
 
 
 
