@@ -13,6 +13,8 @@ class Camera
 
         //  return pointer to its own view matrix
         GLfloat* GetViewMatrix() const;
+        //  return pointer to the projection matrix
+        GLfloat* GetProjectionMatrix() const;
 
         //  update view matrix
         //  to avoid bugs, we should call this every frame
@@ -33,9 +35,9 @@ class Camera
         GLfloat* lookUpVector;
 
 
-        //  this matrix needs to be updated
-        //  DO NOT REINITILIZE THIS POINTER, you can modify it, but don't change where it points in memory
+        //  DO NOT REINITILIZE THESE POINTERS, you can modify their content, but don't change where they points in memory
         GLfloat* viewMatrix;
+        GLfloat* projectionMatrix;
 
 
         void LookAt();

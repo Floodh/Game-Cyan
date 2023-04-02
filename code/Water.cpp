@@ -14,8 +14,8 @@ Water::Water(Camera& camera)
         //  create a test quad
         this->vertices = new GLfloat[valueCount]{
             -0.5, -0.5, 0.0,
-            0.5, -0.5, 0.0,
-            0.5, 0.5, 0.0,
+            0.5, -0.5, 0.5,
+            0.5, 0.5, 0.5,
             -0.5, 0.5, 0.0,
         };
         this->colors = new GLfloat[valueCount]{
@@ -56,12 +56,15 @@ Water::Water(Camera& camera)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObjID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount*sizeof(GLuint), indices, GL_STATIC_DRAW);
 
+    glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
+    
+
 }
 
 void Water::Draw()
 {
     //  when camera is fixed, use this
-    //glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
+    glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
 
 	glBindVertexArray(this->vertexArrayObjID);    // Select VAO
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0L);
