@@ -15,5 +15,5 @@ cyan : $(codeDir)main.cpp $(glad)glad.c $(codeDir)GL_utilities.c $(codeDir)Game.
 else
 #	Linux
 cyan : $(codeDir)main.cpp $(codeDir)GL_utilities.c $(codeDir)Game.cpp $(codeDir)Keyboard.cpp $(codeDir)KeyboardKey.cpp $(codeDir)Camera.cpp $(codeDir)World.cpp $(codeDir)Terrain.cpp $(codeDir)Water.cpp
-	gcc -Wall -o output -m64 $(codeDir)main.cpp $(codeDir)GL_utilities.c $(codeDir)Game.cpp $(codeDir)Keyboard.cpp $(codeDir)KeyboardKey.cpp $(codeDir)Camera.cpp $(codeDir)World.cpp $(codeDir)Terrain.cpp $(codeDir)Water.cpp -I$(headerDir) -I$(sdl2Include) -lSDL2 -L$(sdl2Bin) -lXt -lX11 -lGL -lm -lstdc++
+	gcc -Wall -o output -m64 $(codeDir)main.cpp $(codeDir)GL_utilities.c $(codeDir)Game.cpp $(codeDir)Keyboard.cpp $(codeDir)KeyboardKey.cpp $(codeDir)Camera.cpp $(codeDir)World.cpp $(codeDir)Terrain.cpp $(codeDir)Water.cpp -I$(headerDir) -I$(sdl2Include) -lSDL2 -L$(sdl2Bin) -DGL_GLEXT_PROTOTYPES -lXt -lX11 -lGL -lm -lstdc++
 endif
