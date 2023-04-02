@@ -22,11 +22,21 @@ class Water : public IDrawObject
         // vertex array object
         unsigned int vertexArrayObjID;
 
+        unsigned int indexBufferObjID;
         unsigned int vertexBufferObjID;
         unsigned int colorBufferObjID;
 
+        //  note
+        //      we could potentialy make a buffer for the normals
+        //      but it might be easier to send them in as a premade textures
+        //      we will also probaly send in the offsets as textures aswell
+        GLuint indexCount;
+        GLuint vertexCount;    
+        GLuint valueCount;
+
         GLfloat* vertices;
         GLfloat* colors;
+        GLint* indices;
         
         GLuint shader;
     
