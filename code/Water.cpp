@@ -60,6 +60,9 @@ Water::Water(Camera& camera)
 
 void Water::Draw()
 {
+    //  when camera is fixed, use this
+    //glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
+
 	glBindVertexArray(this->vertexArrayObjID);    // Select VAO
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0L);
 }
