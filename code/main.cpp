@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     try {
 
         Game game{600,600};
+        game.NewGame(0);
 
 
         // GAME LOOP:

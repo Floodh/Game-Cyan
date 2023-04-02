@@ -79,8 +79,11 @@ void Game::Draw()
 {
 
     //  rendering here
-    if (this->world != NULL)
-        this->world->Draw();
+        //  all 3d models is managed by the world
+        if (this->world != NULL)
+            this->world->Draw();
+
+        //  draw UI here
 
 
     //  end
