@@ -4,10 +4,11 @@ Camera::Camera()
     : 
         yaw{0.0}, pitch{0.5}, 
         maxPitch{1.45}, minPitch{1.45}, 
-        x{0.25}, y{1.0}, z{0.0}, 
-        lookAtX{0.0}, lookAtY{0.0}, lookAtZ{0.0}, 
         viewMatrix{new GLfloat[16]}
 {
+    this->position = new GLfloat[3]{0.0, 0.0, 5.5};
+    this->lookAtPosition = new GLfloat[3]{0.0, 0.0, 0.0};
+    this->lookUpVector = new GLfloat[3]{0.0, 1.0, 0};
     this->UpdateViewMatrix();
 }
 
@@ -20,9 +21,21 @@ void Camera::UpdateViewMatrix()
 {
     //  todo
     //  will need to use look at function to update the view matrix.
-
+    
 }
 
+void Camera::SetPosition(const GLfloat x, const GLfloat y, const GLfloat z)
+{
+    this->position[0] = x;
+    this->position[1] = y;
+    this->position[2] = z;
+}
+void Camera::SetLookAt(const GLfloat x, const GLfloat y, const GLfloat z)
+{
+    this->lookAtPosition[0] = x;
+    this->lookAtPosition[1] = y;
+    this->lookAtPosition[2] = z;    
+}
 
 
 
@@ -149,5 +162,29 @@ void Camera::UpdateViewMatrix()
         GLfloat* m = Mult(rot, trans);
         return m;
     }
+
+void Camera::LookAt()
+{
+
+
+
+    GLfloat* n = Normalize(VectorSub(this->position, this->lookAtPosition));
+    GLfloat* u = Normalize(CrossProduct(this->lookUpVector, n));
+    GLfloat* v = CrossProduct(n, u);
+
+
+    // rot = SetMat4(u[0], v[0], n[0], 0,
+    //               u[1], v[1], n[1], 0,
+    //               u[2], v[2], n[2], 0,
+    //               0,   0,   0,   1);
+    GLfloat* rot = new GLfloat[16]{
+        u[0], u[1], u[2], 0,
+        v[0], v[1], v[2], 0,
+        n[0], n[1], n[2], 0,
+        0,   0,   0,   1};
+
+    GLfloat* trans = T(-this->position[0], -this->position[1], -this->position[2]);
+    this->viewMatrix = Mult(rot, trans);
+}
 
     

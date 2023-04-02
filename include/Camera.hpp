@@ -18,6 +18,9 @@ class Camera
         //  to avoid bugs, we should call this every frame
         void UpdateViewMatrix();
 
+        void SetPosition(const GLfloat x, const GLfloat y, const GLfloat z);
+        void SetLookAt(const GLfloat x, const GLfloat y, const GLfloat z);
+
     private:
 
         GLfloat yaw;        //  left right
@@ -25,12 +28,17 @@ class Camera
         GLfloat maxPitch;
         GLfloat minPitch;
 
-        GLfloat x, y, z;
-        GLfloat lookAtX, lookAtY, lookAtZ;
+        GLfloat* position;
+        GLfloat* lookAtPosition;
+        GLfloat* lookUpVector;
+
 
         //  this matrix needs to be updated
         //  DO NOT REINITILIZE THIS POINTER, you can modify it, but don't change where it points in memory
         GLfloat* viewMatrix;
+
+
+        void LookAt();
 
 
 
