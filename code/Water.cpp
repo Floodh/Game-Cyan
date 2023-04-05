@@ -3,7 +3,11 @@
 Water::Water(Camera& camera)
     : camera{camera}
 {
+    #if defined(_WIN32)
     this->shader = loadShaders("shader\\water.vert", "shader\\water.frag");
+    #else
+    this->shader = loadShaders("shader/water.vert", "shader/water.frag");
+    #endif
 
 
     //  world generation here
