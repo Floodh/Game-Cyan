@@ -23,8 +23,8 @@ Camera::Camera()
 			0.0f, 0.0f, -1.0f, 0.0f }
         }
 {
-    this->position = new GLfloat[3]{1.5, 2.5, 3.5};
-    this->lookAtPosition = new GLfloat[3]{0.5, 0.5, 0.5};
+    this->position = new GLfloat[3]{2.0, 1.0, -1.5};
+    this->lookAtPosition = new GLfloat[3]{0.5, 0.0, -1.5};
     this->lookUpVector = new GLfloat[3]{0.0, 1.0, 0};
 
     this->UpdateViewMatrix();
@@ -49,7 +49,7 @@ void Camera::UpdateViewMatrix()
         vec3(this->lookUpVector[0], this->lookUpVector[1], this->lookUpVector[2])
         );
 
-    for (int i = 0; i < 0; i++)
+    for (int i = 0; i < 16; i++)
     {
         this->viewMatrix[i] = result.m[i];
     }

@@ -12,5 +12,4 @@ void main(void)
 {
 	fragColor = inColor;
 	gl_Position = projectionMatrix * viewMatrix * vec4(inPosition, 1.0);
-	//gl_Position = vec4(inPosition, 1.0);
 }

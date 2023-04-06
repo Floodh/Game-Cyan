@@ -17,10 +17,10 @@ Water::Water(Camera& camera)
 
         //  create a test quad
         this->vertices = new GLfloat[valueCount]{
-            -0.5, -0.5, 0.0,
-            0.5, -0.5, 0.5,
-            0.5, 0.5, 0.5,
-            -0.5, 0.5, 0.0,
+            -0.5, -0.5, -2.0,
+            0.5, -0.5, -1.5,
+            0.5, 0.5, -1.5,
+            -0.5, 0.5, -2.0,
         };
         this->colors = new GLfloat[valueCount]{
             0.0, 0.0, 0.5,
