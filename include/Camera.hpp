@@ -36,13 +36,8 @@ class Camera
 
 
         //  DO NOT REINITILIZE THESE POINTERS, you can modify their content, but don't change where they points in memory
-        GLfloat* viewMatrix;
-        GLfloat* projectionMatrix;
-
-
-        void LookAt();
-
-
+        GLfloat* const viewMatrix;
+        GLfloat* const projectionMatrix;
 
 
 };
