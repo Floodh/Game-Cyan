@@ -17,4 +17,7 @@
 //  the size of the .bmp file should be equal to the number of pixels times 4
 //  width and height should get their apropiet values(should be found in the header of the .bmp file)
 //  keep in mind that the values of the pixels are stored in byte, which is to say they are not floats
-GLfloat* LoadBMP(std::string path, int& width, int& height);
+GLfloat* LoadBMP(std::string path, int& width, int& height, int& channels)
+{
+    return stbi_loadf(path, width, height, channels, 0);
+}
