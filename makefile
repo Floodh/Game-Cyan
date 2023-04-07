@@ -6,14 +6,29 @@ sdl2LibWindows = sdl2/lib/windows
 sdl2Bin = sdl2/bin/					#	currently useless
 glad = glad/
 
+#	all cpp and c files
+sources =  $(codeDir)main.cpp 
+sources += $(codeDir)GL_utilities.c 
+sources += $(codeDir)Game.cpp
+sources += $(codeDir)Keyboard.cpp 
+sources += $(codeDir)KeyboardKey.cpp  
+sources += $(codeDir)Camera.cpp 
+sources += $(codeDir)World.cpp 
+sources += $(codeDir)Terrain.cpp 
+sources += $(codeDir)Water.cpp
+sources += $(codeDir)Console.cpp
+ifdef OS
+	sources += $(glad)glad.c 
+endif
+
 all : cyan
 ifdef OS
 #	Windows
-cyan : $(codeDir)main.cpp $(glad)glad.c $(codeDir)GL_utilities.c $(codeDir)Game.cpp $(codeDir)Keyboard.cpp $(codeDir)KeyboardKey.cpp  $(codeDir)Camera.cpp $(codeDir)World.cpp $(codeDir)Terrain.cpp $(codeDir)Water.cpp
-	gcc -Wall -o output -m64 $(codeDir)main.cpp $(glad)glad.c $(codeDir)GL_utilities.c $(codeDir)Game.cpp $(codeDir)Keyboard.cpp $(codeDir)KeyboardKey.cpp $(codeDir)Camera.cpp $(codeDir)World.cpp $(codeDir)Terrain.cpp $(codeDir)Water.cpp -I$(headerDir) -I$(sdl2Include) -I$(glad) -lmingw32 -lSDL2main -lSDL2 -L$(sdl2LibWindows) -L$(sdl2Bin) -lopengl32 -lgdi32 -lstdc++
+cyan : $(sources)
+	gcc -Wall -o output -m64 $(sources) -I$(headerDir) -I$(sdl2Include) -I$(glad) -lmingw32 -lSDL2main -lSDL2 -L$(sdl2LibWindows) -L$(sdl2Bin) -lopengl32 -lgdi32 -lstdc++
 
 else
 #	Linux
-cyan : $(codeDir)main.cpp $(codeDir)GL_utilities.c $(codeDir)Game.cpp $(codeDir)Keyboard.cpp $(codeDir)KeyboardKey.cpp $(codeDir)Camera.cpp $(codeDir)World.cpp $(codeDir)Terrain.cpp $(codeDir)Water.cpp
-	gcc -Wall -o output -m64 $(codeDir)main.cpp $(codeDir)GL_utilities.c $(codeDir)Game.cpp $(codeDir)Keyboard.cpp $(codeDir)KeyboardKey.cpp $(codeDir)Camera.cpp $(codeDir)World.cpp $(codeDir)Terrain.cpp $(codeDir)Water.cpp -I$(headerDir) -I$(sdl2Include) -lSDL2 -L$(sdl2Bin) -DGL_GLEXT_PROTOTYPES -lXt -lX11 -lGL -lm -lstdc++
+cyan : $(sources)
+	gcc -Wall -o output -m64 $(sources) -I$(headerDir) -I$(sdl2Include) -lSDL2 -L$(sdl2Bin) -DGL_GLEXT_PROTOTYPES -lXt -lX11 -lGL -lm -lstdc++
 endif

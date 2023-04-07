@@ -17,7 +17,7 @@ class Water : public IDrawObject
 
     private:
 
-        Camera& camera;
+        Camera& camera;         //  maybe only store pointer to viewMatrix instead?
 
         // vertex array object
         unsigned int vertexArrayObjID;

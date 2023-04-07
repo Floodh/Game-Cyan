@@ -5,9 +5,12 @@
 #include <iostream>
 
 //  I/O inspired by C#'s console class
-class Console
+namespace Console
 {
-    void WriteLine(std::string content);
+    //  print string
+    void WriteLine(std::string const& content);
+    //  print 1d array
     void WriteLine(GLfloat* value, const int size);
+    //  print 1d array as 2d matrix
     void WriteLine(GLfloat* value, const int width, const int height);
 };
