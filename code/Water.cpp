@@ -12,10 +12,12 @@ Water::Water(Camera& camera)
     this->shader = loadShaders("shader/water.vert", "shader/water.frag");
 
     //  world data contaisn information about the quads NOT the vertexes
+    int detailMultipler = 2;
+
     int worldHeight = 3;
     int worldWidth = 3;
-    int vertexHeight = worldHeight + 1;
-    int vertexWidth = worldWidth + 1;
+    int vertexHeight = (worldHeight * detailMultipler) + 1;
+    int vertexWidth = (worldWidth * detailMultipler) + 1;
     GLint* worldData = new GLint[worldHeight * worldWidth * 4]  //  placeholder for testing
     {
         99, 155, 255,
@@ -34,7 +36,7 @@ Water::Water(Camera& camera)
 
 
     //  world generation here
-        this->indexCount = worldHeight * worldWidth * 2 * 3;    //  number of quads multiplied by 2 to get number of triangles, multiplied by 3 to get number of indexes for the triangles.
+        this->indexCount = worldHeight * worldWidth * 2 * 3 * detailMultipler * detailMultipler;    //  number of quads multiplied by 2 to get number of triangles, multiplied by 3 to get number of indexes for the triangles.
         this->vertexCount = vertexHeight * vertexWidth;         //  
         this->valueCount = vertexCount * 3;                     //  we have 3 values for each vertex
 
@@ -46,10 +48,10 @@ Water::Water(Camera& camera)
         //  initlize all indexes for indicies
         {
         GLuint count = 0;
-        for (int z = 0; z < worldHeight; z++)
-            for (int x = 0; x < worldWidth; x++)
+        for (int z = 0; z < vertexHeight - 1; z++)
+            for (int x = 0; x < vertexWidth - 1; x++)
             {
-                std::cout << "x = " << x << ", z = " << z  << std::endl;
+
                 int p1Index = (z * vertexWidth) + x;
                 int p2Index = (z * vertexWidth) + x + 1;
                 int p3Index = ((z + 1) * vertexWidth) + x;
@@ -64,8 +66,6 @@ Water::Water(Camera& camera)
                 this->indices[count++] = p4Index;
                 this->indices[count++] = p2Index;
 
-                std::cout << "triangle 1: " << p1Index << ", " << p2Index << ", " << p3Index << ", " << std::endl;
-                std::cout << "triangle 2: " << p3Index << ", " << p4Index << ", " << p2Index << ", " << std::endl << std::endl;
             }
         if (count != indexCount)
         {
@@ -80,9 +80,9 @@ Water::Water(Camera& camera)
             for (int x = 0; x < vertexWidth; x++)
             {
                 std::cout << "x = " << x << ", z = " << z  << std::endl;
-                GLfloat vertexX = (GLfloat)x;
-                GLfloat vertexY = (GLfloat)0.0f; //+ static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 2;
-                GLfloat vertexZ = (GLfloat)z;
+                GLfloat vertexX = (GLfloat)x / detailMultipler;
+                GLfloat vertexY = (GLfloat)0.0f + static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 4;
+                GLfloat vertexZ = (GLfloat)z / detailMultipler;
 
                 GLfloat r = vertexX / vertexHeight, g = vertexZ / vertexHeight,b = 0.9;    //  placeholder values, will be determined by worldData
 

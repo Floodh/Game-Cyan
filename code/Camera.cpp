@@ -23,7 +23,7 @@ Camera::Camera()
 			0.0f, 0.0f, -1.0f, 0.0f }
         }
 {
-    this->position = new GLfloat[3]{-1.0, 2.0, -1.0};
+    this->position = new GLfloat[3]{-1.0, 2.0, -0.5};
     this->lookAtPosition = new GLfloat[3]{1.5, 0.0, 1.5};
     this->lookUpVector = new GLfloat[3]{0.0, 1.0, 0};  //  TODO: why the f!ck does this need to be inverted? or maybe it does not invert it at all? I'm so confused
 
