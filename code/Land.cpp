@@ -61,69 +61,95 @@ Land::Land(Camera& camera)
                         vertices[countVert++] = (GLfloat)ELEVATION;
                         vertices[countVert++] = (GLfloat)z;
 
-                        vertices[countVert++] = (GLfloat)x +1;
+                        vertices[countVert++] = (GLfloat)(x + 1);
                         vertices[countVert++] = (GLfloat)ELEVATION;
                         vertices[countVert++] = (GLfloat)z;
 
+                        vertices[countVert++] = (GLfloat)(x + 1);
+                        vertices[countVert++] = (GLfloat)ELEVATION;
+                        vertices[countVert++] = (GLfloat)(z + 1);
+
                         vertices[countVert++] = (GLfloat)x;
                         vertices[countVert++] = (GLfloat)ELEVATION;
-                        vertices[countVert++] = (GLfloat)z + 1;
-
-                        vertices[countVert++] = (GLfloat)x + 1;
-                        vertices[countVert++] = (GLfloat)ELEVATION;
-                        vertices[countVert++] = (GLfloat)z + 1;                    
+                        vertices[countVert++] = (GLfloat)(z + 1);                    
 
                         vertices[countVert++] = (GLfloat)x;
-                        vertices[countVert++] = (GLfloat)-ELEVATION;    //  maybe set this to just zero?
+                        vertices[countVert++] = (GLfloat)0;
                         vertices[countVert++] = (GLfloat)z;
 
-                        vertices[countVert++] = (GLfloat)x +1;
-                        vertices[countVert++] = (GLfloat)-ELEVATION;
+                        vertices[countVert++] = (GLfloat)(x + 1);
+                        vertices[countVert++] = (GLfloat)0;
                         vertices[countVert++] = (GLfloat)z;
+
+                        vertices[countVert++] = (GLfloat)(x + 1);
+                        vertices[countVert++] = (GLfloat)0;
+                        vertices[countVert++] = (GLfloat)(z + 1);
 
                         vertices[countVert++] = (GLfloat)x;
-                        vertices[countVert++] = (GLfloat)-ELEVATION;
-                        vertices[countVert++] = (GLfloat)z + 1;
-
-                        vertices[countVert++] = (GLfloat)x + 1;
-                        vertices[countVert++] = (GLfloat)-ELEVATION;
-                        vertices[countVert++] = (GLfloat)z + 1;   
+                        vertices[countVert++] = (GLfloat)0;
+                        vertices[countVert++] = (GLfloat)(z + 1);      
 
                     //  set the colors
                         //  green feilds on top
                         for (int i = 0; i < 4; i++)
                         {
-                            this->colors[countColor++] = 0.3;   //  r
-                            this->colors[countColor++] = 0.8;   //  g
-                            this->colors[countColor++] = 0.1;   //  b
+                            this->colors[countColor++] = 0.05;   //  r
+                            this->colors[countColor++] = 0.5;   //  g
+                            this->colors[countColor++] = 0.0;   //  b
                         }
                         //  grey below
                         for (int i = 0; i < 4; i++)
                         {
-                            this->colors[countColor++] = 0.6;   //  r
-                            this->colors[countColor++] = 0.7;   //  g
-                            this->colors[countColor++] = 0.4;   //  b
+                            this->colors[countColor++] = 0.1;   //  r
+                            this->colors[countColor++] = 0.1;   //  g
+                            this->colors[countColor++] = 0.2;   //  b
                         }
                     //  set the indexes
                         int indexOffset = countCubes * 8;
+                        //  top 1
                         indices[countIndex++] = indexOffset + 0; 
                         indices[countIndex++] = indexOffset + 1; 
                         indices[countIndex++] = indexOffset + 2; 
-
-                        indices[countIndex++] = indexOffset + 1; 
+                        //  top
+                        indices[countIndex++] = indexOffset + 0; 
                         indices[countIndex++] = indexOffset + 2; 
                         indices[countIndex++] = indexOffset + 3; 
 
-                        for (int i = 0; i < 4; i++)
-                        {
-                            indices[countIndex++] = indexOffset + i + 0; 
-                            indices[countIndex++] = indexOffset + i + 1; 
-                            indices[countIndex++] = indexOffset + i + 0 + 4;   
+                        //  bottom
+                        //  top 1
+                        indices[countIndex++] = 0; 
+                        indices[countIndex++] = 1; 
+                        indices[countIndex++] = 4; 
+                        //  top
+                        indices[countIndex++] = 1; 
+                        indices[countIndex++] = 5; 
+                        indices[countIndex++] = 4; 
+                        //  top
+                        indices[countIndex++] = 1; 
+                        indices[countIndex++] = 2; 
+                        indices[countIndex++] = 5; 
+                        //  top
+                        indices[countIndex++] = 2; 
+                        indices[countIndex++] = 6; 
+                        indices[countIndex++] = 5; 
 
-                            indices[countIndex++] = indexOffset + i + 1; 
-                            indices[countIndex++] = indexOffset + i + 1 + 4; 
-                            indices[countIndex++] = indexOffset + i + 0 + 4;
-                        }
+                        //  top
+                        indices[countIndex++] = 2; 
+                        indices[countIndex++] = 3; 
+                        indices[countIndex++] = 6; 
+                        //  top
+                        indices[countIndex++] = 3; 
+                        indices[countIndex++] = 7; 
+                        indices[countIndex++] = 6; 
+                        //  top
+                        indices[countIndex++] = 3; 
+                        indices[countIndex++] = 0; 
+                        indices[countIndex++] = 7; 
+                        //  top
+                        indices[countIndex++] = 0; 
+                        indices[countIndex++] = 4; 
+                        indices[countIndex++] = 7; 
+
 
                     countCubes++;
 
