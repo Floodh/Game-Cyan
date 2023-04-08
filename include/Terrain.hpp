@@ -28,7 +28,7 @@ class Terrain : public IDrawObject
         Camera& camera;
 
         //  land model
-        //Land land;
+        Land land;
         //  water model
         Water water;
 

@@ -35,8 +35,8 @@ Water::Water(Camera& camera)
 
     //  world generation here
         this->indexCount = worldHeight * worldWidth * 2 * 3;    //  number of quads multiplied by 2 to get number of triangles, multiplied by 3 to get number of indexes for the triangles.
-        this->vertexCount = vertexHeight * vertexWidth;    
-        this->valueCount = vertexCount * 3; //  we have 3 values for each vertex
+        this->vertexCount = vertexHeight * vertexWidth;         //  
+        this->valueCount = vertexCount * 3;                     //  we have 3 values for each vertex
 
         this->indices = new GLint[indexCount];
         this->vertices = new GLfloat[valueCount];
@@ -45,7 +45,7 @@ Water::Water(Camera& camera)
 
         //  initlize all indexes for indicies
         {
-        int count = 0;
+        GLuint count = 0;
         for (int z = 0; z < worldHeight; z++)
             for (int x = 0; x < worldWidth; x++)
             {

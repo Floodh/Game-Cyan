@@ -16,6 +16,7 @@ sources += $(codeDir)Camera.cpp
 sources += $(codeDir)World.cpp 
 sources += $(codeDir)Terrain.cpp 
 sources += $(codeDir)Water.cpp
+sources += $(codeDir)Land.cpp
 sources += $(codeDir)Console.cpp
 ifdef OS
 	sources += $(glad)glad.c 
