@@ -1,7 +1,7 @@
 #include "Water.hpp"
 
 #include <iostream>
-
+#include <stdlib.h>
 //  green(land) 75 105 47
 //  blue(water) 99 155 255
 
@@ -49,19 +49,23 @@ Water::Water(Camera& camera)
         for (int z = 0; z < worldHeight; z++)
             for (int x = 0; x < worldWidth; x++)
             {
-                int p1Index = (z * worldWidth) + x;
-                int p2Index = (z * worldWidth) + x + 1;
-                int p3Index = ((z + 1) * worldWidth) + x;
-                int p4Index = ((z + 1) * worldWidth) + x + 1;
+                std::cout << "x = " << x << ", z = " << z  << std::endl;
+                int p1Index = (z * vertexWidth) + x;
+                int p2Index = (z * vertexWidth) + x + 1;
+                int p3Index = ((z + 1) * vertexWidth) + x;
+                int p4Index = ((z + 1) * vertexWidth) + x + 1;
 
                 //  this may not be clockwise, this could cause problems with culling and calculating normals
                 this->indices[count++] = p1Index;
                 this->indices[count++] = p2Index;
                 this->indices[count++] = p3Index;
 
-                this->indices[count++] = p2Index;
                 this->indices[count++] = p3Index;
                 this->indices[count++] = p4Index;
+                this->indices[count++] = p2Index;
+
+                std::cout << "triangle 1: " << p1Index << ", " << p2Index << ", " << p3Index << ", " << std::endl;
+                std::cout << "triangle 2: " << p3Index << ", " << p4Index << ", " << p2Index << ", " << std::endl << std::endl;
             }
         if (count != indexCount)
         {
@@ -69,19 +73,21 @@ Water::Water(Camera& camera)
             exit(1);
         }
         }
+        std::cout << std::endl;
 
         //  initlize all vertexes coords and color
         for (int z = 0; z < vertexHeight; z++)
             for (int x = 0; x < vertexWidth; x++)
             {
+                std::cout << "x = " << x << ", z = " << z  << std::endl;
                 GLfloat vertexX = (GLfloat)x;
-                GLfloat vertexY = (GLfloat)0.0f;
+                GLfloat vertexY = (GLfloat)0.0f; //+ static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 2;
                 GLfloat vertexZ = (GLfloat)z;
 
                 GLfloat r = vertexX / vertexHeight, g = vertexZ / vertexHeight,b = 0.9;    //  placeholder values, will be determined by worldData
 
 
-                int indexOffset = ((z * worldWidth) + x) * 3;
+                int indexOffset = ((z * vertexWidth) + x) * 3;
                 this->vertices[indexOffset + 0] = vertexX;
                 this->vertices[indexOffset + 1] = vertexY;
                 this->vertices[indexOffset + 2] = vertexZ;
