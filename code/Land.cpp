@@ -25,7 +25,7 @@ Land::Land(Camera& camera)
         99, 155, 255,
         99, 155, 255,
 
-        99, 155, 255,
+        75, 105, 47,
         75, 105, 47,
         99, 155, 255,
 
@@ -49,13 +49,14 @@ Land::Land(Camera& camera)
         GLuint countColor = 0; 
         GLuint countIndex = 0;
         int countCubes = 0;
-        for (int z = 0; z < vertexHeight; z++)
+        for (int z = 0; z < worldHeight; z++)
         
-            for (int x = 0; x < vertexWidth; x++)
+            for (int x = 0; x < worldWidth; x++)
             {
                 int indexOffset = ((z * worldWidth) + x) * 3;       //  may need to modify this multipler if the world data structyre changes
                 if (worldData[indexOffset] == 75 && worldData[indexOffset + 1] == 105 && worldData[indexOffset + 2] == 47)
                 {
+                    cout << "1, x = " << x << ", z = " << z << ", offset = " << indexOffset << endl;
                     //  create cube/rectangle
                         vertices[countVert++] = (GLfloat)x;
                         vertices[countVert++] = (GLfloat)ELEVATION;
@@ -117,38 +118,38 @@ Land::Land(Camera& camera)
 
                         //  bottom
                         //  top 1
-                        indices[countIndex++] = 0; 
-                        indices[countIndex++] = 1; 
-                        indices[countIndex++] = 4; 
+                        indices[countIndex++] = indexOffset + 0; 
+                        indices[countIndex++] = indexOffset + 1; 
+                        indices[countIndex++] = indexOffset + 4; 
                         //  top
-                        indices[countIndex++] = 1; 
-                        indices[countIndex++] = 5; 
-                        indices[countIndex++] = 4; 
+                        indices[countIndex++] = indexOffset + 1; 
+                        indices[countIndex++] = indexOffset + 5; 
+                        indices[countIndex++] = indexOffset + 4; 
                         //  top
-                        indices[countIndex++] = 1; 
-                        indices[countIndex++] = 2; 
-                        indices[countIndex++] = 5; 
+                        indices[countIndex++] = indexOffset + 1; 
+                        indices[countIndex++] = indexOffset + 2; 
+                        indices[countIndex++] = indexOffset + 5; 
                         //  top
-                        indices[countIndex++] = 2; 
-                        indices[countIndex++] = 6; 
-                        indices[countIndex++] = 5; 
+                        indices[countIndex++] = indexOffset + 2; 
+                        indices[countIndex++] = indexOffset + 6; 
+                        indices[countIndex++] = indexOffset + 5; 
 
                         //  top
-                        indices[countIndex++] = 2; 
-                        indices[countIndex++] = 3; 
-                        indices[countIndex++] = 6; 
+                        indices[countIndex++] = indexOffset + 2; 
+                        indices[countIndex++] = indexOffset + 3; 
+                        indices[countIndex++] = indexOffset + 6; 
                         //  top
-                        indices[countIndex++] = 3; 
-                        indices[countIndex++] = 7; 
-                        indices[countIndex++] = 6; 
+                        indices[countIndex++] = indexOffset + 3; 
+                        indices[countIndex++] = indexOffset + 7; 
+                        indices[countIndex++] = indexOffset + 6; 
                         //  top
-                        indices[countIndex++] = 3; 
-                        indices[countIndex++] = 0; 
-                        indices[countIndex++] = 7; 
+                        indices[countIndex++] = indexOffset + 3; 
+                        indices[countIndex++] = indexOffset + 0; 
+                        indices[countIndex++] = indexOffset + 7; 
                         //  top
-                        indices[countIndex++] = 0; 
-                        indices[countIndex++] = 4; 
-                        indices[countIndex++] = 7; 
+                        indices[countIndex++] = indexOffset + 0; 
+                        indices[countIndex++] = indexOffset + 4; 
+                        indices[countIndex++] = indexOffset + 7; 
 
 
                     countCubes++;
