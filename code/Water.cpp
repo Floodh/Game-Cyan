@@ -41,7 +41,6 @@ Water::Water(Camera& camera)
         75, 105, 47,
         99, 155, 255,
 
-
         75, 105, 47,
         75, 105, 47,
         99, 155, 255,
@@ -104,7 +103,7 @@ Water::Water(Camera& camera)
             {
 
                 GLfloat vertexX = (GLfloat)x / detailMultipler;
-                GLfloat vertexY = (GLfloat)0.0f + static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 4;
+                GLfloat vertexY = (GLfloat)0.125f + static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 8;
                 GLfloat vertexZ = (GLfloat)z / detailMultipler;
 
                 GLfloat r = vertexX / vertexHeight, g = vertexZ / vertexHeight,b = 0.9;    //  placeholder values, will be determined by worldData
@@ -154,9 +153,25 @@ Water::Water(Camera& camera)
 
 void Water::Draw()
 {
+    //  animate the vertexes
+    for (int i = 0; i < this->vertexCount; i++)
+    {
+        this->vertices[(i * 3) + 1] -= (GLfloat)0.0005f * 8;
+        if (this->vertices[(i * 3) + 1] < 0.0f) 
+            this->vertices[(i * 3) + 1] = 0.0f;
+        this->vertices[(i * 3) + 1] += (static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 1000) * 8;
+        if (this->vertices[(i * 3) + 1] > 0.45f) 
+            this->vertices[(i * 3) + 1] = 0.45f;
+    }
+
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
 
 	glBindVertexArray(this->vertexArrayObjID);    // Select VAO
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjID);
+    glBufferData(GL_ARRAY_BUFFER, vertexCount*3*sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(glGetAttribLocation(shader, "inPosition"), 3, GL_FLOAT, GL_FALSE, 0, 0); 
+    glEnableVertexAttribArray(glGetAttribLocation(shader, "inPosition"));
+
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0L);
 }
