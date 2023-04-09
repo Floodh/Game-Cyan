@@ -14,23 +14,43 @@ Water::Water(Camera& camera)
     //  world data contaisn information about the quads NOT the vertexes
     int detailMultipler = 2;
 
-    int worldHeight = 3;
-    int worldWidth = 3;
+    int worldHeight = 5;
+    int worldWidth = 5;
     int vertexHeight = (worldHeight * detailMultipler) + 1;
     int vertexWidth = (worldWidth * detailMultipler) + 1;
-    GLint* worldData = new GLint[worldHeight * worldWidth * 4]  //  placeholder for testing
+    GLint* worldData = new GLint[worldHeight * worldWidth * 3]  //  placeholder for testing
     {
         99, 155, 255,
         99, 155, 255,
         99, 155, 255,
+        75, 105, 47,
+        99, 155, 255,
 
+        75, 105, 47,
+        75, 105, 47,
         99, 155, 255,
         75, 105, 47,
         99, 155, 255,
 
         99, 155, 255,
         99, 155, 255,
+        75, 105, 47,
+        75, 105, 47,
+        99, 155, 255,
+
+
+        75, 105, 47,
+        75, 105, 47,
+        99, 155, 255,
+        99, 155, 255,
+        99, 155, 255,
+
+        99, 155, 255,
+        99, 155, 255,
+        99, 155, 255,
+        99, 155, 255,
         99, 155, 255
+
     };
 
 
@@ -79,7 +99,7 @@ Water::Water(Camera& camera)
         for (int z = 0; z < vertexHeight; z++)
             for (int x = 0; x < vertexWidth; x++)
             {
-                std::cout << "x = " << x << ", z = " << z  << std::endl;
+
                 GLfloat vertexX = (GLfloat)x / detailMultipler;
                 GLfloat vertexY = (GLfloat)0.0f + static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 4;
                 GLfloat vertexZ = (GLfloat)z / detailMultipler;

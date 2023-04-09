@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#define ELEVATION 1.0f
+#define ELEVATION 0.5f
 
 using namespace std;
 
@@ -15,23 +15,43 @@ Land::Land(Camera& camera)
 
     this->shader = loadShaders("shader/water.vert", "shader/water.frag");
     //  world data contaisn information about the quads NOT the vertexes
-    int worldHeight = 3;
-    int worldWidth = 3;
+    int worldHeight = 5;
+    int worldWidth = 5;
     int vertexHeight = worldHeight + 1;
     int vertexWidth = worldWidth + 1;
-    GLint* worldData = new GLint[worldHeight * worldWidth * 4]  //  placeholder for testing
+    GLint* worldData = new GLint[worldHeight * worldWidth * 3]  //  placeholder for testing
     {
         99, 155, 255,
         99, 155, 255,
         99, 155, 255,
+        75, 105, 47,
+        99, 155, 255,
 
         75, 105, 47,
         75, 105, 47,
         99, 155, 255,
+        75, 105, 47,
+        99, 155, 255,
 
+        99, 155, 255,
+        99, 155, 255,
+        75, 105, 47,
+        75, 105, 47,
+        99, 155, 255,
+
+
+        75, 105, 47,
+        75, 105, 47,
+        99, 155, 255,
+        99, 155, 255,
+        99, 155, 255,
+
+        99, 155, 255,
+        99, 155, 255,
         99, 155, 255,
         99, 155, 255,
         99, 155, 255
+
     };
 
     //  world generation here
@@ -42,7 +62,7 @@ Land::Land(Camera& camera)
 
         this->indices = new GLint[indexCount];
         this->vertices = new GLfloat[valueCount];
-        this->colors = new GLfloat[valueCount];                
+        this->colors = new GLfloat[valueCount];
 
         {
         GLuint countVert = 0; 
@@ -56,7 +76,6 @@ Land::Land(Camera& camera)
                 int indexOffset = ((z * worldWidth) + x) * 3;       //  may need to modify this multipler if the world data structyre changes
                 if (worldData[indexOffset] == 75 && worldData[indexOffset + 1] == 105 && worldData[indexOffset + 2] == 47)
                 {
-                    cout << "1, x = " << x << ", z = " << z << ", offset = " << indexOffset << endl;
                     //  create cube/rectangle
                         vertices[countVert++] = (GLfloat)x;
                         vertices[countVert++] = (GLfloat)ELEVATION;
@@ -90,20 +109,20 @@ Land::Land(Camera& camera)
                         vertices[countVert++] = (GLfloat)0;
                         vertices[countVert++] = (GLfloat)(z + 1);      
 
-                    //  set the colors
+                    //  set the colors (maybe replace it with textures?)
                         //  green feilds on top
                         for (int i = 0; i < 4; i++)
                         {
-                            this->colors[countColor++] = 0.05;   //  r
-                            this->colors[countColor++] = 0.5;   //  g
+                            this->colors[countColor++] = 0.005;   //  r
+                            this->colors[countColor++] = 0.083;   //  g
                             this->colors[countColor++] = 0.0;   //  b
                         }
                         //  grey below
                         for (int i = 0; i < 4; i++)
                         {
-                            this->colors[countColor++] = 0.1;   //  r
-                            this->colors[countColor++] = 0.1;   //  g
-                            this->colors[countColor++] = 0.2;   //  b
+                            this->colors[countColor++] = 0.03;   //  r
+                            this->colors[countColor++] = 0.03;   //  g
+                            this->colors[countColor++] = 0.03;   //  b
                         }
                     //  set the indexes
                         int indexOffset = countCubes * 8;
