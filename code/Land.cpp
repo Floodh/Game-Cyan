@@ -13,7 +13,7 @@ Land::Land(Camera& camera)
     : camera{camera}
 {
 
-    this->shader = loadShaders("shader/water.vert", "shader/water.frag");
+    this->shader = loadShaders("shader/land.vert", "shader/land.frag");
     //  world data contaisn information about the quads NOT the vertexes
     int worldHeight = 5;
     int worldWidth = 5;
@@ -38,7 +38,6 @@ Land::Land(Camera& camera)
         75, 105, 47,
         75, 105, 47,
         99, 155, 255,
-
 
         75, 105, 47,
         75, 105, 47,

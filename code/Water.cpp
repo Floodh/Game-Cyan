@@ -5,6 +5,9 @@
 //  green(land) 75 105 47
 //  blue(water) 99 155 255
 
+//  https://www.enkisoftware.com/devlogpost-20150131-1-Normal-generation-in-the-pixel-shader
+//  https://c0de517e.blogspot.com/2008/10/normals-without-normals.html
+
 Water::Water(Camera& camera)
     : camera{camera}
 {
