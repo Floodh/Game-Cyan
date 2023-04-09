@@ -5,6 +5,8 @@
 
 #include "IDrawObject.hpp"
 #include "Camera.hpp"
+#include "TheSun.hpp"
+
 
 class Land : public IDrawObject
 {
@@ -12,12 +14,13 @@ class Land : public IDrawObject
 
         //  the constructor should later receive the content of the .bmp file
         Land() = delete;
-        Land(Camera& camera);
+        Land(Camera& camera, TheSun& theSun);
         void Draw() override;
 
     private:
 
         Camera& camera;         //  maybe only store pointer to viewMatrix instead?
+        TheSun& theSun;
 
         // vertex array object
         unsigned int vertexArrayObjID;
@@ -36,6 +39,7 @@ class Land : public IDrawObject
 
         GLfloat* vertices;
         GLfloat* colors;
+        GLfloat* normals;
         GLint* indices;
         
         GLuint shader;

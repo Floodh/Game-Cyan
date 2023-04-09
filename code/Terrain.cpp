@@ -1,7 +1,7 @@
 #include "Terrain.hpp"
 
-Terrain::Terrain(Camera& camera)
-    : camera{camera}, water{camera}, land{camera}
+Terrain::Terrain(Camera& camera, TheSun& theSun)
+    : camera{camera}, theSun{theSun}, water{camera}, land{camera, theSun}
 {}
 
 void Terrain::Draw()

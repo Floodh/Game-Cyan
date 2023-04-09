@@ -8,6 +8,7 @@
 
 #include "Land.hpp"
 #include "Water.hpp"
+#include "TheSun.hpp"
 
 //  read https://stackoverflow.com/questions/5751749/how-can-i-read-bmp-pixel-values-into-an-array
 
@@ -19,13 +20,14 @@ class Terrain : public IDrawObject
         
         Terrain() = delete;
         //  when we define the constructor, we also need to define all its members
-        Terrain(Camera& camera);
+        Terrain(Camera& camera, TheSun& theSun);
         void Draw() override;
 
     private:
     
         //  reference to camera
         Camera& camera;
+        TheSun& theSun;
 
         //  land model
         Land land;

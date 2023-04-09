@@ -6,7 +6,7 @@
 #include "IDrawObject.hpp"
 #include "Camera.hpp"
 #include "Terrain.hpp"
-
+#include "TheSun.hpp"
 
 #include <vector>
 
@@ -27,7 +27,9 @@ class World
         std::vector<IDrawObject*> drawObjects;
 
         Camera camera;
+        TheSun theSun;
         Terrain terrain;
+        
         
 
 };

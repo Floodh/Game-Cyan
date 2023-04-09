@@ -2,15 +2,17 @@
 
 
 #include <iostream>
+#include <math.h>
 
 #define ELEVATION 0.5f
 
 using namespace std;
 
 int calculateIndexCount(GLint* worldData, int worldWidth, int worldHeight);
+void normalizeVec3(GLfloat* data);
 
-Land::Land(Camera& camera)
-    : camera{camera}
+Land::Land(Camera& camera, TheSun& theSun)
+    : camera{camera}, theSun{theSun}
 {
 
     this->shader = loadShaders("shader/land.vert", "shader/land.frag");
@@ -62,6 +64,7 @@ Land::Land(Camera& camera)
         this->indices = new GLint[indexCount];
         this->vertices = new GLfloat[valueCount];
         this->colors = new GLfloat[valueCount];
+        this->normals = new GLfloat[valueCount];
 
         {
         GLuint countVert = 0; 
@@ -123,6 +126,10 @@ Land::Land(Camera& camera)
                             this->colors[countColor++] = 0.03;   //  g
                             this->colors[countColor++] = 0.03;   //  b
                         }
+
+                    //  set the normals
+                    
+
                     //  set the indexes
                         int indexOffset = countCubes * 8;
                         //  top 1
@@ -233,4 +240,14 @@ int calculateIndexCount(GLint* worldData, int worldWidth, int worldHeight)
             greenPixels++; 
     }
     return greenPixels * 2 * 3 * 5;    //  multiplied by five because were making a partial cube    
+}
+
+
+//  normalizes a vector(x, y, z)
+void normalizeVec3(GLfloat* data)
+{
+    GLfloat norm = (GLfloat)sqrt(data[0] * data[0] + data[1] * data[1] + data[2] * data[2]);
+    data[0] = data[0] / norm;
+    data[1] = data[1] / norm;
+    data[2] = data[2] / norm;
 }

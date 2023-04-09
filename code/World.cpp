@@ -4,7 +4,8 @@ World::World()
     :
         drawObjects{std::vector<IDrawObject*>()},
         camera{},
-        terrain{this->camera}
+        theSun{},
+        terrain{this->camera, this->theSun}
 {
 
 }
