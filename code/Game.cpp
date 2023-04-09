@@ -35,15 +35,8 @@ Game::Game(int windowWidth, int windowHeight)
 
     
 
-    
-    
-    //if( SDL_SetVideoMode( width, height, bpp, flags ) == 0 )
-
-
-
-
     // CREATE AND SDL WINDOW CONFIGURED FOR OPENGL:
-    if (0 == (this->window = SDL_CreateWindow("OpenGL Init Example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowWidth, SDL_WINDOW_OPENGL))) {
+    if (0 == (this->window = SDL_CreateWindow("Cyan", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowWidth, SDL_WINDOW_OPENGL))) {
         throw(std::string("Failed to create window: ") + SDL_GetError());
     }
     // CREATE THE OPENGL CONTEXT AND MAKE IT CURRENT:

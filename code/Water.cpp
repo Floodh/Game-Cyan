@@ -153,6 +153,7 @@ Water::Water(Camera& camera)
 
 void Water::Draw()
 {
+    glUseProgram(shader);
     //  animate the vertexes
     for (int i = 0; i < this->vertexCount; i++)
     {

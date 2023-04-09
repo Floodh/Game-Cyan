@@ -28,6 +28,7 @@ class Land : public IDrawObject
         unsigned int indexBufferObjID;
         unsigned int vertexBufferObjID;
         unsigned int colorBufferObjID;
+        unsigned int normalBufferObjID;
 
         //  note
         //      we could potentialy make a buffer for the normals

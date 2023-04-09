@@ -11,8 +11,8 @@ class TheSun
     public:
 
         TheSun();
-        GLfloat* direction;
-        GLfloat* color;
+        GLfloat* const direction;
+        GLfloat* const color;
 
 
 };

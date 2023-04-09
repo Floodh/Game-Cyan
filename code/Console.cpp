@@ -10,7 +10,7 @@ void Console::WriteLine(string const& content)
 void Console::WriteLine(GLfloat* value, const int size)
 {
     for (int i = 0; i < size; i++)
-        cout << value[i];
+        cout << value[i] << " ";
     cout << endl;
 }
 

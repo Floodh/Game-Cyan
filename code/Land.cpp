@@ -1,5 +1,5 @@
 #include "Land.hpp"
-
+#include "Console.hpp"
 
 #include <iostream>
 #include <math.h>
@@ -69,6 +69,7 @@ Land::Land(Camera& camera, TheSun& theSun)
         {
         GLuint countVert = 0; 
         GLuint countColor = 0; 
+        GLuint countNormal = 0;
         GLuint countIndex = 0;
         int countCubes = 0;
         for (int z = 0; z < worldHeight; z++)
@@ -128,7 +129,47 @@ Land::Land(Camera& camera, TheSun& theSun)
                         }
 
                     //  set the normals
-                    
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normalizeVec3(normals + countNormal - 3);
+                        //Console::WriteLine(normals + countNormal - 3, 3);
+
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normalizeVec3(normals + countNormal - 3);
+                        //Console::WriteLine(normals + countNormal - 3, 3);
+
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normalizeVec3(normals + countNormal - 3);
+
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)1.0f;  
+                        normalizeVec3(normals + countNormal - 3);                  
+
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normals[countNormal++] = (GLfloat)0.0f;      //  consider changeing this to 0.0f
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normalizeVec3(normals + countNormal - 3);
+
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)0.0f;
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normalizeVec3(normals + countNormal - 3);
+
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normals[countNormal++] = (GLfloat)0.0f;
+                        normals[countNormal++] = (GLfloat)1.0f;
+                        normalizeVec3(normals + countNormal - 3);
+
+                        normals[countNormal++] = (GLfloat)-1.0f;
+                        normals[countNormal++] = (GLfloat)0.0f;
+                        normals[countNormal++] = (GLfloat)1.0f; 
+                        normalizeVec3(normals + countNormal - 3);
 
                     //  set the indexes
                         int indexOffset = countCubes * 8;
@@ -182,9 +223,9 @@ Land::Land(Camera& camera, TheSun& theSun)
                 }
             }
         
-        if ( (countIndex != this->indexCount) | (countVert != this->valueCount) | (countColor != this->valueCount) )
+        if ( (countIndex != this->indexCount) | (countVert != this->valueCount) | (countColor != this->valueCount) | (countNormal != this->valueCount) )
         {
-            cout << "Landmass counters does not match the expected values, countIndex = " << countIndex << "/" << this->indexCount << ", countVert = " << countVert << "/" << this->valueCount << ", countColor = " << countColor << "/" << this->valueCount << endl;
+            cout << "Landmass counters does not match the expected values, countIndex = " << countIndex << "/" << this->indexCount << ", countVert = " << countVert << "/" << this->valueCount << ", countColor = " << countColor << "/" << this->valueCount << ", countNormal" << countNormal << "/" << this->valueCount << endl;
             exit(1);
         }
         } 
@@ -197,6 +238,7 @@ Land::Land(Camera& camera, TheSun& theSun)
     glGenBuffers(1, &indexBufferObjID);
     glGenBuffers(1, &vertexBufferObjID);
     glGenBuffers(1, &colorBufferObjID);
+    glGenBuffers(1, &normalBufferObjID);
     
     glBindVertexArray(vertexArrayObjID);
 
@@ -210,16 +252,27 @@ Land::Land(Camera& camera, TheSun& theSun)
     glVertexAttribPointer(glGetAttribLocation(shader, "inColor"), 3, GL_FLOAT, GL_FALSE, 0, 0); 
     glEnableVertexAttribArray(glGetAttribLocation(shader, "inColor"));
 
+    glBindBuffer(GL_ARRAY_BUFFER, normalBufferObjID);
+    glBufferData(GL_ARRAY_BUFFER, vertexCount*3*sizeof(GLfloat), normals, GL_STATIC_DRAW);
+    glVertexAttribPointer(glGetAttribLocation(shader, "inNormal"), 3, GL_FLOAT, GL_FALSE, 0, 0); 
+    glEnableVertexAttribArray(glGetAttribLocation(shader, "inNormal"));
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObjID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount*sizeof(GLuint), indices, GL_STATIC_DRAW);
 
+    Console::WriteLine("The Sun:");
+    Console::WriteLine(this->theSun.direction, 3);
+    Console::WriteLine(this->theSun.color, 3);
+
     glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
-    
+    glUniform3fv(glGetUniformLocation(shader, "lightSourceDirection"), 1, this->theSun.direction);  //  this sh!t does not work
+    glUniform3fv(glGetUniformLocation(shader, "lightSourceColor"), 1, this->theSun.color);
 
 }
 
 void Land::Draw()
 {
+    glUseProgram(shader);
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
 
@@ -227,6 +280,9 @@ void Land::Draw()
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0L);
 }
 
+
+
+//  help functions
 
 int calculateIndexCount(GLint* worldData, int worldWidth, int worldHeight)
 {
