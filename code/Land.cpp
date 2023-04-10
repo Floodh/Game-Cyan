@@ -265,8 +265,7 @@ Land::Land(Camera& camera, TheSun& theSun)
     Console::WriteLine(this->theSun.color, 3);
 
     glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
-    glUniform3fv(glGetUniformLocation(shader, "lightSourceDirection"), 1, this->theSun.direction);  //  this sh!t does not work
-    glUniform3fv(glGetUniformLocation(shader, "lightSourceColor"), 1, this->theSun.color);
+    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.position);
 
 }
 

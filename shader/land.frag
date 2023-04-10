@@ -1,17 +1,16 @@
 #version 150
 
-uniform vec3 lightSourceDirection;
-uniform vec3 lightSourceColor;
-
 in vec3 fragColor;
-in vec3 fragNormal;
+in vec3 eyeRelativePosition;
 
 out vec4 outColor;
 
 void main(void)
 {
+    vec3 dFdxPos = dFdx( eyeRelativePosition );
+    vec3 dFdyPos = dFdy( eyeRelativePosition );
+	vec3 facenormal = normalize( cross(dFdxPos,dFdyPos ));
 
-	outColor = max(0.0, dot(lightSourceDirection, normalize(fragNormal))) * vec4(fragColor, 1.0);
-	outColor.rgb *= lightSourceColor.rgb;
-
+	outColor = vec4(facenormal*0.5 + 0.5,1.0);
+	outColor.rgb *= fragColor;
 }

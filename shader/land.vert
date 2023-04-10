@@ -2,17 +2,17 @@
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
+uniform vec3 eyePosition;
 
 in vec3 inPosition;
 in vec3 inColor;
-in vec3 inNormal;
 
 out vec3 fragColor;
-out vec3 fragNormal;
+out vec3 eyeRelativePosition;
 
 void main(void)
 {
+    gl_Position = projectionMatrix * viewMatrix * vec4(inPosition, 1.0);
 	fragColor = inColor;
-	fragNormal = inNormal;	//	if transformation is done, this line will need to be adjusted (by transformation matrix and rotation matrix for example)
-	gl_Position = projectionMatrix * viewMatrix * vec4(inPosition, 1.0);
+    eyeRelativePosition = inPosition - eyePosition;
 }
