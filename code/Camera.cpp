@@ -13,8 +13,6 @@
 
 Camera::Camera()
     : 
-        yaw{0.0}, pitch{0.5}, 
-        maxPitch{1.45}, minPitch{1.45}, 
         viewMatrix{new GLfloat[16]},
         projectionMatrix{new GLfloat[16]{    	
             2.0f*near/(right-left), 0.0f, (right+left)/(right-left), 0.0f,

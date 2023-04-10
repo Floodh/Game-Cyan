@@ -23,17 +23,9 @@ class Camera
         void SetPosition(const GLfloat x, const GLfloat y, const GLfloat z);
         void SetLookAt(const GLfloat x, const GLfloat y, const GLfloat z);
 
-    private:
-
-        GLfloat yaw;        //  left right
-        GLfloat pitch;      //  up down
-        GLfloat maxPitch;
-        GLfloat minPitch;
-
         GLfloat* position;
         GLfloat* lookAtPosition;
         GLfloat* lookUpVector;
-
 
         //  DO NOT REINITILIZE THESE POINTERS, you can modify their content, but don't change where they points in memory
         GLfloat* const viewMatrix;

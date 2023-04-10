@@ -167,6 +167,8 @@ void Water::Draw()
 
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
+    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.position);
+
 
 	glBindVertexArray(this->vertexArrayObjID);    // Select VAO
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjID);
