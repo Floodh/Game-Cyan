@@ -13,4 +13,8 @@ namespace Console
     void WriteLine(GLfloat* value, const int size);
     //  print 1d array as 2d matrix
     void WriteLine(GLfloat* value, const int width, const int height);
+    //  print 1d array as 2d matrix
+    void WriteLine(unsigned int* value, const int width, const int height);
+    //  print 1d array as 2d matrix
+    void WriteLine(uint8_t* value, const int width, const int height, const int groupSize);
 };
