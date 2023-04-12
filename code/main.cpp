@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
             //  swap buffers
             game.Draw();
 
-            _sleep(24);
+            //_sleep(24);
         }
     }
     catch (std::string e) {

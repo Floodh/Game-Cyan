@@ -50,27 +50,15 @@ uint8_t* LoadBMP(char const *path, int& outWidth, int& outHeight, int& channels)
 	cout << "Width: " << width << endl;
 	cout << "Height: " << height << endl;
 
-    unsigned int* pixels = new unsigned int[width * height];
-
 	if ( bits_per_pixel != 32 )
         return NULL;
-	
 
-    unsigned int bgr;
-    for( int y = 0; y < height; y++)    //  consider inverting this
-    {
-        for( int x = 0; x < width; x++)
-        {
-            std::cout << " " << x << " " << y << std::endl;
-            file.read ((char*)&bgr, 4); 
-            pixels[x + y * width] = bgr;
-        }
-    }
+    //  allocate memory
+    uint8_t* pixelData = new uint8_t[width * height * 4];
 
-    uint8_t* recastedResult = (uint8_t*)(pixels);
-    for (int i = 0; i < width * height * 4; i++)
-        std::cout << "at i = " << i << " gives " <<  (unsigned int)recastedResult[i] << std::endl;
+    //  read the raw file data, conveniently its already in the format we wan't
+    file.read ((char*)pixelData, height * width * 4);
 
-    return recastedResult;
+    return pixelData;
 
 }
