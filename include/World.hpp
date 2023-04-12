@@ -23,9 +23,9 @@ class World
         void Update();
 
     private:
-
         std::vector<IDrawObject*> drawObjects;
 
+    public:
         Camera camera;
         TheSun theSun;
         Terrain terrain;

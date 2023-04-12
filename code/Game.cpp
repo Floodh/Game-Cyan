@@ -88,6 +88,33 @@ void Game::NewGame(int level)
 }
 
 
+void Game::Update()
+{
+
+    if (this->keyboard.GetKey(1073741906).keypress) //  up
+    {
+        this->world->camera.position[0] += 0.01;
+
+    }
+    if (this->keyboard.GetKey(1073741905).keypress) //  down
+    {
+        this->world->camera.position[0] -= 0.01;
+        
+    }
+    if (this->keyboard.GetKey(1073741904).keypress) //  right
+    {
+        
+    }
+    if (this->keyboard.GetKey(1073741903).keypress) //  left
+    {
+        
+    }
+
+    //  keydown and keyup is only valid for one frame, unlike the pressed state
+    this->keyboard.ClearFrameEvents();
+
+}
+
 void Game::Draw()
 {
 

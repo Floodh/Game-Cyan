@@ -6,17 +6,55 @@ using namespace std;
 
 Keyboard::Keyboard()
 {
-    this->keys = vector< pair<char,KeyboardKey> >();
+    this->keys = vector<KeyboardKey>();
+    this->keys.push_back((SDL_KeyCode)(1073741906));    //  up arrow
+    this->keys.push_back((SDL_KeyCode)(1073741905));    //  down arrow
+    this->keys.push_back((SDL_KeyCode)(1073741904));    //  right arrow
+    this->keys.push_back((SDL_KeyCode)(1073741903));    //  left arrow
     //  add key bindings here
 }
 
-void Keyboard::HandleKeydown(const SDL_Keycode& event)
+void Keyboard::HandleKeydown(const SDL_Keycode eventKey)
 {
-    cout << "Keydown: " << event << endl;
+    cout << "Keydown: " << eventKey << endl;
+    for (int i = 0; i < keys.size(); i++)
+        if (keys[i].keycode == eventKey)
+    {
+        keys[i].keydown = true;
+        keys[i].keypress = true;
+        return;
+    }
 }
 
 
-void Keyboard::HandleKeyup(const SDL_Keycode& event)
+void Keyboard::HandleKeyup(const SDL_Keycode eventKey)
 {
-    cout << "Keyup: " << event << endl;
+    cout << "Keyup: " << eventKey << endl;
+    for (int i = 0; i < keys.size(); i++)
+        if (keys[i].keycode == eventKey)
+    {
+        keys[i].keyup = true;
+        keys[i].keypress = false;
+        return;
+    }
+}
+
+void Keyboard::ClearFrameEvents()
+{
+    for (int i = 0; i < keys.size(); i++)
+    {
+        keys[i].keydown = false;
+        keys[i].keyup = false; 
+    }
+}
+
+KeyboardKey Keyboard::GetKey(const SDL_Keycode key) const
+{
+    for (int i = 0; i < keys.size(); i++)
+        if (keys[i].keycode == key)
+    {
+        return keys[i];
+    }
+
+    throw "Invalid keycode, keycode has not been added in the constructor of the Keyboard class";
 }
