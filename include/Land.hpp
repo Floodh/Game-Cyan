@@ -40,7 +40,6 @@ class Land : public IDrawObject
 
         GLfloat* vertices;
         GLfloat* colors;
-        GLfloat* normals;
         GLint* indices;
         
         GLuint shader;

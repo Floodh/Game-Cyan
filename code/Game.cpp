@@ -85,6 +85,9 @@ void Game::NewGame(int level)
     //  level should be used to fetch the right bitmap
     //  this bitmap should later be sent to the world constructor
     this->world = new World();
+
+    //  create player
+    //this->player = new Player(this->world->camera);
 }
 
 
@@ -110,6 +113,10 @@ void Game::Update()
         
     }
 
+    this->world->Update();
+    this->world->camera.position[1] += 0.001;
+    //this->player.Update();
+
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     this->keyboard.ClearFrameEvents();
 
@@ -122,6 +129,8 @@ void Game::Draw()
         //  all 3d models is managed by the world
         if (this->world != NULL)
             this->world->Draw();
+
+        //this->player.Draw();
 
         //  draw UI here
 
