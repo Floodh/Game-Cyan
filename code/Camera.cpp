@@ -4,12 +4,12 @@
 #define MAIN
 #include "VectorUtils4.h"
 
-#define near 1.0
-#define far 30.0
-#define right 0.5
-#define left -0.5
-#define top 0.5
-#define bottom -0.5
+#define near 1.4
+#define far 60.0
+#define right 0.55
+#define left -0.55
+#define top 0.55
+#define bottom -0.55
 
 Camera::Camera()
     : 
@@ -21,8 +21,8 @@ Camera::Camera()
 			0.0f, 0.0f, -1.0f, 0.0f }
         }
 {
-    this->position = new GLfloat[3]{-2.5, 2.5, -0.5};
-    this->lookAtPosition = new GLfloat[3]{2.5, 0.0, 2.5};
+    this->position = new GLfloat[3]{35.0, 17.0, 5.0};
+    this->lookAtPosition = new GLfloat[3]{20.0, 0.0, 20};
     this->lookUpVector = new GLfloat[3]{0.0, 1.0, 0};
 
     this->UpdateViewMatrix();

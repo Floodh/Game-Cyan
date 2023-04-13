@@ -17,8 +17,8 @@ Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, i
 
     this->shader = loadShaders("shader/land.vert", "shader/land.frag");
     //  world data contaisn information about the quads NOT the vertexes
-    int vertexHeight = levelWidth + 1;
-    int vertexWidth = levelHeight + 1;
+    int vertexHeight = levelHeight + 1;
+    int vertexWidth = levelWidth + 1;
 
     //  bgra
     //  world generation here
@@ -37,43 +37,43 @@ Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, i
         GLuint countIndex = 0;
 
         int countCubes = 0;
-        for (int z = 0; z < levelWidth; z++)
+        for (int z = 0; z < levelHeight; z++)
         
-            for (int x = 0; x < levelHeight; x++)
+            for (int x = 0; x < levelWidth; x++)
             {
-                int indexOffset = ((z * levelHeight) + x) * 4;       //  may need to modify this multipler if the world data structyre changes
+                int indexOffset = ((z * levelWidth) + x) * 4;       //  may need to modify this multipler if the world data structyre changes
                 if (levelData[indexOffset] == 75 && levelData[indexOffset + 1] == 105 && levelData[indexOffset + 2] == 47)
                 {
                     //  create cube/rectangle
-                        vertices[countVert++] = (GLfloat)x;
+                        vertices[countVert++] = (GLfloat)(levelWidth - x);
                         vertices[countVert++] = (GLfloat)ELEVATION;
                         vertices[countVert++] = (GLfloat)z;
 
-                        vertices[countVert++] = (GLfloat)(x + 1);
+                        vertices[countVert++] = (GLfloat)(levelWidth - (x + 1));
                         vertices[countVert++] = (GLfloat)ELEVATION;
                         vertices[countVert++] = (GLfloat)z;
 
-                        vertices[countVert++] = (GLfloat)(x + 1);
+                        vertices[countVert++] = (GLfloat)(levelWidth - (x + 1));
                         vertices[countVert++] = (GLfloat)ELEVATION;
                         vertices[countVert++] = (GLfloat)(z + 1);
 
-                        vertices[countVert++] = (GLfloat)x;
+                        vertices[countVert++] = (GLfloat)(levelWidth - x);
                         vertices[countVert++] = (GLfloat)ELEVATION;
                         vertices[countVert++] = (GLfloat)(z + 1);                    
 
-                        vertices[countVert++] = (GLfloat)x;
+                        vertices[countVert++] = (GLfloat)(levelWidth - x);
                         vertices[countVert++] = (GLfloat)0;
                         vertices[countVert++] = (GLfloat)z;
 
-                        vertices[countVert++] = (GLfloat)(x + 1);
+                        vertices[countVert++] = (GLfloat)(levelWidth - (x + 1));
                         vertices[countVert++] = (GLfloat)0;
                         vertices[countVert++] = (GLfloat)z;
 
-                        vertices[countVert++] = (GLfloat)(x + 1);
+                        vertices[countVert++] = (GLfloat)(levelWidth - (x + 1));
                         vertices[countVert++] = (GLfloat)0;
                         vertices[countVert++] = (GLfloat)(z + 1);
 
-                        vertices[countVert++] = (GLfloat)x;
+                        vertices[countVert++] = (GLfloat)(levelWidth - x);
                         vertices[countVert++] = (GLfloat)0;
                         vertices[countVert++] = (GLfloat)(z + 1);      
 

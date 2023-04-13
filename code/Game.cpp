@@ -36,7 +36,7 @@ Game::Game(int windowWidth, int windowHeight)
     
 
     // CREATE AND SDL WINDOW CONFIGURED FOR OPENGL:
-    if (0 == (this->window = SDL_CreateWindow("Cyan", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowWidth, SDL_WINDOW_OPENGL))) {
+    if (0 == (this->window = SDL_CreateWindow("Cyan", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_OPENGL))) {
         throw(std::string("Failed to create window: ") + SDL_GetError());
     }
     // CREATE THE OPENGL CONTEXT AND MAKE IT CURRENT:
@@ -84,8 +84,8 @@ void Game::NewGame(int level)
 {
     //  level should be used to fetch the right bitmap
     //  this bitmap should later be sent to the world constructor
-    int width, height, channels;
-    this->levelData = LoadBMP("data/level/Level1Map.bmp", width, height, channels);
+    int width, height;
+    this->levelData = LoadBMP("data/level/Level0Map.bmp", width, height);
     if (levelData == NULL)
         throw std::runtime_error("Couldn't load level");
     

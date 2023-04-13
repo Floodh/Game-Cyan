@@ -17,15 +17,6 @@
 int main(int argc, char *argv[])
 {
 
-    int width = 10, height = 10, channels = 0;
-    uint8_t* levelFile = LoadBMP("data/level/Level1Map.bmp", width, height, channels);
-    std::cout << "Loading level " << width << ","  << height << "," << channels << std::endl;
-
-    if (levelFile == NULL)
-        throw std::runtime_error("Couldn't load level");
-
-    Console::WriteLine(levelFile, width, height, 4);
-
 
     SDL_Event event = { 0 };
     bool should_quit = false;
@@ -33,7 +24,7 @@ int main(int argc, char *argv[])
     //
     try {
 
-        Game game{600,600};
+        Game game{1000,1000};
         game.NewGame(0);
 
 
@@ -64,6 +55,7 @@ int main(int argc, char *argv[])
             game.Draw();
 
             //_sleep(24);
+            SDL_Delay(24);
         }
     }
     catch (std::string e) {

@@ -8,7 +8,7 @@
 using namespace std;
 
 //  http://echachik.blogspot.com/2014/09/bmp-c.html
-uint8_t* LoadBMP(char const *path, int& outWidth, int& outHeight, int& channels)
+uint8_t* LoadBMP(char const *path, int& outWidth, int& outHeight)
 {
     int size = 0, pixels_adress = 0, width = 0, height = 0;
 	short int bits_per_pixel = 0;
@@ -73,3 +73,5 @@ uint8_t* LoadBMP(char const *path, int& outWidth, int& outHeight, int& channels)
     return pixelData;
 
 }
+
+

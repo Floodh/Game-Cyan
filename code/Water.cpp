@@ -19,10 +19,10 @@ Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight
     this->shader = loadShaders("shader/water.vert", "shader/water.frag");
 
     //  world data contaisn information about the quads NOT the vertexes
-    int detailMultipler = 2;
+    int detailMultipler = 3;
 
-    int vertexHeight = (levelWidth * detailMultipler) + 1;
-    int vertexWidth = (levelHeight * detailMultipler) + 1;
+    int vertexHeight = (levelHeight * detailMultipler) + 1;
+    int vertexWidth = (levelWidth * detailMultipler) + 1;
 
 
 
