@@ -2,7 +2,7 @@
 
 #include "Console.hpp"
 
-World::World(uint8_t* levelData, int levelWidth, int levelHeight)
+World::World(uint8_t* levelData, const int levelWidth, const int levelHeight)
     :
         drawObjects{std::vector<IDrawObject*>()},
         camera{},

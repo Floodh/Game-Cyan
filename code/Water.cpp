@@ -8,57 +8,26 @@
 //  https://www.enkisoftware.com/devlogpost-20150131-1-Normal-generation-in-the-pixel-shader
 //  https://c0de517e.blogspot.com/2008/10/normals-without-normals.html
 
+using namespace std;
+
 Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight)
     : camera{camera}
 {
+    
+    std::cout << "Generating water level: " << levelWidth << "x" << levelHeight << std::endl;
 
     this->shader = loadShaders("shader/water.vert", "shader/water.frag");
 
     //  world data contaisn information about the quads NOT the vertexes
     int detailMultipler = 2;
 
-    int worldHeight = 5;
-    int worldWidth = 5;
-    int vertexHeight = (worldHeight * detailMultipler) + 1;
-    int vertexWidth = (worldWidth * detailMultipler) + 1;
-    GLint* worldData = new GLint[worldHeight * worldWidth * 3]  //  placeholder for testing
-    {
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-        75, 105, 47,
-        99, 155, 255,
-
-        75, 105, 47,
-        75, 105, 47,
-        99, 155, 255,
-        75, 105, 47,
-        99, 155, 255,
-
-        99, 155, 255,
-        99, 155, 255,
-        75, 105, 47,
-        75, 105, 47,
-        99, 155, 255,
-
-        75, 105, 47,
-        75, 105, 47,
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255
-
-    };
+    int vertexHeight = (levelWidth * detailMultipler) + 1;
+    int vertexWidth = (levelHeight * detailMultipler) + 1;
 
 
 
     //  world generation here
-        this->indexCount = worldHeight * worldWidth * 2 * 3 * detailMultipler * detailMultipler;    //  number of quads multiplied by 2 to get number of triangles, multiplied by 3 to get number of indexes for the triangles.
+        this->indexCount = levelWidth * levelHeight * 2 * 3 * detailMultipler * detailMultipler;    //  number of quads multiplied by 2 to get number of triangles, multiplied by 3 to get number of indexes for the triangles.
         this->vertexCount = vertexHeight * vertexWidth;         //  
         this->valueCount = vertexCount * 3;                     //  we have 3 values for each vertex
 

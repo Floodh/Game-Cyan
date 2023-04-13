@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int calculateIndexCount(GLint* worldData, int worldWidth, int worldHeight);
+int calculateIndexCount(uint8_t* levelData, int levelHeight, int levelWidth);
 void normalizeVec3(GLfloat* data);
 
 Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight)
@@ -17,51 +17,13 @@ Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, i
 
     this->shader = loadShaders("shader/land.vert", "shader/land.frag");
     //  world data contaisn information about the quads NOT the vertexes
-    int worldHeight = 5;
-    int worldWidth = 5;
-    int vertexHeight = worldHeight + 1;
-    int vertexWidth = worldWidth + 1;
-
+    int vertexHeight = levelWidth + 1;
+    int vertexWidth = levelHeight + 1;
 
     //  bgra
-
-    GLint* worldData = new GLint[worldHeight * worldWidth * 3]  //  placeholder for testing
-    {
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-        75, 105, 47,
-        99, 155, 255,
-
-        75, 105, 47,
-        75, 105, 47,
-        99, 155, 255,
-        75, 105, 47,
-        99, 155, 255,
-
-        99, 155, 255,
-        99, 155, 255,
-        75, 105, 47,
-        75, 105, 47,
-        99, 155, 255,
-
-        75, 105, 47,
-        75, 105, 47,
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255,
-        99, 155, 255
-
-    };
-
     //  world generation here
 
-        this->indexCount = calculateIndexCount(worldData, worldWidth, worldHeight);
+        this->indexCount = calculateIndexCount(levelData, levelHeight, levelWidth);
         this->vertexCount = ( indexCount / ( 2 * 3 * 5) ) * 8;  //  8 points per cube
         this->valueCount = vertexCount * 3;
 
@@ -72,15 +34,15 @@ Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, i
         {
         GLuint countVert = 0; 
         GLuint countColor = 0; 
-        GLuint countNormal = 0;
         GLuint countIndex = 0;
+
         int countCubes = 0;
-        for (int z = 0; z < worldHeight; z++)
+        for (int z = 0; z < levelWidth; z++)
         
-            for (int x = 0; x < worldWidth; x++)
+            for (int x = 0; x < levelHeight; x++)
             {
-                int indexOffset = ((z * worldWidth) + x) * 3;       //  may need to modify this multipler if the world data structyre changes
-                if (worldData[indexOffset] == 75 && worldData[indexOffset + 1] == 105 && worldData[indexOffset + 2] == 47)
+                int indexOffset = ((z * levelHeight) + x) * 4;       //  may need to modify this multipler if the world data structyre changes
+                if (levelData[indexOffset] == 75 && levelData[indexOffset + 1] == 105 && levelData[indexOffset + 2] == 47)
                 {
                     //  create cube/rectangle
                         vertices[countVert++] = (GLfloat)x;
@@ -238,15 +200,15 @@ void Land::Draw()
 
 //  help functions
 
-int calculateIndexCount(GLint* worldData, int worldWidth, int worldHeight)
+int calculateIndexCount(uint8_t* levelData, int levelHeight, int levelWidth)
 {
     int greenPixels = 0;
     //  for optimazation one might wanna calculate
 
-    for (int i = 0; i < worldHeight * worldWidth; i++)
+    for (int i = 0; i < levelWidth * levelHeight; i++)
     {
-        int indexOffset = i * 3;
-        if (worldData[indexOffset] == 75 & worldData[indexOffset + 1] == 105 & worldData[indexOffset + 2] == 47)
+        int indexOffset = i * 4;
+        if (levelData[indexOffset] == 75 & levelData[indexOffset + 1] == 105 & levelData[indexOffset + 2] == 47)
             greenPixels++; 
     }
     return greenPixels * 2 * 3 * 5;    //  multiplied by five because were making a partial cube    

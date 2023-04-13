@@ -89,6 +89,7 @@ void Game::NewGame(int level)
     if (levelData == NULL)
         throw std::runtime_error("Couldn't load level");
     
+    std::cout << "Word loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << std::endl;
     this->world = new World(this->levelData, width, height);
 
     //  create player

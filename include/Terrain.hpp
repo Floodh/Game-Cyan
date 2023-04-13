@@ -20,7 +20,7 @@ class Terrain : public IDrawObject
         
         Terrain() = delete;
         //  when we define the constructor, we also need to define all its members
-        Terrain(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight);
+        Terrain(Camera& camera, TheSun& theSun, uint8_t* levelData, const int levelWidth, const int levelHeight);
         void Draw() override;
 
     private:

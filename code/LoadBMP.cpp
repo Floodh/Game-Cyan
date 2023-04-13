@@ -68,6 +68,8 @@ uint8_t* LoadBMP(char const *path, int& outWidth, int& outHeight, int& channels)
 		pixelData[i+2] = tmp;
 	}
 
+	outWidth = width;
+	outHeight = height;
     return pixelData;
 
 }
