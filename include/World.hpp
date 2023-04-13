@@ -18,7 +18,7 @@ class World
     public:
 
         //  the constructor should later receive the path to a .bmp file.
-        World();
+        World(uint8_t* levelData, int levelWidth, int levelHeight);
         void Draw();
         void Update();
 

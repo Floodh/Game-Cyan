@@ -84,7 +84,12 @@ void Game::NewGame(int level)
 {
     //  level should be used to fetch the right bitmap
     //  this bitmap should later be sent to the world constructor
-    this->world = new World();
+    int width, height, channels;
+    this->levelData = LoadBMP("data/level/Level1Map.bmp", width, height, channels);
+    if (levelData == NULL)
+        throw std::runtime_error("Couldn't load level");
+    
+    this->world = new World(this->levelData, width, height);
 
     //  create player
     //this->player = new Player(this->world->camera);

@@ -55,7 +55,7 @@ uint8_t* LoadBMP(char const *path, int& outWidth, int& outHeight, int& channels)
 
     //  allocate memory
     uint8_t* pixelData = new uint8_t[width * height * 4];
-
+	
     //  read the raw file data, conveniently its already in the format we wan't
     file.read ((char*)pixelData, height * width * 4);
 

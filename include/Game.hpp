@@ -7,6 +7,7 @@
 #include "Keyboard.hpp"
 #include "Camera.hpp"
 #include "World.hpp"
+#include "LoadBMP.hpp"
 
 #include <vector>
 #include <string>
@@ -38,6 +39,7 @@ class Game
         SDL_GLContext glContext = nullptr;
         Keyboard keyboard;
 
+        uint8_t* levelData;
         World* world;
 
 };
