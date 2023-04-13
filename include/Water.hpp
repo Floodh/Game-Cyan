@@ -12,7 +12,7 @@ class Water : public IDrawObject
 
         //  the constructor should later receive the content of the .bmp file
         Water() = delete;
-        Water(Camera& camera);
+        Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight);
         void Draw() override;
 
     private:

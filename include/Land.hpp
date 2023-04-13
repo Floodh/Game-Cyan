@@ -14,7 +14,7 @@ class Land : public IDrawObject
 
         //  the constructor should later receive the content of the .bmp file
         Land() = delete;
-        Land(Camera& camera, TheSun& theSun);
+        Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight);
         void Draw() override;
 
     private:

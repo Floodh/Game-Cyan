@@ -7,7 +7,7 @@ World::World(uint8_t* levelData, int levelWidth, int levelHeight)
         drawObjects{std::vector<IDrawObject*>()},
         camera{},
         theSun{},
-        terrain{this->camera, this->theSun}
+        terrain{this->camera, this->theSun, levelData, levelWidth, levelHeight}
 {
     Console::WriteLine("The Sun:");
     Console::WriteLine(this->theSun.direction, 3);

@@ -11,7 +11,7 @@ using namespace std;
 int calculateIndexCount(GLint* worldData, int worldWidth, int worldHeight);
 void normalizeVec3(GLfloat* data);
 
-Land::Land(Camera& camera, TheSun& theSun)
+Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight)
     : camera{camera}, theSun{theSun}
 {
 
