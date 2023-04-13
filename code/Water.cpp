@@ -124,7 +124,7 @@ void Water::Draw()
 {
     glUseProgram(shader);
     //  animate the vertexes
-    for (int i = 0; i < this->vertexCount; i++)
+    for (GLuint i = 0; i < this->vertexCount; i++)
     {
         this->vertices[(i * 3) + 1] -= (GLfloat)0.0005f * 8;
         if (this->vertices[(i * 3) + 1] < 0.0f) 
