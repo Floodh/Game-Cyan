@@ -1,10 +1,10 @@
 #pragma once
 
-
+#include "IDrawObject.hpp"
 #include "GL_utilities.h"
 #include "Camera.hpp"
 
-class Player
+class Player : public IDrawObject
 {
     public:
         Player(Camera& camera);
@@ -24,5 +24,11 @@ class Player
         // Stats        
         int HP;
         int Points;
+
+        GLuint shader;
+        GLuint numVertices;
+        GLfloat* pyramidVertices;
+        GLfloat* colors;
+        unsigned int vertexArrayObjID;
         
 };

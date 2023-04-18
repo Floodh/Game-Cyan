@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+// #include "Player.hpp"
+
 using namespace std;
 
 
@@ -93,7 +95,7 @@ void Game::NewGame(int level)
     this->world = new World(this->levelData, width, height);
 
     //  create player
-    //this->player = new Player(this->world->camera);
+    this->player = new Player(this->world->camera);
 }
 
 
@@ -136,7 +138,7 @@ void Game::Draw()
         if (this->world != NULL)
             this->world->Draw();
 
-        //this->player.Draw();
+        this->player->Draw();
 
         //  draw UI here
 
