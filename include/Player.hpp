@@ -3,6 +3,8 @@
 #include "IDrawObject.hpp"
 #include "GL_utilities.h"
 #include "Camera.hpp"
+#include "LittleOBJLoader.h"
+#include "VectorUtils4.h"
 
 class Player : public IDrawObject
 {
@@ -19,7 +21,7 @@ class Player : public IDrawObject
 
     private:
         Camera &camera;
-        GLfloat* position;
+        vec3 position;
 
         // Stats        
         int HP;
@@ -30,5 +32,8 @@ class Player : public IDrawObject
         GLfloat* pyramidVertices;
         GLfloat* colors;
         unsigned int vertexArrayObjID;
+        GLfloat scale;
+        mat4 scaleMatrix;
+        mat4 rotationMatrix;
         
 };
