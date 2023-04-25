@@ -3,6 +3,8 @@
 //  specific to the cpp file
 #define MAIN
 #include "VectorUtils4.h"
+#include "LittleOBJLoader.h"
+
 
 #define near 1.0
 #define far 30.0
