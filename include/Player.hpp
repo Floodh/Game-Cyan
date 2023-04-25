@@ -5,6 +5,8 @@
 #include "Camera.hpp"
 #include "LittleOBJLoader.h"
 #include "VectorUtils4.h"
+#include "Keyboard.hpp"
+
 
 class Player : public IDrawObject
 {
@@ -13,7 +15,7 @@ class Player : public IDrawObject
         // Player(GLint* m, GLint* texture);
         ~Player();
 
-        void Update();
+        void Update(Keyboard* kb);
         void Draw();
 
         void setPosition(const GLfloat x, const GLfloat y, const GLfloat z);
@@ -35,5 +37,7 @@ class Player : public IDrawObject
         GLfloat scale;
         mat4 scaleMatrix;
         mat4 rotationMatrix;
+
+        Model* m;
         
 };

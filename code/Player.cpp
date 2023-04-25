@@ -1,74 +1,78 @@
 #include "Player.hpp"
+#include <iostream>
 
 
 Player::Player(Camera& camera)
-: camera{camera}, HP{100}, Points{0}, scale{0.5f}
+: camera{camera}, HP{100}, Points{0}, scale{0.3f}
 {
     // this->position = new GLfloat[3]{0.0f, 100.0f, 5.0f};
-    this->position = {2.0f, 1.0f, 1.0f};
+    this->position = {0.0f, 1.0f, 0.0f};
 
     this->shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->scaleMatrix = S(scale);
     this->rotationMatrix = Rx(4.7f); //IdentityMatrix();
     
     this->numVertices = 3 * 3 * 6;
+
+    this->m = LoadModel("data/model/cubeplus.obj");
+ 
     
-    unsigned int vertexBufferObjID;
-	unsigned int fragmentBufferObjID;
+    // unsigned int vertexBufferObjID;
+	// unsigned int fragmentBufferObjID;l
 
-    this->pyramidVertices = new GLfloat[3*18]{
+    // this->pyramidVertices = new GLfloat[3*18]{
     
-        0.5f, 0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
+    //     0.5f, 0.5f, 0.0f,
+    //     -0.5f, 0.5f, 0.0f,
+    //     0.5f, -0.5f, 0.0f,
 
-        -0.5f, -0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
+    //     -0.5f, -0.5f, 0.0f,
+    //     -0.5f, 0.5f, 0.0f,
+    //     0.5f, -0.5f, 0.0f,
 
 
-    //
-        0.5f, 0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f,
-        0.0f, 0.0f, 0.5f,
+    // //
+    //     0.5f, 0.5f, 0.0f,
+    //     -0.5f, 0.5f, 0.0f,
+    //     0.0f, 0.0f, 0.5f,
 
-        -0.5f, 0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f,
-        0.0f, 0.0f, 0.5f,
+    //     -0.5f, 0.5f, 0.0f,
+    //     -0.5f, -0.5f, 0.0f,
+    //     0.0f, 0.0f, 0.5f,
 
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.0f, 0.5f,
+    //     -0.5f, -0.5f, 0.0f,
+    //     0.5f, -0.5f, 0.0f,
+    //     0.0f, 0.0f, 0.5f,
 
-        0.5f, -0.5f, 0.0f,
-        0.5f, 0.5f, 0.0f,
-        0.0f, 0.0f, 0.5f};
+    //     0.5f, -0.5f, 0.0f,
+    //     0.5f, 0.5f, 0.0f,
+    //     0.0f, 0.0f, 0.5f};
 
     
 
-    this->colors = new GLfloat[3*3]
-        {
-            0.5f, 0.0f, 0.0f,
-            0.0f, 0.5f, 0.0f,
-            0.0f, 0.0f, 0.5f};
-    // Allocate and activate Vertex Array Object
-    glGenVertexArrays(1, &vertexArrayObjID);
-	glBindVertexArray(vertexArrayObjID);
+    // this->colors = new GLfloat[3*3]
+    //     {
+    //         0.5f, 0.0f, 0.0f,
+    //         0.0f, 0.5f, 0.0f,
+    //         0.0f, 0.0f, 0.5f};
+    // // Allocate and activate Vertex Array Object
+    // glGenVertexArrays(1, &vertexArrayObjID);
+	// glBindVertexArray(vertexArrayObjID);
 
-    // Allocate Vertex Buffer Objects
-	glGenBuffers(1, &vertexBufferObjID);
+    // // Allocate Vertex Buffer Objects
+	// glGenBuffers(1, &vertexBufferObjID);
 
-    // VBO for vertex data
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjID);
-	glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat), pyramidVertices, GL_STATIC_DRAW);
+    // // VBO for vertex data
+	// glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjID);
+	// glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat), pyramidVertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(glGetAttribLocation(this->shader, "inPosition"), 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(glGetAttribLocation(this->shader, "inPosition"));
 
     // VBO for vertex data
-	glGenBuffers(1, &fragmentBufferObjID);
+	// glGenBuffers(1, &fragmentBufferObjID);
 
-	glBindBuffer(GL_ARRAY_BUFFER, fragmentBufferObjID);
-	glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat), colors, GL_STATIC_DRAW);
+	// glBindBuffer(GL_ARRAY_BUFFER, fragmentBufferObjID);
+	// glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat), colors, GL_STATIC_DRAW);
 	glVertexAttribPointer(glGetAttribLocation(this->shader, "inColor"), 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(glGetAttribLocation(this->shader, "inColor"));
 	//
@@ -89,9 +93,38 @@ Player::~Player()
 {}
 
 
-void Player::Update()
+void Player::Update(Keyboard* kb)
 {
-    ;
+    vec3 movement{0.0f, 0.0f, 0.0f};
+    if (kb->GetKey(119).keypress) //  W
+    {
+
+        movement.x = sin(0.0f);
+        movement.z = cos(0.0f);
+        movement = normalize(movement);
+    }
+     if (kb->GetKey(115).keypress) //  S
+    {
+
+        movement.x = -sin(0.0f);
+        movement.z = -cos(0.0f);
+        movement = normalize(movement);
+    }
+     if (kb->GetKey(97).keypress) //  A
+    {
+
+        movement.x = sin(1.5f);
+        movement.z = cos(1.5f);
+        movement = normalize(movement);
+    }
+     if (kb->GetKey(100).keypress) //  D
+    {
+
+        movement.x = -sin(1.5f);
+        movement.z = -cos(1.5f);
+        movement = normalize(movement);
+    }
+    this->position += 0.05f * movement;
 }
 
 
@@ -105,8 +138,9 @@ void Player::Draw()
 
 
 
-    glBindVertexArray(vertexArrayObjID); // Select VAO
-	glDrawArrays(GL_TRIANGLES, 0, numVertices / 3);	 // draw object
+    //glBindVertexArray(vertexArrayObjID); // Select VAO
+	DrawModel(m, shader, "inPosition", NULL, NULL);
+    //glDrawArrays(GL_TRIANGLES, 0, numVertices / 3);	 // draw object
 }
 
 void Player::setPosition(const GLfloat x, const GLfloat y, const GLfloat z)
