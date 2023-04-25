@@ -123,7 +123,7 @@ void Game::Update()
 
     this->world->Update();
     //this->world->camera.position[1] += 0.001;
-    //this->player.Update();
+    this->player->Update(&this->keyboard);
 
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     this->keyboard.ClearFrameEvents();
