@@ -12,6 +12,10 @@ Keyboard::Keyboard()
     this->keys.push_back((SDL_KeyCode)(1073741904));    //  right arrow
     this->keys.push_back((SDL_KeyCode)(1073741903));    //  left arrow
     //  add key bindings here
+    this->keys.push_back((SDL_KeyCode)(119));           //  W
+    this->keys.push_back((SDL_KeyCode)(115));           //  S
+    this->keys.push_back((SDL_KeyCode)(97));            //  A
+    this->keys.push_back((SDL_KeyCode)(100));           //  D
 }
 
 void Keyboard::HandleKeydown(const SDL_Keycode eventKey)
