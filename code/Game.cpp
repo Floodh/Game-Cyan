@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+// #include "Player.hpp"
+
 using namespace std;
 
 
@@ -107,7 +109,7 @@ void Game::NewGame(int level)
     }
 
     //  create player
-    //this->player = new Player(this->world->camera);
+    this->player = new Player(this->world->camera);
 }
 
 
@@ -135,7 +137,7 @@ void Game::Update()
 
     this->world->Update();
     //this->world->camera.position[1] += 0.001;
-    //this->player.Update();
+    this->player->Update(&this->keyboard);
 
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     this->keyboard.ClearFrameEvents();
@@ -150,7 +152,7 @@ void Game::Draw()
         if (this->world != NULL)
             this->world->Draw();
 
-        //this->player.Draw();
+        this->player->Draw();
 
         //  draw UI here
 

@@ -9,6 +9,8 @@
 #include "World.hpp"
 #include "LoadBMP.hpp"
 
+#include "Player.hpp"
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -50,6 +52,6 @@ class Game
         uint8_t* levelData;
         World* world;
 
-        
+        Player* player;
 
 };
