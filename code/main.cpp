@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     try {
 
         Game game{1000,1000};
-        game.NewGame(0);
+        game.NewGame(1);
 
 
         // GAME LOOP:

@@ -5,6 +5,8 @@ using namespace std;
 
 Game::Game(int windowWidth, int windowHeight)
 {
+    this->gameState = GameState::Loading;
+
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
 
@@ -85,12 +87,24 @@ void Game::NewGame(int level)
     //  level should be used to fetch the right bitmap
     //  this bitmap should later be sent to the world constructor
     int width, height;
-    this->levelData = LoadBMP("data/level/Level0Map.bmp", width, height);
+
+    string path = "data/level/Level" + to_string(level) +  "Map.bmp";
+    cout << "Trying to load level " << path << endl;
+    this->levelData = LoadBMP(path.c_str(), width, height);
     if (levelData == NULL)
         throw std::runtime_error("Couldn't load level");
     
     std::cout << "Word loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << std::endl;
     this->world = new World(this->levelData, width, height);
+
+    if (level == 0)
+        gameState = GameState::MainMenu;
+    else
+    {
+        gameState = GameState::Playing;
+        this->world->camera.SetPosition(0.0, 2.0, 0.0);
+        this->world->camera.SetLookAt(3.0, 1.0, 3.0);
+    }
 
     //  create player
     //this->player = new Player(this->world->camera);

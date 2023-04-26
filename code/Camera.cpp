@@ -21,7 +21,7 @@ Camera::Camera()
 			0.0f, 0.0f, -1.0f, 0.0f }
         }
 {
-    this->position = new GLfloat[3]{35.0, 17.0, 5.0};
+    this->position = new GLfloat[3]{35.0, 14.0, 5.0};
     this->lookAtPosition = new GLfloat[3]{20.0, 0.0, 20};
     this->lookUpVector = new GLfloat[3]{0.0, 1.0, 0};
 

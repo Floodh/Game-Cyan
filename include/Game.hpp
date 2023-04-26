@@ -15,6 +15,13 @@
 #include <iomanip> // for setw
 
 
+enum GameState 
+{
+    Loading,
+    MainMenu,
+    Playing
+};
+
 //  master class, here everything is ultimetly managed
 //  is divided into Update, Draw and HandleEvent
 class Game
@@ -30,6 +37,7 @@ class Game
         //  this function only needs to pass through the event to Keyboard
         void HandleEvent(const SDL_Event& event);
 
+        GameState gameState;
 
     private:
 
@@ -41,5 +49,7 @@ class Game
 
         uint8_t* levelData;
         World* world;
+
+        
 
 };
