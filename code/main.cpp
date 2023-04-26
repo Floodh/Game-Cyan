@@ -47,9 +47,6 @@ int main(int argc, char *argv[])
 
             game.Update();
 
-            // Clear the screen
-            glClearColor(0.f, 0.f, 0.2f, 1.f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             //  swap buffers
             game.Draw();

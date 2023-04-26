@@ -13,11 +13,11 @@ Game::Game(int windowWidth, int windowHeight)
 
     // INITIALIZE SDL:
     if (SDL_Init(SDL_INIT_EVENTS) < 0) {
-        throw(std::string("Failed to initialize SDL: ") + SDL_GetError());
+        throw(string("Failed to initialize SDL: ") + SDL_GetError());
     }
     if (SDL_Init(SDL_INIT_VIDEO) < 0) 
     {
-        throw(std::string("Failed to initialize SDL Video: ") + SDL_GetError());
+        throw(string("Failed to initialize SDL Video: ") + SDL_GetError());
     }
 
     // CONFIGURE OPENGL ATTRIBUTES USING SDL:
@@ -39,11 +39,11 @@ Game::Game(int windowWidth, int windowHeight)
 
     // CREATE AND SDL WINDOW CONFIGURED FOR OPENGL:
     if (0 == (this->window = SDL_CreateWindow("Cyan", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_OPENGL))) {
-        throw(std::string("Failed to create window: ") + SDL_GetError());
+        throw(string("Failed to create window: ") + SDL_GetError());
     }
     // CREATE THE OPENGL CONTEXT AND MAKE IT CURRENT:
     if(NULL == (this->glContext = SDL_GL_CreateContext(this->window))) {
-        throw(std::string("Failed to create OpenGL context"));
+        throw(string("Failed to create OpenGL context"));
     }
     else SDL_GL_MakeCurrent(this->window, this->glContext);
 
@@ -51,12 +51,12 @@ Game::Game(int windowWidth, int windowHeight)
     
     
     #if defined(_WIN32)
-    // INITIALIZE GLAD:
+    // inti glad:
     if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
-        throw(std::string("Failed to initialize GLAD"));
+        throw(string("Failed to initialize GLAD"));
     }
 
-    // LOG OPENGL VERSION, VENDOR (IMPLEMENTATION), RENDERER, GLSL, ETC.:
+    //  Display Information
     std::cout << std::setw(34) << std::left << "OpenGL Version: " << GLVersion.major << "." << GLVersion.minor << std::endl;
     std::cout << std::setw(34) << std::left << "OpenGL Shading Language Version: " << (char *)glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     std::cout << std::setw(34) << std::left << "OpenGL Vendor:" << (char *)glGetString(GL_VENDOR) << std::endl;
@@ -114,6 +114,23 @@ void Game::NewGame(int level)
 void Game::Update()
 {
 
+    switch (this->gameState)
+    {
+        case GameState::Loading:
+            cout << "Warning: Is in loading state while trying to update!" << endl;
+            break;
+        case GameState::MainMenu:
+            //  handle UI here
+            break;
+        case GameState::Playing:
+            this->world->Update();
+            //this->player.Update();
+            break;
+
+        default:
+            throw runtime_error("Entered invalid gamestate in update function");
+    }
+
     if (this->keyboard.GetKey(1073741906).keypress) //  up
     {
         this->world->camera.position[0] += 0.01;
@@ -132,11 +149,6 @@ void Game::Update()
     {
         
     }
-
-    this->world->Update();
-    //this->world->camera.position[1] += 0.001;
-    //this->player.Update();
-
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     this->keyboard.ClearFrameEvents();
 
@@ -144,21 +156,33 @@ void Game::Update()
 
 void Game::Draw()
 {
-
-    //  rendering here
-        //  all 3d models is managed by the world
-        if (this->world != NULL)
-            this->world->Draw();
-
-        //this->player.Draw();
-
-        //  draw UI here
+    // Clear the screen
+    glClearColor(0.f, 0.f, 0.2f, 1.f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-    //  end
+    switch (this->gameState)
+    {
+        case GameState::Loading:
+            cout << "Warning: Is in loading state while trying to update!" << endl;
+            break;
+        case GameState::MainMenu:
+            break;
+        case GameState::Playing:
+            //  all 3d models are managed by the world
+            if (this->world != NULL)    //  this null check is redundant, but safty is important
+                this->world->Draw();
+            break;
+        default:
+            throw runtime_error("Entered invalid gamestate in update function");
+    }
 
+    //  opengl rendering
     SDL_GL_SwapWindow(this->window);
 
+    //  SDL_Renderer rendering
+    
+    
 }
 
 
