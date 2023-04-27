@@ -36,6 +36,7 @@ compiled += $(compiledDir)Water.o
 compiled += $(compiledDir)Land.o
 compiled += $(compiledDir)TheSun.o
 compiled += $(compiledDir)LoadBMP.o
+compiled += $(compiledDir)MainMenu.o
 compiled += $(compiledDir)Console.o
 compiled += $(compiledDir)Player.o
 
@@ -93,6 +94,9 @@ $(compiledDir)TheSun.o: $(codeDir)TheSun.cpp
 
 $(compiledDir)LoadBMP.o: $(codeDir)LoadBMP.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)LoadBMP.o $(codeDir)LoadBMP.cpp $(CINCLUDE)
+
+$(compiledDir)MainMenu.o: $(codeDir)MainMenu.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)MainMenu.o $(codeDir)MainMenu.cpp $(CINCLUDE)
 
 $(compiledDir)Console.o: $(codeDir)Console.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Console.o $(codeDir)Console.cpp $(CINCLUDE)
