@@ -96,35 +96,34 @@ Player::~Player()
 void Player::Update(Keyboard* kb)
 {
     vec3 movement{0.0f, 0.0f, 0.0f};
+
     if (kb->GetKey(119).keypress) //  W
     {
-
-        movement.x = sin(0.0f);
-        movement.z = cos(0.0f);
-        movement = normalize(movement);
+        movement.x += sin(0.0f);
+        movement.z += cos(0.0f);
     }
-     if (kb->GetKey(115).keypress) //  S
+    if (kb->GetKey(115).keypress) //  S
     {
-
-        movement.x = -sin(0.0f);
-        movement.z = -cos(0.0f);
-        movement = normalize(movement);
+        movement.x += -sin(0.0f);
+        movement.z += -cos(0.0f);
     }
      if (kb->GetKey(97).keypress) //  A
     {
-
-        movement.x = sin(1.5f);
-        movement.z = cos(1.5f);
-        movement = normalize(movement);
+        movement.x += sin(1.5f);
+        movement.z += cos(1.5f);
     }
-     if (kb->GetKey(100).keypress) //  D
+    if (kb->GetKey(100).keypress) //  D
     {
-
-        movement.x = -sin(1.5f);
-        movement.z = -cos(1.5f);
-        movement = normalize(movement);
+        movement.x += -sin(1.5f);
+        movement.z += -cos(1.5f); 
     }
+    if (movement.x != 0.0f | movement.y != 0.0f | movement.z != 0.0f) //    don't normalize a vector that has no direction
+        movement = normalize(movement);
     this->position += 0.05f * movement;
+
+
+    camera.SetLookAt(position.x, position.y, position.z);
+    camera.SetPosition(position.x, position.y + 1.5f, position.z - 1.75f);
 }
 
 
