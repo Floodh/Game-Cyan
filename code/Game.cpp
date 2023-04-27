@@ -86,6 +86,18 @@ Game::~Game()
 
 void Game::NewGame(int level)
 {
+
+    //  garbage collection:
+    //  corrently there will always be a somewhat small
+    //  amount of memory that will be leaked when creating
+    //  a new game, but we don't have time to do the proper destructors
+    //  to fix that and its not noticeable by the user anyway
+        // free(this->levelData);
+        // free(this->mainMenu); 
+        // free(this->world);
+        // free(this->player);
+
+
     //  level should be used to fetch the right bitmap
     //  this bitmap should later be sent to the world constructor
     int width, height;
@@ -127,7 +139,15 @@ void Game::Update()
         case GameState::MainMenu:
             //  handle UI here
             if (this->mainMenu != NULL)
+            {
                 this->mainMenu->Update();
+                if (this->mainMenu->response == MainMenu_Load)
+                {
+                    this->NewGame(this->mainMenu->loadMap);
+                }
+                else if (this->mainMenu->response == MainMenu_Quit)
+                    this->gameState = GameState::Quit;
+            }
             break;
         case GameState::Playing:
             if (this->world != NULL)

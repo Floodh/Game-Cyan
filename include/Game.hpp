@@ -22,6 +22,7 @@ namespace GameState
 {
 enum GameState 
 {
+    Quit,
     Loading,
     MainMenu,
     Playing
@@ -45,6 +46,7 @@ class Game
 
         GameState::GameState gameState;
 
+
     private:
 
         //  
@@ -60,5 +62,7 @@ class Game
 
 
         Player* player;
+
+        
 
 };

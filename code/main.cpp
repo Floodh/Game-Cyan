@@ -46,6 +46,12 @@ int main(int argc, char *argv[])
             }
 
             game.Update();
+            if (game.gameState == GameState::Quit)
+            {
+                should_quit = true;
+                break;
+            }
+
 
 
             //  swap buffers
