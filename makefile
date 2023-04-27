@@ -38,6 +38,7 @@ compiled += $(compiledDir)Water.o
 compiled += $(compiledDir)Land.o
 compiled += $(compiledDir)TheSun.o
 compiled += $(compiledDir)LoadBMP.o
+compiled += $(compiledDir)MainMenu.o
 compiled += $(compiledDir)Console.o
 compiled += $(compiledDir)Player.o
 
@@ -64,7 +65,7 @@ $(compiledDir)main.o: $(codeDir)main.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)main.o $(codeDir)main.cpp $(CINCLUDE)
 
 $(compiledDir)GL_utilities.o: $(codeDir)GL_utilities.c
-	$(CC) $(CFLAGS) -c -o $(compiledDir)GL_utilities.o $(codeDir)GL_utilities.cpp $(CINCLUDE)
+	$(CC) $(CFLAGS) -c -o $(compiledDir)GL_utilities.o $(codeDir)GL_utilities.c $(CINCLUDE)
 
 $(compiledDir)Game.o: $(codeDir)Game.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Game.o $(codeDir)Game.cpp $(CINCLUDE)
@@ -98,6 +99,9 @@ $(compiledDir)TheSun.o: $(codeDir)TheSun.cpp
 
 $(compiledDir)LoadBMP.o: $(codeDir)LoadBMP.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)LoadBMP.o $(codeDir)LoadBMP.cpp $(CINCLUDE)
+
+$(compiledDir)MainMenu.o: $(codeDir)MainMenu.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)MainMenu.o $(codeDir)MainMenu.cpp $(CINCLUDE)
 
 $(compiledDir)Console.o: $(codeDir)Console.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Console.o $(codeDir)Console.cpp $(CINCLUDE)
