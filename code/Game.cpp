@@ -112,7 +112,7 @@ void Game::NewGame(int level)
     }
 
     //  create player
-    this->player = new Player(this->world->camera);
+    this->player = new Player(this->world->camera, this->levelData);
 }
 
 

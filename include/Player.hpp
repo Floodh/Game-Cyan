@@ -11,7 +11,7 @@
 class Player : public IDrawObject
 {
     public:
-        Player(Camera& camera);
+        Player(Camera& camera, uint8_t* levelData);
         // Player(GLint* m, GLint* texture);
         ~Player();
 
@@ -39,5 +39,6 @@ class Player : public IDrawObject
         mat4 rotationMatrix;
 
         Model* m;
+        uint8_t* levelData;
         
 };
