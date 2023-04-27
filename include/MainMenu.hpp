@@ -19,12 +19,13 @@ struct Button
     Button(
         Rect area, 
         bool enabled, bool visible, 
-        GLfloat* color
+        GLfloat* color, unsigned int bufferIndex
     )
-        :   area(area),
-            enabled(enabled), visible(visible), 
-            holdingClick(false), clicked(false),
-            clickedFrame(-1), color(color)
+        :   area{area},
+            enabled{enabled}, visible{visible}, 
+            holdingClick{false}, clicked{false},
+            clickedFrame{-1}, color{color},
+            bufferIndex{bufferIndex}
     {}
 
     Rect area;
@@ -35,6 +36,8 @@ struct Button
     int clickedFrame; 
 
     GLfloat* color; //  vec3
+
+    unsigned int bufferIndex;
 };
 
 
@@ -43,7 +46,7 @@ class MainMenu
 
     public:
 
-        MainMenu();
+        MainMenu(const int & windowWidth, const int & windowHeight);
         void Update();
         void Draw();
 
@@ -56,10 +59,15 @@ class MainMenu
         
         Button quitButton;
 
+        const int& windowWidth;
+        const int& windowHeight; 
+
 
         void DrawButton(const Button& button);
 
 
+
+        //  these are mainted by the main menu instance but are referanced by the buttons
 
         // vertex array object
         unsigned int vertexArrayObjID;

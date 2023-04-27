@@ -19,6 +19,7 @@ sources += $(codeDir)Water.cpp
 sources += $(codeDir)Land.cpp
 sources += $(codeDir)TheSun.cpp
 sources += $(codeDir)LoadBMP.cpp
+sources += $(codeDir)MainMenu.cpp
 sources += $(codeDir)Console.cpp
 ifdef OS
 	sources += $(glad)glad.c 

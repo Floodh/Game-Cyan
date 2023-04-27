@@ -92,13 +92,16 @@ void Game::NewGame(int level)
     cout << "Trying to load level " << path << endl;
     this->levelData = LoadBMP(path.c_str(), width, height);
     if (levelData == NULL)
-        throw std::runtime_error("Couldn't load level");
+        throw runtime_error("Couldn't load level");
     
-    std::cout << "Word loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << std::endl;
+    cout << "Word loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << endl;
     this->world = new World(this->levelData, width, height);
 
     if (level == 0)
+    {
         gameState = GameState::MainMenu;
+        this->mainMenu = new MainMenu(this->windowWidth, this->windowHeight);
+    }
     else
     {
         gameState = GameState::Playing;
@@ -121,9 +124,12 @@ void Game::Update()
             break;
         case GameState::MainMenu:
             //  handle UI here
+            if (this->mainMenu != NULL)
+                this->mainMenu->Update();
             break;
         case GameState::Playing:
-            this->world->Update();
+            if (this->world != NULL)
+                this->world->Update();
             //this->player.Update();
             break;
 
@@ -133,21 +139,17 @@ void Game::Update()
 
     if (this->keyboard.GetKey(1073741906).keypress) //  up
     {
-        this->world->camera.position[0] += 0.01;
-
+        this->world->camera.position[0] += 0.1;
     }
     if (this->keyboard.GetKey(1073741905).keypress) //  down
     {
-        this->world->camera.position[0] -= 0.01;
-        
+        this->world->camera.position[0] -= 0.1;
     }
     if (this->keyboard.GetKey(1073741904).keypress) //  right
     {
-        
     }
     if (this->keyboard.GetKey(1073741903).keypress) //  left
     {
-        
     }
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     this->keyboard.ClearFrameEvents();
@@ -160,6 +162,8 @@ void Game::Draw()
     glClearColor(0.f, 0.f, 0.2f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    if (this->world != NULL)    //  this null check is redundant, but safty is important
+        this->world->Draw();
 
     switch (this->gameState)
     {
@@ -167,15 +171,17 @@ void Game::Draw()
             cout << "Warning: Is in loading state while trying to update!" << endl;
             break;
         case GameState::MainMenu:
+            if (this->mainMenu != NULL)
+                this->mainMenu->Draw();
             break;
         case GameState::Playing:
-            //  all 3d models are managed by the world
-            if (this->world != NULL)    //  this null check is redundant, but safty is important
-                this->world->Draw();
+
             break;
         default:
             throw runtime_error("Entered invalid gamestate in update function");
     }
+
+
 
     //  opengl rendering
     SDL_GL_SwapWindow(this->window);

@@ -8,19 +8,22 @@
 #include "Camera.hpp"
 #include "World.hpp"
 #include "LoadBMP.hpp"
+#include "MainMenu.hpp"
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <iomanip> // for setw
 
-
+namespace GameState
+{
 enum GameState 
 {
     Loading,
     MainMenu,
     Playing
 };
+}
 
 //  master class, here everything is ultimetly managed
 //  is divided into Update, Draw and HandleEvent
@@ -37,7 +40,7 @@ class Game
         //  this function only needs to pass through the event to Keyboard
         void HandleEvent(const SDL_Event& event);
 
-        GameState gameState;
+        GameState::GameState gameState;
 
     private:
 
@@ -47,8 +50,10 @@ class Game
         SDL_GLContext glContext = nullptr;
         Keyboard keyboard;
 
-        uint8_t* levelData;
-        World* world;
+        uint8_t* levelData = nullptr;
+        MainMenu* mainMenu = nullptr;
+        World* world = nullptr;
+
 
         
 

@@ -42,7 +42,6 @@ Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight
         for (int z = 0; z < vertexHeight - 1; z++)
             for (int x = 0; x < vertexWidth - 1; x++)
             {
-                cout << " " << z << " " << x << " " << endl;
 
                 int p1Index = (z * vertexWidth) + x;
                 int p2Index = (z * vertexWidth) + x + 1;
@@ -71,6 +70,7 @@ Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight
         for (int z = 0; z < vertexHeight; z++)
             for (int x = 0; x < vertexWidth; x++)
             {
+                //cout << "Vertex " << x << " " << z << endl;
 
                 GLfloat vertexX = (GLfloat)x / detailMultipler;
                 GLfloat vertexY = (GLfloat)0.125f + static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 8;
