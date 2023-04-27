@@ -132,7 +132,8 @@ void Game::Update()
         case GameState::Playing:
             if (this->world != NULL)
                 this->world->Update();
-            //this->player.Update();
+            if (this->player != NULL)
+                this->player->Update(&this->keyboard);
             break;
 
         default:
@@ -154,12 +155,12 @@ void Game::Update()
     {
     }
 
-    this->world->Update();
-    //this->world->camera.position[1] += 0.001;
-    this->player->Update(&this->keyboard);
+    if (this->world != NULL)
+        this->world->Update();
 
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     this->keyboard.ClearFrameEvents();
+    this->mouse.ClearFrameEvents();
 
 }
 
@@ -209,6 +210,17 @@ void Game::HandleEvent(const SDL_Event& event)
             break;
         case SDL_KEYUP:
             this->keyboard.HandleKeyup(event.key.keysym.sym);
+            break;
+        case SDL_MOUSEMOTION:
+            this->mouse.HandleMouseMotion(event.motion);
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            this->mouse.HandleMouseButton(event.button);
+            break;
+        case SDL_MOUSEBUTTONUP:
+            this->mouse.HandleMouseButton(event.button);
+            break;
+        default:
             break;
     }
 

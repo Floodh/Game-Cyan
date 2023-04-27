@@ -67,7 +67,7 @@ void MainMenu::Update()
 void MainMenu::Draw()
 {
 
-    cout << "Drawing main menu:" << endl;
+    //cout << "Drawing main menu:" << endl;
 
 
     glDisable(GL_DEPTH_TEST);
@@ -84,7 +84,7 @@ void MainMenu::Draw()
 
 void MainMenu::DrawButton(const Button& button)
 {
-    cout << "     Drawing button: visable = " << button.visible << endl;
+    //cout << "     Drawing button: visable = " << button.visible << endl;
     if (button.visible)
         this->DrawRect(button.area, button.color);
 }
@@ -93,9 +93,9 @@ void MainMenu::DrawButton(const Button& button)
 void MainMenu::DrawRect(const Rect rect, GLfloat* color)
 {
 
-    cout << "          Drawing rect" << endl;
-    cout << "               x = " << rect.x << ", y = " << rect.y << endl;
-    cout << "               width = " << rect.width << ", height = " << rect.height << endl;
+    // cout << "          Drawing rect" << endl;
+    // cout << "               x = " << rect.x << ", y = " << rect.y << endl;
+    // cout << "               width = " << rect.width << ", height = " << rect.height << endl;
 
     glUseProgram(shader);
     //  set the color of the rectangle

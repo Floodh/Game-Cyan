@@ -5,6 +5,7 @@
 
 #include "IDrawObject.hpp"
 #include "Keyboard.hpp"
+#include "Mouse.hpp"
 #include "Camera.hpp"
 #include "World.hpp"
 #include "LoadBMP.hpp"
@@ -51,6 +52,7 @@ class Game
         SDL_Window * window = nullptr;
         SDL_GLContext glContext = nullptr;
         Keyboard keyboard;
+        Mouse mouse;
 
         uint8_t* levelData = nullptr;
         MainMenu* mainMenu = nullptr;

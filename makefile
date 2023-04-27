@@ -12,7 +12,8 @@ sources =  $(codeDir)main.cpp
 sources += $(codeDir)GL_utilities.c 
 sources += $(codeDir)Game.cpp
 sources += $(codeDir)Keyboard.cpp 
-sources += $(codeDir)KeyboardKey.cpp  
+sources += $(codeDir)KeyboardKey.cpp
+sources += $(codeDir)Mouse.cpp  
 sources += $(codeDir)Camera.cpp 
 sources += $(codeDir)World.cpp 
 sources += $(codeDir)Terrain.cpp 
@@ -29,6 +30,7 @@ compiled += $(compiledDir)GL_utilities.o
 compiled += $(compiledDir)Game.o
 compiled += $(compiledDir)Keyboard.o 
 compiled += $(compiledDir)KeyboardKey.o  
+compiled += $(compiledDir)Mouse.0
 compiled += $(compiledDir)Camera.o 
 compiled += $(compiledDir)World.o 
 compiled += $(compiledDir)Terrain.o 
@@ -72,6 +74,9 @@ $(compiledDir)Keyboard.o: $(codeDir)Keyboard.cpp
 
 $(compiledDir)KeyboardKey.o: $(codeDir)KeyboardKey.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)KeyboardKey.o $(codeDir)KeyboardKey.cpp $(CINCLUDE)
+
+$(compiledDir)Mouse.o: $(codeDir)Mouse.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)Mouse.o $(codeDir)Mouse.cpp $(CINCLUDE)
 
 $(compiledDir)Camera.o: $(codeDir)Camera.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Camera.o $(codeDir)Camera.cpp $(CINCLUDE)
