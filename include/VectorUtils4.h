@@ -257,7 +257,9 @@
 	} mat3;
 
 #ifdef __cplusplus
+	inline		// Added inline due to multiple definition problem, seems to solve the issue
 	vec3::vec3(vec4 v) : x(v.x), y(v.y), z(v.z) {}
+	inline
 	mat4::mat4(mat3 x)
 	{
 		m[0] = x.m[0]; m[1] = x.m[1]; m[2] = x.m[2]; m[3] = 0;

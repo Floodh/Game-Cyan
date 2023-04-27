@@ -10,6 +10,8 @@
 #include "LoadBMP.hpp"
 #include "MainMenu.hpp"
 
+#include "Player.hpp"
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -55,6 +57,6 @@ class Game
         World* world = nullptr;
 
 
-        
+        Player* player;
 
 };

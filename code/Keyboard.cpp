@@ -12,12 +12,16 @@ Keyboard::Keyboard()
     this->keys.push_back((SDL_KeyCode)(1073741904));    //  right arrow
     this->keys.push_back((SDL_KeyCode)(1073741903));    //  left arrow
     //  add key bindings here
+    this->keys.push_back((SDL_KeyCode)(119));           //  W
+    this->keys.push_back((SDL_KeyCode)(115));           //  S
+    this->keys.push_back((SDL_KeyCode)(97));            //  A
+    this->keys.push_back((SDL_KeyCode)(100));           //  D
 }
 
 void Keyboard::HandleKeydown(const SDL_Keycode eventKey)
 {
     cout << "Keydown: " << eventKey << endl;
-    for (int i = 0; i < keys.size(); i++)
+    for (long unsigned int i = 0; i < keys.size(); i++)
         if (keys[i].keycode == eventKey)
     {
         keys[i].keydown = true;
@@ -30,7 +34,7 @@ void Keyboard::HandleKeydown(const SDL_Keycode eventKey)
 void Keyboard::HandleKeyup(const SDL_Keycode eventKey)
 {
     cout << "Keyup: " << eventKey << endl;
-    for (int i = 0; i < keys.size(); i++)
+    for (long unsigned int i = 0; i < keys.size(); i++)
         if (keys[i].keycode == eventKey)
     {
         keys[i].keyup = true;
@@ -41,7 +45,7 @@ void Keyboard::HandleKeyup(const SDL_Keycode eventKey)
 
 void Keyboard::ClearFrameEvents()
 {
-    for (int i = 0; i < keys.size(); i++)
+    for (long unsigned int i = 0; i < keys.size(); i++)
     {
         keys[i].keydown = false;
         keys[i].keyup = false; 
@@ -50,7 +54,7 @@ void Keyboard::ClearFrameEvents()
 
 KeyboardKey Keyboard::GetKey(const SDL_Keycode key) const
 {
-    for (int i = 0; i < keys.size(); i++)
+    for (long unsigned int i = 0; i < keys.size(); i++)
         if (keys[i].keycode == key)
     {
         return keys[i];

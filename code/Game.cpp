@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+// #include "Player.hpp"
+
 using namespace std;
 
 
@@ -110,7 +112,7 @@ void Game::NewGame(int level)
     }
 
     //  create player
-    //this->player = new Player(this->world->camera);
+    this->player = new Player(this->world->camera);
 }
 
 
@@ -151,6 +153,11 @@ void Game::Update()
     if (this->keyboard.GetKey(1073741903).keypress) //  left
     {
     }
+
+    this->world->Update();
+    //this->world->camera.position[1] += 0.001;
+    this->player->Update(&this->keyboard);
+
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     this->keyboard.ClearFrameEvents();
 
@@ -165,6 +172,7 @@ void Game::Draw()
     if (this->world != NULL)    //  this null check is redundant, but safty is important
         this->world->Draw();
 
+
     switch (this->gameState)
     {
         case GameState::Loading:
@@ -175,7 +183,7 @@ void Game::Draw()
                 this->mainMenu->Draw();
             break;
         case GameState::Playing:
-
+            this->player->Draw();
             break;
         default:
             throw runtime_error("Entered invalid gamestate in update function");

@@ -208,7 +208,7 @@ int calculateIndexCount(uint8_t* levelData, int levelHeight, int levelWidth)
     for (int i = 0; i < levelWidth * levelHeight; i++)
     {
         int indexOffset = i * 4;
-        if (levelData[indexOffset] == 75 & levelData[indexOffset + 1] == 105 & levelData[indexOffset + 2] == 47)
+        if ( (levelData[indexOffset] == 75) & (levelData[indexOffset + 1] == 105) & (levelData[indexOffset + 2] == 47) )
             greenPixels++; 
     }
     return greenPixels * 2 * 3 * 5;    //  multiplied by five because were making a partial cube    
