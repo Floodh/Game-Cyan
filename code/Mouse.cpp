@@ -67,7 +67,11 @@ void Mouse::ClearFrameEvents()
     this->xRel = 0;
     this->yRel = 0;
 
-    right.keypress = false;
-    middle.keypress = false;
-    left.keypress = false;
+    right.keydown = false;
+    middle.keydown = false;
+    left.keydown = false;
+
+    right.keyup = false;
+    middle.keyup = false;
+    left.keyup = false;
 }

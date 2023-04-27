@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "GL_utilities.h"
 
+#include "Mouse.hpp"
 
 //  may need to move the support data types 
 //  if the need for a in game menu arises
@@ -24,31 +25,41 @@ struct Button
         :   area{area},
             enabled{enabled}, visible{visible}, 
             holdingClick{false}, clicked{false},
-            clickedFrame{-1}, color{color},
-            bufferIndex{bufferIndex}
+            clickedFrame{-1}, color{color}
+            //,bufferIndex{bufferIndex}
     {}
 
     Rect area;
     bool enabled;
     bool visible;
-    bool holdingClick;
-    bool clicked;
-    int clickedFrame; 
+    bool holdingClick;  //  not implemented
+    bool clicked;       //  not implemented
+    int clickedFrame;   //  not implemented
 
     GLfloat* color; //  vec3
 
-    unsigned int bufferIndex;
+    //unsigned int bufferIndex;
 };
 
+enum MainMenuResponse
+{
+    MainMenu_None,
+    MainMenu_Quit,
+    MainMenu_Play,
+    MainMenu_Load
+};
 
 class MainMenu
 {
 
     public:
 
-        MainMenu(const int & windowWidth, const int & windowHeight);
+        MainMenu(const int & windowWidth, const int & windowHeight, Mouse& mouse);
         void Update();
         void Draw();
+
+        unsigned int response = MainMenu_None;
+        unsigned int loadMap = 0;
 
     private:
 
@@ -61,30 +72,34 @@ class MainMenu
 
         const int& windowWidth;
         const int& windowHeight; 
+        Mouse& mouse;
 
+        int mouseDownX, mouseDownY;
 
         void DrawButton(const Button& button);
+
+        bool IsSelectedButton(const Button& button);
 
 
 
         //  these are mainted by the main menu instance but are referanced by the buttons
+            // vertex array object
+            unsigned int vertexArrayObjID;
 
-        // vertex array object
-        unsigned int vertexArrayObjID;
+            unsigned int indexBufferObjID;
+            unsigned int vertexBufferObjID;
 
-        unsigned int indexBufferObjID;
-        unsigned int vertexBufferObjID;
+            //  variables for drawing rectangles
+            GLuint indexCount;
+            GLuint vertexCount;    
+            GLuint valueCount;
 
-        //  variables for drawing rectangles
-        GLuint indexCount;
-        GLuint vertexCount;    
-        GLuint valueCount;
+            GLfloat* vertices;
+            GLint* indices;
 
-        GLfloat* vertices;
-        GLint* indices;
+            GLuint shader;
+            void DrawRect(Rect rect, GLfloat* color);
 
-        GLuint shader;
-        void DrawRect(Rect rect, GLfloat* color);
 
 
 };

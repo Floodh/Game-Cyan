@@ -102,7 +102,7 @@ void Game::NewGame(int level)
     if (level == 0)
     {
         gameState = GameState::MainMenu;
-        this->mainMenu = new MainMenu(this->windowWidth, this->windowHeight);
+        this->mainMenu = new MainMenu(this->windowWidth, this->windowHeight, this->mouse);
     }
     else
     {
