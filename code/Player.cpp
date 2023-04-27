@@ -2,15 +2,17 @@
 #include <iostream>
 
 
-Player::Player(Camera& camera, uint8_t* levelData)
-: camera{camera}, HP{100}, Points{0}, scale{0.3f}, levelData{levelData}
+Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
+: camera{camera}, HP{100}, Points{0}, scale{0.3f}, width{width}, height{height}
 {
     // this->position = new GLfloat[3]{0.0f, 100.0f, 5.0f};
-    this->position = {0.0f, 1.0f, 0.0f};
+    this->position = {2.0f, 1.0f, 1.0f};
 
     this->shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->scaleMatrix = S(scale);
     this->rotationMatrix = IdentityMatrix();
+
+    this->levelData = levelData;
     
     this->numVertices = 3 * 3 * 6;
 
@@ -119,7 +121,25 @@ void Player::Update(Keyboard* kb)
     }
     if (movement.x != 0.0f | movement.y != 0.0f | movement.z != 0.0f) //    don't normalize a vector that has no direction
         movement = normalize(movement);
-    this->position += 0.05f * movement;
+    
+
+    vec3 tmp_pos = this->position;// + (0.05f * movement);
+
+    int z = floor(tmp_pos.z) * width*4;
+    int x = floor(tmp_pos.x) * 4;
+
+    int index = (z+x);
+  
+    // if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
+        this->position += 0.05f * movement;
+
+    // for (int index = 0; index < this->width * this->height * 4; index +=4)
+    std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
+        
+
+
+
+
 
 
     camera.SetLookAt(position.x, position.y, position.z);

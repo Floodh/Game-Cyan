@@ -111,8 +111,14 @@ void Game::NewGame(int level)
         this->world->camera.SetLookAt(3.0, 1.0, 3.0);
     }
 
+    // for (int index = 0; index < width * height * 4; index +=4)
+    //     std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << std::endl;
+
+
+    // for (int i=0; i < width*height*4; i++)
+    //     std::cout << (int)this->levelData[i] << std::endl;
     //  create player
-    this->player = new Player(this->world->camera, this->levelData);
+    this->player = new Player(this->world->camera, this->levelData, width, height);
 }
 
 
