@@ -10,7 +10,7 @@ Player::Player(Camera& camera)
 
     this->shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->scaleMatrix = S(scale);
-    this->rotationMatrix = Rx(4.7f); //IdentityMatrix();
+    this->rotationMatrix = IdentityMatrix();
     
     this->numVertices = 3 * 3 * 6;
 
