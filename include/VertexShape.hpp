@@ -11,6 +11,17 @@ struct VertexShape
     unsigned int indexBufferObjID;
     unsigned int vertexBufferObjID;
     unsigned int colorBufferObjID;
+
+    GLuint indexCount;
+    GLuint vertexCount;    
+    GLuint valueCount;
+
+    GLint* indices;
+    GLfloat* vertices;
+    GLfloat* colors;
+    
+    GLuint shader = NULL;
+
 };
 
 //  return a vertex shape that will be drawn as a dome

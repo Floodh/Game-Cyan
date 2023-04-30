@@ -177,10 +177,6 @@ Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, i
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObjID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount*sizeof(GLuint), indices, GL_STATIC_DRAW);
 
-    Console::WriteLine("The Sun:");
-    Console::WriteLine(this->theSun.direction, 3);
-    Console::WriteLine(this->theSun.color, 3);
-
     glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
     glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.position);
 
