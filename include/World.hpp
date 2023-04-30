@@ -7,6 +7,7 @@
 #include "Camera.hpp"
 #include "Terrain.hpp"
 #include "TheSun.hpp"
+#include "Mouse.hpp"
 
 #include <vector>
 
@@ -18,7 +19,7 @@ class World
     public:
 
         //  the constructor should later receive the path to a .bmp file.
-        World(uint8_t* levelData, const int levelWidth, const int levelHeight);
+        World(uint8_t* levelData, const int levelWidth, const int levelHeight, Mouse& mouse, Camera& camera);
         void Draw();
         void Update();
 
@@ -26,7 +27,7 @@ class World
         std::vector<IDrawObject*> drawObjects;
 
     public:
-        Camera camera;
+        Camera& camera;
         TheSun theSun;
         Terrain terrain;
         

@@ -31,7 +31,6 @@ void Mouse::HandleMouseMotion(const SDL_MouseMotionEvent event)
 
 void Mouse::HandleMouseButton(const SDL_MouseButtonEvent event)
 {
-    //cout << "Button: " << (int)event.button << endl;
     MouseButton* button = NULL;
 
     if (event.button == 1)

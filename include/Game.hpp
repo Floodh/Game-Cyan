@@ -59,6 +59,7 @@ class Game
         uint8_t* levelData = nullptr;
         MainMenu* mainMenu = nullptr;
         World* world = nullptr;
+        Camera camera;
 
 
         Player* player;

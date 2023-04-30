@@ -20,7 +20,7 @@ Keyboard::Keyboard()
 
 void Keyboard::HandleKeydown(const SDL_Keycode eventKey)
 {
-    cout << "Keydown: " << eventKey << endl;
+    //cout << "Keydown: " << eventKey << endl;
     for (long unsigned int i = 0; i < keys.size(); i++)
         if (keys[i].keycode == eventKey)
     {

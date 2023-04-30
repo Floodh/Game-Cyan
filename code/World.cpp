@@ -2,10 +2,10 @@
 
 #include "Console.hpp"
 
-World::World(uint8_t* levelData, const int levelWidth, const int levelHeight)
+World::World(uint8_t* levelData, const int levelWidth, const int levelHeight, Mouse& mouse, Camera& camera)
     :
         drawObjects{std::vector<IDrawObject*>()},
-        camera{},
+        camera{camera},
         theSun{},
         terrain{this->camera, this->theSun, levelData, levelWidth, levelHeight}
 {
@@ -18,8 +18,6 @@ World::World(uint8_t* levelData, const int levelWidth, const int levelHeight)
 void World::Draw()
 {
 
-    camera.UpdateViewMatrix();
-    
     for (IDrawObject* drawObject : this->drawObjects)
         drawObject->Draw();
 

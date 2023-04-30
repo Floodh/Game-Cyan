@@ -6,6 +6,7 @@ using namespace std;
 
 
 Game::Game(int windowWidth, int windowHeight)
+    : camera{this->mouse}
 {
     this->gameState = GameState::Loading;
 
@@ -109,7 +110,7 @@ void Game::NewGame(int level)
         throw runtime_error("Couldn't load level");
     
     cout << "Word loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << endl;
-    this->world = new World(this->levelData, width, height);
+    this->world = new World(this->levelData, width, height, this->mouse, this->camera);
 
     if (level == 0)
     {
@@ -179,6 +180,7 @@ void Game::Update()
         this->world->Update();
 
     //  keydown and keyup is only valid for one frame, unlike the pressed state
+    camera.UpdateViewMatrix();
     this->keyboard.ClearFrameEvents();
     this->mouse.ClearFrameEvents();
 
