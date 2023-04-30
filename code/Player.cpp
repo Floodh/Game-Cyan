@@ -117,7 +117,7 @@ void Player::Update(Keyboard* kb)
         movement.x += -sin(1.5f);
         movement.z += -cos(1.5f); 
     }
-    if (movement.x != 0.0f | movement.y != 0.0f | movement.z != 0.0f) //    don't normalize a vector that has no direction
+    if ( (movement.x != 0.0f) | (movement.y != 0.0f) | (movement.z != 0.0f) ) //    don't normalize a vector that has no direction
         movement = normalize(movement);
     this->position += 0.05f * movement;
 
