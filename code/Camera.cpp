@@ -50,7 +50,6 @@ void Camera::UpdateViewMatrix()
     GLfloat x, y, z;
     x = this->position[0], y = this->position[1], z = this->position[2];
 
-    //cout << "MouseDragMode = " << this->mouseDragMode << endl;
     //  mouse dragMode
     if (mouseDragMode)
     {
@@ -69,8 +68,6 @@ void Camera::UpdateViewMatrix()
 
             if ((mouseY) != 0.0)
                 radiansY += mouseY * dragSpeedY;
-
-            //cout << "radians = " << radians << endl;
 
             GLfloat  lookX = this->lookAtPosition[0], lookY = this->lookAtPosition[1], lookZ = this->lookAtPosition[2];
 
