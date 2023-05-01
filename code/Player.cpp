@@ -6,7 +6,7 @@ Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
 : camera{camera}, HP{100}, Points{0}, scale{0.3f}, width{width}, height{height}
 {
     // this->position = new GLfloat[3]{0.0f, 100.0f, 5.0f};
-    this->position = {2.0f, 1.0f, 1.0f};
+    this->position = {2.0f, 0.6f, 1.0f};
 
     this->shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->scaleMatrix = S(scale);
@@ -128,13 +128,13 @@ void Player::Update(Keyboard* kb)
     int z = floor(tmp_pos.z) * width*4;
     int x = floor(tmp_pos.x) * 4;
 
-    // int index = (z+x);
+    int index = (z+x);
   
     // if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
     // if ((int)this->levelData[index+3] != 255)    
       this->position += 0.05f * movement;
 
-    // std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
+    std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
     // for (int index = 0; index < this->width * this->height * 4; index +=4)
     // {
     //     std::cout << (int)this->levelData[index] << " " << (int)this->levelData[index+1] << " " << (int)this->levelData[index+2] << " " << (int)this->levelData[index+3] << " " << std::endl;
