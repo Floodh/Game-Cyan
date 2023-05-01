@@ -5,24 +5,25 @@
 using namespace std;
 
 
-#define BUTTONWIDTH 450
-#define BUTTONHEIGHT 200
-#define BUTTONSPACING 100
+#define BUTTONWIDTH 250
+#define BUTTONHEIGHT 150
+#define BUTTONSPACING_X 50
+#define BUTTONSPACING_Y 25
 
 
-MainMenu::MainMenu(const int & windowWidth, const int & windowHeight)
-    : windowWidth(windowWidth), windowHeight(windowHeight)
+MainMenu::MainMenu(const int & windowWidth, const int & windowHeight, Mouse& mouse)
+    : windowWidth(windowWidth), windowHeight(windowHeight), mouse{mouse}
 {
     unsigned int assignedIndexes = 0;
 
-    Rect area{(windowWidth + BUTTONWIDTH) / 2, BUTTONHEIGHT + BUTTONSPACING, BUTTONWIDTH, BUTTONHEIGHT};
+    Rect area{(windowWidth - BUTTONWIDTH) / 2, BUTTONHEIGHT + BUTTONSPACING_Y, BUTTONWIDTH, BUTTONHEIGHT};
     this->playButton = Button{area, true, true, new GLfloat[3]{0.5f, 0.2f, 0.6f}, assignedIndexes++};
-        area.y += area.height + BUTTONSPACING;
-        area.x += BUTTONSPACING;
+        area.y += area.height + BUTTONSPACING_Y;
+        area.x += BUTTONSPACING_X;
         this->map1Button = Button{area, false, false, new GLfloat[3]{0.5f, 0.2f, 0.6f}, assignedIndexes++};
 
     //  y stays the same until the play button is pressed
-    area.x -= BUTTONSPACING;
+    area.x -= BUTTONSPACING_X;
     this->quitButton = Button{area, true, true, new GLfloat[3]{0.5f, 0.2f, 0.6f}, assignedIndexes++};
 
 
@@ -61,13 +62,50 @@ MainMenu::MainMenu(const int & windowWidth, const int & windowHeight)
 
 void MainMenu::Update()
 {
+
     //
+    if (mouse.left.keydown)
+    {
+        this->mouseDownX = mouse.x;
+        this->mouseDownY = mouse.y;
+    }
+
+    //  when we let the mouse button go, that's when we check if we picked an option
+    if (mouse.left.keyup)
+    {
+        // cout << "Update" << endl;
+        // cout << "       response = " << response << endl;
+        // cout << "       loadMap = " << loadMap << endl;   
+
+        // cout << "       Mouse:" << endl;
+        // cout << "           downX = " << mouseDownX << ", downY = " << mouseDownY << endl;  
+        // cout << "           upX = " << mouse.x << ", upY = " << mouse.y << endl;      
+        if (IsSelectedButton(playButton))
+        {
+            this->response = MainMenu_Play;
+            this->quitButton.area.y += BUTTONHEIGHT + BUTTONSPACING_Y;
+            this->map1Button.visible = true;
+            this->map1Button.enabled = true;
+        }
+        else if (IsSelectedButton(map1Button))
+        {
+            this->response = MainMenu_Load;
+            this->loadMap = 1;  //  hardcoded for now
+        }
+        else if (IsSelectedButton(quitButton))
+        {
+            this->response = MainMenu_Quit;
+        }
+    }
+
+
+    
 }
 
 void MainMenu::Draw()
 {
 
-    cout << "Drawing main menu:" << endl;
+    //cout << "Drawing main menu:" << endl;
 
 
     glDisable(GL_DEPTH_TEST);
@@ -84,38 +122,61 @@ void MainMenu::Draw()
 
 void MainMenu::DrawButton(const Button& button)
 {
-    cout << "     Drawing button: visable = " << button.visible << endl;
+    //cout << "     Drawing button: visable = " << button.visible << endl;
     if (button.visible)
         this->DrawRect(button.area, button.color);
+}
+
+bool MainMenu::IsSelectedButton(const Button& button)
+{
+    if (button.visible == false)
+        return false;
+    if (button.enabled == false)
+        return false;
+
+    // cout << "1, " << (this->mouseDownX >= button.area.x) << ", " << (this->mouseDownX <= button.area.x + button.area.width) << endl;
+    // cout << "   mouse down.x = " << this->mouseDownX << ", area.x =" << button.area.x << endl;
+    //  if the down is inside the area
+    if (this->mouseDownX >= button.area.x && this->mouseDownX <= button.area.x + button.area.width)
+    if (this->mouseDownY >= button.area.y && this->mouseDownY <= button.area.y + button.area.height)
+    //  if the up is also inside the area
+    if (mouse.x >= button.area.x && mouse.x <= button.area.x + button.area.width)
+    if (mouse.y >= button.area.y && mouse.y <= button.area.y + button.area.height)
+        return true;
+
+
+
+    return false;
+
 }
 
 //  not very optimized, like at all
 void MainMenu::DrawRect(const Rect rect, GLfloat* color)
 {
 
-    cout << "          Drawing rect" << endl;
-    cout << "               x = " << rect.x << ", y = " << rect.y << endl;
-    cout << "               width = " << rect.width << ", height = " << rect.height << endl;
+    // cout << "          Drawing rect" << endl;
+    // cout << "               x = " << rect.x << ", y = " << rect.y << endl;
+    // cout << "               width = " << rect.width << ", height = " << rect.height << endl;
 
     glUseProgram(shader);
     //  set the color of the rectangle
     glUniform3fv(glGetUniformLocation(shader, "rectColor"), 1, color);
 
     //  set the 4 points
-        this->vertices[0] = (GLfloat)(-windowWidth + rect.x) / windowWidth;
-        this->vertices[1] = (GLfloat)(windowHeight - rect.y) / windowHeight;
+        this->vertices[0] = (GLfloat)( rect.x) / (windowWidth / 2) - 1.0f;
+        this->vertices[1] = (GLfloat)( -rect.y) / (windowHeight / 2) + 1.0f;
         this->vertices[2] = 0.0f;
 
-        this->vertices[3] = (GLfloat)(-windowWidth + rect.x + rect.width) / windowWidth;
-        this->vertices[4] = (GLfloat)(windowHeight - rect.y) / windowHeight;
+        this->vertices[3] = (GLfloat)(+ rect.x + rect.width) / (windowWidth / 2) - 1.0f;
+        this->vertices[4] = (GLfloat)( - rect.y) / (windowHeight / 2) + 1.0f;
         this->vertices[5] = 0.0f;
 
-        this->vertices[6] = (GLfloat)(-windowWidth + rect.x + rect.width) / windowWidth;
-        this->vertices[7] = (GLfloat)(windowHeight - rect.y - rect.height) / windowHeight;
+        this->vertices[6] = (GLfloat)( + rect.x + rect.width) / (windowWidth / 2) - 1.0f;
+        this->vertices[7] = (GLfloat)( - rect.y - rect.height) / (windowHeight / 2) + 1.0f;
         this->vertices[8] = 0.0f;
 
-        this->vertices[9] = (GLfloat)(-windowWidth + rect.x) / windowWidth;
-        this->vertices[10] = (GLfloat)(windowHeight - rect.y - rect.height) / windowHeight;
+        this->vertices[9] = (GLfloat)( + rect.x) / (windowWidth / 2) - 1.0f;
+        this->vertices[10] = (GLfloat)(- rect.y - rect.height) / (windowHeight / 2) + 1.0f;
         this->vertices[11] = 0.0f;
 
 

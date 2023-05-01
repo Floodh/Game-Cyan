@@ -6,6 +6,7 @@ using namespace std;
 
 
 Game::Game(int windowWidth, int windowHeight)
+    : camera{this->mouse}
 {
     this->gameState = GameState::Loading;
 
@@ -86,6 +87,18 @@ Game::~Game()
 
 void Game::NewGame(int level)
 {
+
+    //  garbage collection:
+    //  corrently there will always be a somewhat small
+    //  amount of memory that will be leaked when creating
+    //  a new game, but we don't have time to do the proper destructors
+    //  to fix that and its not noticeable by the user anyway
+        // free(this->levelData);
+        // free(this->mainMenu); 
+        // free(this->world);
+        // free(this->player);
+
+
     //  level should be used to fetch the right bitmap
     //  this bitmap should later be sent to the world constructor
     int width, height;
@@ -97,12 +110,12 @@ void Game::NewGame(int level)
         throw runtime_error("Couldn't load level");
     
     cout << "Word loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << endl;
-    this->world = new World(this->levelData, width, height);
+    this->world = new World(this->levelData, width, height, this->mouse, this->camera);
 
     if (level == 0)
     {
         gameState = GameState::MainMenu;
-        this->mainMenu = new MainMenu(this->windowWidth, this->windowHeight);
+        this->mainMenu = new MainMenu(this->windowWidth, this->windowHeight, this->mouse);
     }
     else
     {
@@ -133,12 +146,21 @@ void Game::Update()
         case GameState::MainMenu:
             //  handle UI here
             if (this->mainMenu != NULL)
+            {
                 this->mainMenu->Update();
+                if (this->mainMenu->response == MainMenu_Load)
+                {
+                    this->NewGame(this->mainMenu->loadMap);
+                }
+                else if (this->mainMenu->response == MainMenu_Quit)
+                    this->gameState = GameState::Quit;
+            }
             break;
         case GameState::Playing:
             if (this->world != NULL)
                 this->world->Update();
-            //this->player.Update();
+            if (this->player != NULL)
+                this->player->Update(&this->keyboard);
             break;
 
         default:
@@ -160,12 +182,13 @@ void Game::Update()
     {
     }
 
-    this->world->Update();
-    //this->world->camera.position[1] += 0.001;
-    this->player->Update(&this->keyboard);
+    if (this->world != NULL)
+        this->world->Update();
 
     //  keydown and keyup is only valid for one frame, unlike the pressed state
+    camera.UpdateViewMatrix();
     this->keyboard.ClearFrameEvents();
+    this->mouse.ClearFrameEvents();
 
 }
 
@@ -215,6 +238,17 @@ void Game::HandleEvent(const SDL_Event& event)
             break;
         case SDL_KEYUP:
             this->keyboard.HandleKeyup(event.key.keysym.sym);
+            break;
+        case SDL_MOUSEMOTION:
+            this->mouse.HandleMouseMotion(event.motion);
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            this->mouse.HandleMouseButton(event.button);
+            break;
+        case SDL_MOUSEBUTTONUP:
+            this->mouse.HandleMouseButton(event.button);
+            break;
+        default:
             break;
     }
 

@@ -3,13 +3,15 @@
 #include "GL_utilities.h"
 
 #include "IDrawObject.hpp"
+#include "Mouse.hpp"
+
 
 
 class Camera
 {
     public:
 
-        Camera();
+        Camera(Mouse& mouse);
 
         //  return pointer to its own view matrix
         GLfloat* GetViewMatrix() const;
@@ -32,4 +34,14 @@ class Camera
         GLfloat* const projectionMatrix;
 
 
+    private:
+
+        Mouse& mouse;
+        bool mouseDragMode = false;
+        GLfloat radians;
+        GLfloat radiansY;
+        GLfloat dragSpeedRad = 0.01f;
+        GLfloat dragSpeedY = 0.01f;
+
+        
 };

@@ -5,6 +5,10 @@
 #include "VectorUtils4.h"
 #include "LittleOBJLoader.h"
 
+#include "math.h"
+#include "iostream"
+
+using namespace std;
 
 #define near 1.4
 #define far 60.0
@@ -13,7 +17,7 @@
 #define top 0.55
 #define bottom -0.55
 
-Camera::Camera()
+Camera::Camera(Mouse& mouse)
     : 
         viewMatrix{new GLfloat[16]},
         projectionMatrix{new GLfloat[16]{    	
@@ -21,7 +25,8 @@ Camera::Camera()
 			0.0f, 2.0f*near/(top-bottom), (top+bottom)/(top-bottom), 0.0f,
 			0.0f, 0.0f, -(far + near)/(far - near), -2*far*near/(far - near),
 			0.0f, 0.0f, -1.0f, 0.0f }
-        }
+        },
+        mouse{mouse}
 {
     this->position = new GLfloat[3]{35.0, 14.0, 5.0};
     this->lookAtPosition = new GLfloat[3]{20.0, 0.0, 20};
@@ -41,10 +46,52 @@ GLfloat* Camera::GetProjectionMatrix() const
 
 void Camera::UpdateViewMatrix()
 {
-    //  todo
-    //  will need to use look at function to update the view matrix.
+
+    GLfloat x, y, z;
+    x = this->position[0], y = this->position[1], z = this->position[2];
+
+    //  mouse dragMode
+    if (mouseDragMode)
+    {
+        if (mouse.middle.keypress == false)
+        {
+            mouseDragMode = false;
+        }
+        else
+        {
+            // get mouse coordinates 
+            GLfloat mouseX = (GLfloat)mouse.xRel;
+            GLfloat mouseY = (GLfloat)mouse.yRel;
+
+            if ((mouseX) != 0.0)
+                radians -= mouseX * dragSpeedRad;
+
+            if ((mouseY) != 0.0)
+                radiansY += mouseY * dragSpeedY;
+
+            GLfloat  lookX = this->lookAtPosition[0], lookY = this->lookAtPosition[1], lookZ = this->lookAtPosition[2];
+
+            // calculate the camera's position
+            x = lookX + 5.0f * sin(radians);    
+            z = lookZ + 5.0f * cos(radians);
+            y = lookY + 5.0f * sin(radiansY);   //  this makes the camera behave weird, but i can't think of the math to fix it
+
+        }
+
+    }
+    else
+    {
+        if (mouse.middle.keydown)
+        {
+            mouseDragMode = true;
+            this->radians = 3.5f;
+            this->radiansY = 0.0f;
+        }
+    }
+
+
     mat4 result = lookAt(
-        vec3(this->position[0], this->position[1], this->position[2]),
+        vec3(x, y, z),
         vec3(this->lookAtPosition[0], this->lookAtPosition[1], this->lookAtPosition[2]),
         vec3(this->lookUpVector[0], this->lookUpVector[1], this->lookUpVector[2])
         );

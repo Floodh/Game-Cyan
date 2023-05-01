@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     try {
 
         Game game{1000,1000};
-        game.NewGame(1);
+        game.NewGame(0);
 
 
         // GAME LOOP:
@@ -46,6 +46,12 @@ int main(int argc, char *argv[])
             }
 
             game.Update();
+            if (game.gameState == GameState::Quit)
+            {
+                should_quit = true;
+                break;
+            }
+
 
 
             //  swap buffers
