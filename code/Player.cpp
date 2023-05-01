@@ -101,40 +101,44 @@ void Player::Update(Keyboard* kb)
 
     if (kb->GetKey(119).keypress) //  W
     {
-        movement.x += sin(0.0f);
-        movement.z += cos(0.0f);
+        // movement.x += sin(0.0f);
+        movement.z += 1;//cos(0.0f);
     }
     if (kb->GetKey(115).keypress) //  S
     {
-        movement.x += -sin(0.0f);
-        movement.z += -cos(0.0f);
+        // movement.x += -sin(0.0f);
+        movement.z += -1;//-cos(0.0f);
     }
      if (kb->GetKey(97).keypress) //  A
     {
-        movement.x += sin(1.5f);
-        movement.z += cos(1.5f);
+        movement.x += 1;//sin(1.5f);
+        // movement.z += cos(1.5f);
     }
     if (kb->GetKey(100).keypress) //  D
     {
-        movement.x += -sin(1.5f);
-        movement.z += -cos(1.5f); 
+        movement.x += -1;//-sin(1.5f);
+        // movement.z += -cos(1.5f); 
     }
     if (movement.x != 0.0f | movement.y != 0.0f | movement.z != 0.0f) //    don't normalize a vector that has no direction
         movement = normalize(movement);
     
 
-    vec3 tmp_pos = this->position;// + (0.05f * movement);
+    vec3 tmp_pos = this->position + (0.05f * movement);
 
     int z = floor(tmp_pos.z) * width*4;
     int x = floor(tmp_pos.x) * 4;
 
-    int index = (z+x);
+    // int index = (z+x);
   
     // if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
-        this->position += 0.05f * movement;
+    // if ((int)this->levelData[index+3] != 255)    
+      this->position += 0.05f * movement;
 
+    // std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
     // for (int index = 0; index < this->width * this->height * 4; index +=4)
-    std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
+    // {
+    //     std::cout << (int)this->levelData[index] << " " << (int)this->levelData[index+1] << " " << (int)this->levelData[index+2] << " " << (int)this->levelData[index+3] << " " << std::endl;
+    // }
         
 
 
