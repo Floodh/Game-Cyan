@@ -24,6 +24,9 @@ sources += $(codeDir)LoadBMP.cpp
 sources += $(codeDir)MainMenu.cpp
 sources += $(codeDir)Console.cpp
 sources += $(codeDir)Player.cpp
+sources += $(codeDir)Portal.cpp
+sources += $(codeDir)VertexShape.cpp
+
 
 compiled =  $(compiledDir)main.o 
 compiled += $(compiledDir)GL_utilities.o 

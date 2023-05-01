@@ -19,6 +19,7 @@ class Player : public IDrawObject
         void Draw();
 
         void setPosition(const GLfloat x, const GLfloat y, const GLfloat z);
+        const vec3& getPosition();
 
 
     private:

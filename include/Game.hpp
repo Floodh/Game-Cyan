@@ -12,6 +12,7 @@
 #include "MainMenu.hpp"
 
 #include "Player.hpp"
+#include "Portal.hpp"
 
 #include <vector>
 #include <string>
@@ -62,7 +63,9 @@ class Game
         Camera camera;
 
 
-        Player* player;
+        Player* player = nullptr;
+        Portal* portal = nullptr;
+
 
         
 

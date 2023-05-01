@@ -109,7 +109,7 @@ void Game::NewGame(int level)
     if (levelData == NULL)
         throw runtime_error("Couldn't load level");
     
-    cout << "Word loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << endl;
+    cout << "World loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << endl;
     this->world = new World(this->levelData, width, height, this->mouse, this->camera);
 
     if (level == 0)
@@ -125,7 +125,10 @@ void Game::NewGame(int level)
     }
 
     //  create player
-    this->player = new Player(this->world->camera, this->levelData);
+    if (this->player == NULL)
+        this->player = new Player(this->world->camera, this->levelData);
+    if (this->portal == NULL)
+        this->portal = new Portal(5.0, 0.5, 5.0, *this->player, this->camera);
 }
 
 
@@ -155,6 +158,9 @@ void Game::Update()
                 this->world->Update();
             if (this->player != NULL)
                 this->player->Update(&this->keyboard);
+            if (this->portal != NULL)
+                if (this->portal->IsPlayerInside())
+                    cout << "Player inside portal" << endl;
             break;
 
         default:
@@ -207,6 +213,7 @@ void Game::Draw()
             break;
         case GameState::Playing:
             this->player->Draw();
+            this->portal->Draw();
             break;
         default:
             throw runtime_error("Entered invalid gamestate in update function");

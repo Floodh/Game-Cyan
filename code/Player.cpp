@@ -148,3 +148,9 @@ void Player::setPosition(const GLfloat x, const GLfloat y, const GLfloat z)
     this->position.y = y; // We may not want to change the y-value here
     this->position.z = z;
 }
+
+
+const vec3& Player::getPosition()
+{
+    return this->position;
+}
