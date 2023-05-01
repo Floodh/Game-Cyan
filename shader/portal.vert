@@ -14,7 +14,7 @@ out vec3 eyeRelativePosition;
 
 void main(void)
 {
-    gl_Position = projectionMatrix * viewMatrix * vec4(inPosition, 1.0);
+    gl_Position = projectionMatrix * viewMatrix * transformMatrix * vec4(inPosition, 1.0);
 	fragColor = inColor;
     eyeRelativePosition = inPosition - eyePosition;
 }

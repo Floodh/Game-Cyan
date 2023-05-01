@@ -8,20 +8,15 @@ Portal::Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera)
     : player{player}, transformMatrix{new GLfloat[16]}, camera{camera}
 {
 
-    cout << "Portal" << endl;
-    this->shape = VertexShape_Diamond(x, y, z, 2.0f, 1.0f);
+    this->shape = VertexShape_Diamond(0.0, 0.0, 0.0, 0.5f, 1.0f);
     this->shape.shader = loadShaders("shader/portal.vert", "shader/portal.frag");
 
-    cout << "Portal 1" << endl;
-    
     for (int i = 0; i < 16; i++)
         this->transformMatrix[i] = 0.0f;
     for (int i = 0; i < 16; i += 5)
         this->transformMatrix[i] = 1.0f;
         
     SetPosition(x,y,z);
-
-    cout << "P0ortal 2" << endl;
 
     
 
@@ -32,10 +27,6 @@ Portal::Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera)
         this->shape.colors[i++] = 0.2f;
         this->shape.colors[i++] = 0.5f;
     }
-
-    cout << "Portal 3" << endl;
-
-    
 
     glBindBuffer(GL_ARRAY_BUFFER, shape.vertexBufferObjID);
     glBufferData(GL_ARRAY_BUFFER, shape.vertexCount*3*sizeof(GLfloat), shape.vertices, GL_STATIC_DRAW);
@@ -52,9 +43,6 @@ Portal::Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera)
 
     glUniformMatrix4fv(glGetUniformLocation(shape.shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
     glUniform3fv(glGetUniformLocation(shape.shader, "eyePosition"), 1, this->camera.position);
-
-
-    cout << "P0ortal 4" << endl;
 
 }
 
