@@ -26,7 +26,10 @@ sources += $(codeDir)Console.cpp
 sources += $(codeDir)Player.cpp
 sources += $(codeDir)Portal.cpp
 sources += $(codeDir)VertexShape.cpp
-
+sources += $(codeDir)NG1.cpp
+sources += $(codeDir)NG2.cpp
+sources += $(codeDir)NG3.cpp
+sources += $(codeDir)NG4.cpp
 
 compiled =  $(compiledDir)main.o 
 compiled += $(compiledDir)GL_utilities.o 

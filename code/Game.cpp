@@ -101,6 +101,8 @@ void Game::NewGame(int level)
 
     //  level should be used to fetch the right bitmap
     //  this bitmap should later be sent to the world constructor
+    this->currentLevel = level;
+
     int width, height;
 
     string path = "data/level/Level" + to_string(level) +  "Map.bmp";
@@ -116,6 +118,8 @@ void Game::NewGame(int level)
     {
         gameState = GameState::MainMenu;
         this->mainMenu = new MainMenu(this->windowWidth, this->windowHeight, this->mouse);
+        this->camera.SetPosition(30.0, 6.0, 12.0);
+        this->camera.SetLookAt(20.0, 0.75, 24.0);
     }
     else
     {
@@ -128,7 +132,26 @@ void Game::NewGame(int level)
     if (this->player == NULL)
         this->player = new Player(this->world->camera, this->levelData);
     if (this->portal == NULL)
-        this->portal = new Portal(5.0, 0.5, 5.0, *this->player, this->camera);
+        this->portal = new Portal(5.0, 1.0, 5.0, *this->player, this->camera);
+
+    switch (this->currentLevel)
+    {
+        case 1:
+            this->NG1_Init();
+            break;
+        case 2:
+            this->NG2_Init();
+            break;
+        case 3:
+            this->NG3_Init();
+            break;
+        case 4:
+            this->NG4_Init();
+            break;   
+        default:
+            break;
+    }
+
 }
 
 
@@ -141,6 +164,9 @@ void Game::Update()
             cout << "Warning: Is in loading state while trying to update!" << endl;
             break;
         case GameState::MainMenu:
+        {
+            GLfloat cameraX = 20.0 + (sin((GLfloat)frameCount / 250.0) * 10.0);   //  from 30 to 10
+            this->camera.SetPosition(cameraX, 6.0, 12.0);
             //  handle UI here
             if (this->mainMenu != NULL)
             {
@@ -153,6 +179,8 @@ void Game::Update()
                     this->gameState = GameState::Quit;
             }
             break;
+        }
+
         case GameState::Playing:
             if (this->world != NULL)
                 this->world->Update();
@@ -161,26 +189,43 @@ void Game::Update()
             if (this->portal != NULL)
                 if (this->portal->IsPlayerInside())
                     cout << "Player inside portal" << endl;
+            switch (this->currentLevel)
+            {
+                case 1:
+                    this->NG1_Update();
+                    break;
+                case 2:
+                    this->NG2_Update();
+                    break;
+                case 3:
+                    this->NG3_Update();
+                    break;
+                case 4:
+                    this->NG4_Update();
+                    break;   
+                default:
+                    break;
+            }                             
             break;
 
         default:
             throw runtime_error("Entered invalid gamestate in update function");
     }
 
-    if (this->keyboard.GetKey(1073741906).keypress) //  up
-    {
-        this->world->camera.position[0] += 0.1;
-    }
-    if (this->keyboard.GetKey(1073741905).keypress) //  down
-    {
-        this->world->camera.position[0] -= 0.1;
-    }
-    if (this->keyboard.GetKey(1073741904).keypress) //  right
-    {
-    }
-    if (this->keyboard.GetKey(1073741903).keypress) //  left
-    {
-    }
+    // if (this->keyboard.GetKey(1073741906).keypress) //  up
+    // {
+    //     this->world->camera.position[0] += 0.1;
+    // }
+    // if (this->keyboard.GetKey(1073741905).keypress) //  down
+    // {
+    //     this->world->camera.position[0] -= 0.1;
+    // }
+    // if (this->keyboard.GetKey(1073741904).keypress) //  right
+    // {
+    // }
+    // if (this->keyboard.GetKey(1073741903).keypress) //  left
+    // {
+    // }
 
     if (this->world != NULL)
         this->world->Update();
@@ -212,8 +257,28 @@ void Game::Draw()
                 this->mainMenu->Draw();
             break;
         case GameState::Playing:
-            this->player->Draw();
-            this->portal->Draw();
+            if (this->player != NULL)
+                this->player->Draw();
+            if (this->portal != NULL)
+                this->portal->Draw();
+            switch (this->currentLevel)
+            {
+                case 1:
+                    this->NG1_Draw();
+                    break;
+                case 2:
+                    this->NG2_Draw();
+                    break;
+                case 3:
+                    this->NG3_Draw();
+                    break;
+                case 4:
+                    this->NG4_Draw();
+                    break;   
+                default:
+                    break;
+            }
+
             break;
         default:
             throw runtime_error("Entered invalid gamestate in update function");
@@ -225,8 +290,9 @@ void Game::Draw()
     SDL_GL_SwapWindow(this->window);
 
     //  SDL_Renderer rendering
-    
-    
+
+
+    frameCount++;
 }
 
 

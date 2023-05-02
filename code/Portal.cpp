@@ -56,6 +56,8 @@ void Portal::SetPosition(GLfloat x, GLfloat y, GLfloat z)
     this->transformMatrix[7] = this->y;
     this->transformMatrix[11] = this->z;
 
+    //glBindVertexArray(shape.vertexArrayObjID);
+    glUseProgram(this->shape.shader);
     glUniformMatrix4fv(glGetUniformLocation(shape.shader, "transformMatrix"), 1, GL_TRUE, this->transformMatrix);
 
 }
@@ -63,7 +65,6 @@ void Portal::SetPosition(GLfloat x, GLfloat y, GLfloat z)
 void Portal::Draw()
 {
     glUseProgram(this->shape.shader);
-    //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(this->shape.shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
 
 	glBindVertexArray(this->shape.vertexArrayObjID);    // Select VAO

@@ -52,11 +52,14 @@ class Game
 
         //  
         int windowWidth, windowHeight;
+        int frameCount = 0;
         SDL_Window * window = nullptr;
         SDL_GLContext glContext = nullptr;
+
         Keyboard keyboard;
         Mouse mouse;
 
+        int currentLevel = 0;
         uint8_t* levelData = nullptr;
         MainMenu* mainMenu = nullptr;
         World* world = nullptr;
@@ -67,6 +70,24 @@ class Game
         Portal* portal = nullptr;
 
 
-        
 
+    //  NewGames
+
+        int const totalLevels = 4;
+
+        void NG1_Init();
+        bool NG1_Update();
+        void NG1_Draw();
+
+        void NG2_Init();
+        bool NG2_Update();
+        void NG2_Draw();
+
+        void NG3_Init();
+        bool NG3_Update(); 
+        void NG3_Draw();
+
+        void NG4_Init();
+        bool NG4_Update();
+        void NG4_Draw();
 };
