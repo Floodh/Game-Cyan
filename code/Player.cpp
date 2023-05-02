@@ -1,6 +1,6 @@
 #include "Player.hpp"
 #include <iostream>
-
+#include "Console.hpp"
 
 Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
 : camera{camera}, HP{100}, Points{0}, scale{0.3f}, width{width}, height{height}
@@ -125,16 +125,33 @@ void Player::Update(Keyboard* kb)
 
     vec3 tmp_pos = this->position + (0.05f * movement);
 
-    int z = floor(tmp_pos.z) * width*4;
-    int x = floor(tmp_pos.x) * 4;
+    int z = floor(tmp_pos.z);
+    int x = width - floor(tmp_pos.x) - 1.0; //  inverted weirdness
 
-    int index = (z+x);
+    std::cout << "Debug:" << std::endl;
+    std::cout << "      x = " << x << ", z = " << z << std::endl;
+    
+
+    int index = (x*4+z*width*4);
+
+    std::cout << "      index = " << index << std::endl;
   
     // if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
     // if ((int)this->levelData[index+3] != 255)    
       this->position += 0.05f * movement;
 
-    std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
+    //std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
+    if (this->levelData[index] == 99 & this->levelData[index+1] == 155 & this->levelData[index+2] == 255 & this->levelData[index+3] == 255)
+        std::cout << "      Blue" << std::endl;
+    else 
+        std::cout << "      Green" << std::endl;
+
+    
+
+    std::cout << std::endl;
+
+    //Console::WriteLine(this->levelData, width, height, 4);
+    
     // for (int index = 0; index < this->width * this->height * 4; index +=4)
     // {
     //     std::cout << (int)this->levelData[index] << " " << (int)this->levelData[index+1] << " " << (int)this->levelData[index+2] << " " << (int)this->levelData[index+3] << " " << std::endl;
