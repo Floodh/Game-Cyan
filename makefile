@@ -48,6 +48,9 @@ compiled += $(compiledDir)LoadBMP.o
 compiled += $(compiledDir)MainMenu.o
 compiled += $(compiledDir)Console.o
 compiled += $(compiledDir)Player.o
+compiled += $(compiledDir)Portal.o
+compiled += $(compiledDir)VertexShape.o
+
 
 CC = gcc
 CFLAGS = -Wall -m64 -lSDL2 -DGL_GLEXT_PROTOTYPES -lXt -lX11 -lGl -lm -lstdc++
@@ -115,6 +118,12 @@ $(compiledDir)Console.o: $(codeDir)Console.cpp
 
 $(compiledDir)Player.o: $(codeDir)Player.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Player.o $(codeDir)Player.cpp $(CINCLUDE)
+
+$(compiledDir)Portal.o: $(codeDir)Portal.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)Portal.o $(codeDir)Portal.cpp $(CINCLUDE)
+
+$(compiledDir)VertexShape.o: $(codeDir)VertexShape.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)VertexShape.o $(codeDir)VertexShape.cpp $(CINCLUDE)
 
 
 clean: 
