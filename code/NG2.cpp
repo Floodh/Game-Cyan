@@ -5,7 +5,8 @@
 void Game::NG2_Init()
 {
 
-    this->portal->SetPosition(0.0, 1.0, 0.0);
+    this->portal->SetPosition(6.5, 1.0, 6.5);
+    this->player->setPosition(2.5, 0.75, 2.5);
 
 }
 

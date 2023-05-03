@@ -192,16 +192,20 @@ void Game::Update()
             switch (this->currentLevel)
             {
                 case 1:
-                    this->NG1_Update();
+                    if (this->NG1_Update())
+                        NewGame(++this->currentLevel);
                     break;
                 case 2:
-                    this->NG2_Update();
+                    if (this->NG2_Update()) 
+                        NewGame(++this->currentLevel);
                     break;
                 case 3:
-                    this->NG3_Update();
+                    if (this->NG3_Update())
+                        NewGame(++this->currentLevel);
                     break;
                 case 4:
-                    this->NG4_Update();
+                    if (this->NG4_Update())
+                        NewGame(1);
                     break;   
                 default:
                     break;
@@ -212,20 +216,7 @@ void Game::Update()
             throw runtime_error("Entered invalid gamestate in update function");
     }
 
-    // if (this->keyboard.GetKey(1073741906).keypress) //  up
-    // {
-    //     this->world->camera.position[0] += 0.1;
-    // }
-    // if (this->keyboard.GetKey(1073741905).keypress) //  down
-    // {
-    //     this->world->camera.position[0] -= 0.1;
-    // }
-    // if (this->keyboard.GetKey(1073741904).keypress) //  right
-    // {
-    // }
-    // if (this->keyboard.GetKey(1073741903).keypress) //  left
-    // {
-    // }
+
 
     if (this->world != NULL)
         this->world->Update();
