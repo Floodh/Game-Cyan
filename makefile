@@ -25,6 +25,7 @@ sources += $(codeDir)MainMenu.cpp
 sources += $(codeDir)Console.cpp
 sources += $(codeDir)Player.cpp
 sources += $(codeDir)Portal.cpp
+sources += $(codeDir)Collectable.cpp
 sources += $(codeDir)VertexShape.cpp
 sources += $(codeDir)NG1.cpp
 sources += $(codeDir)NG2.cpp

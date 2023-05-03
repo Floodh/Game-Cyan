@@ -125,7 +125,6 @@ void Player::Update(Keyboard* kb)
     camera.SetLookAt(position.x, position.y, position.z);
     camera.SetPosition(position.x, position.y + 1.5f, position.z - 1.75f);
 
-    std::cout << "x = " << position.x << ", z = " << position.z << std::endl;
 }
 
 

@@ -13,6 +13,7 @@
 
 #include "Player.hpp"
 #include "Portal.hpp"
+#include "Collectable.hpp"
 
 #include <vector>
 #include <string>

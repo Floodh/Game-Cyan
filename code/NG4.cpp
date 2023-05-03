@@ -31,9 +31,10 @@ void Game::NG4_Init()
 bool Game::NG4_Update()
 {
 
-    // if (this->portal->IsPlayerInside())
-    //     return true;
+    if (this->portal->IsPlayerInside())
+        return true;
 
+    
 
 
     return false;
