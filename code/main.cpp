@@ -16,7 +16,8 @@
 
 int main(int argc, char *argv[])
 {
-
+    
+    srand (time(NULL));
 
     SDL_Event event = { 0 };
     bool should_quit = false;

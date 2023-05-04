@@ -112,7 +112,7 @@ void Game::NewGame(int level)
         throw runtime_error("Couldn't load level");
     
     cout << "World loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << endl;
-    this->world = new World(this->levelData, width, height, this->mouse, this->camera, this->backgroundColor);
+    this->world = new World(this->levelData, width, height, this->mouse, this->camera, this->backgroundColor, this->frameCount);
 
     if (level == 0)
     {

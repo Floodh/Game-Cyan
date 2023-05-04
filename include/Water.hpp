@@ -13,7 +13,7 @@ class Water : public IDrawObject
 
         //  the constructor should later receive the content of the .bmp file
         Water() = delete;
-        Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor);
+        Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor, int& frameCount);
         void Draw() override;
 
         Player* player = NULL;
@@ -44,5 +44,10 @@ class Water : public IDrawObject
         GLint* indices;
         
         GLuint shader;
+
+
+        GLfloat* randomYPosition0; 
+        GLfloat* randomYPosition1;
+        int& frameCount;
     
 };

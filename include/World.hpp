@@ -19,7 +19,7 @@ class World
     public:
 
         //  the constructor should later receive the path to a .bmp file.
-        World(uint8_t* levelData, const int levelWidth, const int levelHeight, Mouse& mouse, Camera& camera, GLfloat* const backgroundColor);
+        World(uint8_t* levelData, const int levelWidth, const int levelHeight, Mouse& mouse, Camera& camera, GLfloat* const backgroundColor, int& frameCount);
         void Draw();
         void Update();
 

@@ -10,8 +10,10 @@
 
 using namespace std;
 
-Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor)
-    : backgroundColor{backgroundColor}, camera{camera}
+#define WATERLEVEL 0.425f
+
+Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor, int& frameCount)
+    : backgroundColor{backgroundColor}, camera{camera}, frameCount{frameCount}
 {
     
     std::cout << "Generating water level: " << levelWidth << "x" << levelHeight << std::endl;
@@ -119,21 +121,34 @@ Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight
     glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
     glUniform3fv(glGetUniformLocation(shader, "backgroundColor"), 1, this->backgroundColor);
 
+
+    this->randomYPosition0 = new GLfloat[this->vertexCount];
+    this->randomYPosition1 = new GLfloat[this->vertexCount];
+    for (GLuint i = 0; i < this->vertexCount; i++)
+    {
+        this->randomYPosition0[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
+        this->randomYPosition1[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
+    }
 }
 
 void Water::Draw()
 {
     glUseProgram(shader);
+
     //  animate the vertexes
+    GLfloat howMuch = (0.5 * sin((GLfloat)this->frameCount / 45.0) + 0.5);
+    //howMuch = (GLfloat)(this->frameCount % 75) / 74.0;
     for (GLuint i = 0; i < this->vertexCount; i++)
-    {
-        this->vertices[(i * 3) + 1] -= (GLfloat)0.0005f * 8;
-        if (this->vertices[(i * 3) + 1] < 0.0f) 
-            this->vertices[(i * 3) + 1] = 0.0f;
-        this->vertices[(i * 3) + 1] += (static_cast<float>(rand()) / static_cast<float>(RAND_MAX) / 1000) * 8;
-        if (this->vertices[(i * 3) + 1] > 0.45f) 
-            this->vertices[(i * 3) + 1] = 0.45f;
+    {  
+        this->vertices[(i * 3) + 1] = howMuch * this->randomYPosition0[i] + (1.0 - howMuch) * this->randomYPosition1[i];
+        if (howMuch == 0.0f)
+            this->randomYPosition0[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
+        else if (howMuch == 1.0f)
+            this->randomYPosition1[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
     }
+    
+
+
 
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
