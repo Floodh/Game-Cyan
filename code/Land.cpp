@@ -11,8 +11,8 @@ using namespace std;
 int calculateIndexCount(uint8_t* levelData, int levelHeight, int levelWidth);
 void normalizeVec3(GLfloat* data);
 
-Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight)
-    : camera{camera}, theSun{theSun}
+Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor)
+    : backgroundColor{backgroundColor}, camera{camera}, theSun{theSun}
 {
 
     this->shader = loadShaders("shader/land.vert", "shader/land.frag");
@@ -178,7 +178,7 @@ Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, i
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount*sizeof(GLuint), indices, GL_STATIC_DRAW);
 
     glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
-    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.position);
+    glUniform3fv(glGetUniformLocation(shader, "backgroundColor"), 1, this->backgroundColor);
 
 }
 
@@ -187,6 +187,11 @@ void Land::Draw()
     glUseProgram(shader);
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
+    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.position);
+    if (this->player != NULL)
+        glUniform3fv(glGetUniformLocation(shader, "playerPosition"), 1, (GLfloat*)&this->player->getPosition());
+    else
+        glUniform3fv(glGetUniformLocation(shader, "playerPosition"), 1, this->camera.lookAtPosition);
 
 	glBindVertexArray(this->vertexArrayObjID);    // Select VAO
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0L);

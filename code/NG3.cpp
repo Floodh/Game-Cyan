@@ -83,13 +83,11 @@ bool Game::NG3_Update()
 
 void Game::NG3_Draw()
 {
-    cout << "Drawing NG3" << endl;
     for (int i = 0; i < 9; i++)
     {
         if (collectables[i].canBeCollected == true)
         if (collectables[i].isCollected == false)
         {
-            cout << "   i = " << i << endl;
             collectables[i].Draw();
         }
     }

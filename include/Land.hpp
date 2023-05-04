@@ -6,6 +6,7 @@
 #include "IDrawObject.hpp"
 #include "Camera.hpp"
 #include "TheSun.hpp"
+#include "Player.hpp"
 
 
 class Land : public IDrawObject
@@ -14,8 +15,12 @@ class Land : public IDrawObject
 
         //  the constructor should later receive the content of the .bmp file
         Land() = delete;
-        Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight);
+        Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor);
         void Draw() override;
+
+        Player* player = NULL;
+
+        GLfloat* const backgroundColor;
 
     private:
 

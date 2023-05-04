@@ -70,6 +70,8 @@ class Game
         Player* player = nullptr;
         Portal* portal = nullptr;
 
+        GLfloat* const backgroundColor = new GLfloat[3]{0.5f, 0.5f, 0.8f};
+
 
 
     //  NewGames

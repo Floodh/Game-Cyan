@@ -112,7 +112,7 @@ void Game::NewGame(int level)
         throw runtime_error("Couldn't load level");
     
     cout << "World loaded level: " << (unsigned int*)levelData << ", " << width << ", " << height << endl;
-    this->world = new World(this->levelData, width, height, this->mouse, this->camera);
+    this->world = new World(this->levelData, width, height, this->mouse, this->camera, this->backgroundColor);
 
     if (level == 0)
     {
@@ -133,6 +133,8 @@ void Game::NewGame(int level)
         this->player = new Player(this->world->camera, this->levelData);
     if (this->portal == NULL)
         this->portal = new Portal(5.0, 1.0, 5.0, *this->player, this->camera);
+
+    this->world->terrain.land.player = this->player;
 
     switch (this->currentLevel)
     {
@@ -231,7 +233,7 @@ void Game::Update()
 void Game::Draw()
 {
     // Clear the screen
-    glClearColor(0.f, 0.f, 0.2f, 1.f);
+    glClearColor(0.5f, 0.5f, 0.8f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     if (this->world != NULL)    //  this null check is redundant, but safty is important

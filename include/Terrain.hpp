@@ -20,7 +20,7 @@ class Terrain : public IDrawObject
         
         Terrain() = delete;
         //  when we define the constructor, we also need to define all its members
-        Terrain(Camera& camera, TheSun& theSun, uint8_t* levelData, const int levelWidth, const int levelHeight);
+        Terrain(Camera& camera, TheSun& theSun, uint8_t* levelData, const int levelWidth, const int levelHeight, GLfloat* const backgroundColor);
         void Draw() override;
 
     private:
@@ -28,6 +28,8 @@ class Terrain : public IDrawObject
         //  reference to camera
         Camera& camera;
         TheSun& theSun;
+
+    public:
 
         //  land model
         Land land;
