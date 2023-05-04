@@ -25,7 +25,7 @@ VertexShape VertexShape_Diamond(GLfloat x, GLfloat y, GLfloat z, GLfloat size, G
     Point bot   {x, y - size * ratio, z};
     
 
-    shape.indexCount = 8;
+    shape.indexCount = 8 * 3;
     shape.vertexCount = 6;
     shape.valueCount = shape.vertexCount * 3;
 
@@ -63,6 +63,8 @@ VertexShape VertexShape_Diamond(GLfloat x, GLfloat y, GLfloat z, GLfloat size, G
     glGenBuffers(1, &shape.indexBufferObjID);
     glGenBuffers(1, &shape.vertexBufferObjID);
     glGenBuffers(1, &shape.colorBufferObjID);
+
+    glBindVertexArray(shape.vertexArrayObjID);
 
     return shape;
 

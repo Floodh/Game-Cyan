@@ -172,6 +172,7 @@ void Player::Update(Keyboard* kb)
 
     camera.SetLookAt(position.x, position.y, position.z);
     camera.SetPosition(position.x, position.y + 1.5f, position.z - 1.75f);
+
 }
 
 
@@ -195,4 +196,10 @@ void Player::setPosition(const GLfloat x, const GLfloat y, const GLfloat z)
     this->position.x = x;
     this->position.y = y; // We may not want to change the y-value here
     this->position.z = z;
+}
+
+
+const vec3& Player::getPosition()
+{
+    return this->position;
 }

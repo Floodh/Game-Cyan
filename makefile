@@ -24,6 +24,13 @@ sources += $(codeDir)LoadBMP.cpp
 sources += $(codeDir)MainMenu.cpp
 sources += $(codeDir)Console.cpp
 sources += $(codeDir)Player.cpp
+sources += $(codeDir)Portal.cpp
+sources += $(codeDir)Collectable.cpp
+sources += $(codeDir)VertexShape.cpp
+sources += $(codeDir)NG1.cpp
+sources += $(codeDir)NG2.cpp
+sources += $(codeDir)NG3.cpp
+sources += $(codeDir)NG4.cpp
 
 compiled =  $(compiledDir)main.o 
 compiled += $(compiledDir)GL_utilities.o 
@@ -41,6 +48,15 @@ compiled += $(compiledDir)LoadBMP.o
 compiled += $(compiledDir)MainMenu.o
 compiled += $(compiledDir)Console.o
 compiled += $(compiledDir)Player.o
+compiled += $(compiledDir)Portal.o
+compiled += $(compiledDir)Collectable.o
+compiled += $(compiledDir)VertexShape.o
+compiled += $(compiledDir)NG1.o
+compiled += $(compiledDir)NG2.o
+compiled += $(compiledDir)NG3.o
+compiled += $(compiledDir)NG4.o
+
+
 
 CC = gcc
 CFLAGS = -Wall -m64 -lSDL2 -DGL_GLEXT_PROTOTYPES -lXt -lX11 -lGl -lm -lstdc++
@@ -109,6 +125,26 @@ $(compiledDir)Console.o: $(codeDir)Console.cpp
 $(compiledDir)Player.o: $(codeDir)Player.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Player.o $(codeDir)Player.cpp $(CINCLUDE)
 
+$(compiledDir)Portal.o: $(codeDir)Portal.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)Portal.o $(codeDir)Portal.cpp $(CINCLUDE)
+
+$(compiledDir)VertexShape.o: $(codeDir)VertexShape.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)VertexShape.o $(codeDir)VertexShape.cpp $(CINCLUDE)
+
+$(compiledDir)NG1.o: $(codeDir)NG1.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)NG1.o $(codeDir)NG1.cpp $(CINCLUDE)
+
+$(compiledDir)NG2.o: $(codeDir)NG2.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)NG2.o $(codeDir)NG2.cpp $(CINCLUDE)
+
+$(compiledDir)NG3.o: $(codeDir)NG3.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)NG3.o $(codeDir)NG3.cpp $(CINCLUDE)
+
+$(compiledDir)NG4.o: $(codeDir)NG4.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)NG4.o $(codeDir)NG4.cpp $(CINCLUDE)
+
+$(compiledDir)Collectable.o: $(codeDir)Collectable.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)Collectable.o $(codeDir)Collectable.cpp $(CINCLUDE)
 
 clean: 
 	rm $(compiledDir)*.o
