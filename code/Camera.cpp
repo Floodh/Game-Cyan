@@ -28,6 +28,7 @@ Camera::Camera(Mouse& mouse)
         },
         mouse{mouse}
 {
+    this->realPosition = new GLfloat[3];
     this->position = new GLfloat[3]{35.0, 14.0, 5.0};
     this->lookAtPosition = new GLfloat[3]{20.0, 0.0, 20};
     this->lookUpVector = new GLfloat[3]{0.0, 1.0, 0};
@@ -88,6 +89,10 @@ void Camera::UpdateViewMatrix()
             this->radiansY = 0.0f;
         }
     }
+
+    realPosition[0] = x;
+    realPosition[1] = y;
+    realPosition[2] = z;
 
 
     mat4 result = lookAt(

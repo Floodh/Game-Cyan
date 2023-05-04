@@ -5,6 +5,7 @@
 
 #include "IDrawObject.hpp"
 #include "Camera.hpp"
+#include "Player.hpp"
 
 class Water : public IDrawObject
 {
@@ -12,8 +13,12 @@ class Water : public IDrawObject
 
         //  the constructor should later receive the content of the .bmp file
         Water() = delete;
-        Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight);
+        Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor);
         void Draw() override;
+
+        Player* player = NULL;
+
+        GLfloat* const backgroundColor;
 
     private:
 

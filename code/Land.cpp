@@ -187,11 +187,10 @@ void Land::Draw()
     glUseProgram(shader);
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
-    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.position);
-    if (this->player != NULL)
-        glUniform3fv(glGetUniformLocation(shader, "playerPosition"), 1, (GLfloat*)&this->player->getPosition());
-    else
-        glUniform3fv(glGetUniformLocation(shader, "playerPosition"), 1, this->camera.lookAtPosition);
+    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.realPosition);
+
+    glUniform3fv(glGetUniformLocation(shader, "playerPosition"), 1, this->camera.realPosition);
+
 
 	glBindVertexArray(this->vertexArrayObjID);    // Select VAO
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0L);

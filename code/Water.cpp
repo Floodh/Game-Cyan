@@ -10,8 +10,8 @@
 
 using namespace std;
 
-Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight)
-    : camera{camera}
+Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight, GLfloat* const backgroundColor)
+    : backgroundColor{backgroundColor}, camera{camera}
 {
     
     std::cout << "Generating water level: " << levelWidth << "x" << levelHeight << std::endl;
@@ -117,7 +117,7 @@ Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount*sizeof(GLuint), indices, GL_STATIC_DRAW);
 
     glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
-    
+    glUniform3fv(glGetUniformLocation(shader, "backgroundColor"), 1, this->backgroundColor);
 
 }
 
@@ -137,7 +137,10 @@ void Water::Draw()
 
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
-    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.position);
+    glUniform3fv(glGetUniformLocation(shader, "eyePosition"), 1, this->camera.realPosition);
+
+    glUniform3fv(glGetUniformLocation(shader, "playerPosition"), 1, this->camera.realPosition);
+
 
 
 	glBindVertexArray(this->vertexArrayObjID);    // Select VAO

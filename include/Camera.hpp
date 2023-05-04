@@ -25,6 +25,7 @@ class Camera
         void SetPosition(const GLfloat x, const GLfloat y, const GLfloat z);
         void SetLookAt(const GLfloat x, const GLfloat y, const GLfloat z);
 
+        GLfloat* realPosition;
         GLfloat* position;
         GLfloat* lookAtPosition;
         GLfloat* lookUpVector;
