@@ -6,7 +6,7 @@ Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
 : camera{camera}, HP{100}, Points{0}, scale{0.3f}, width{width}, height{height}
 {
     // this->position = new GLfloat[3]{0.0f, 100.0f, 5.0f};
-    this->position = {2.0f, 0.6f, 1.0f};
+    this->position = {2.0f, 0.65f, 1.5f};
 
     this->shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->scaleMatrix = S(scale);
@@ -14,7 +14,7 @@ Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
 
     this->levelData = levelData;
     
-    this->numVertices = 3 * 3 * 6;
+    // this->numVertices = 3 * 3 * 6;
 
     this->m = LoadModel("data/model/cubeplus.obj");
  
@@ -119,36 +119,43 @@ void Player::Update(Keyboard* kb)
         movement.x += -1;//-sin(1.5f);
         // movement.z += -cos(1.5f); 
     }
+
     if ( (movement.x != 0.0f) | (movement.y != 0.0f) | (movement.z != 0.0f) ) //    don't normalize a vector that has no direction
-        movement = normalize(movement);
+    {
+        // movement = normalize(movement);
+    }
+    
+    
     
 
-    vec3 tmp_pos = this->position + (0.05f * movement);
+    vec3 tmp_pos = this->position + (abs(this->m->normalArray->z) * this->scale * movement);
 
     int z = floor(tmp_pos.z);
     int x = width - floor(tmp_pos.x) - 1.0; //  inverted weirdness
 
-    std::cout << "Debug:" << std::endl;
-    std::cout << "      x = " << x << ", z = " << z << std::endl;
+    // std::cout << "Debug:" << std::endl;
+    // std::cout << "      x = " << x << ", z = " << z << std::endl;
+    
     
 
     int index = (x*4+z*width*4);
 
-    std::cout << "      index = " << index << std::endl;
+    // std::cout << "      index = " << index << std::endl;
   
-    // if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
-    // if ((int)this->levelData[index+3] != 255)    
-      this->position += 0.05f * movement;
+    if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
+        this->position += 0.05f * movement;
 
     //std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << " levelData: " << (int)this->levelData[index+3] << std::endl;
-    if (this->levelData[index] == 99 & this->levelData[index+1] == 155 & this->levelData[index+2] == 255 & this->levelData[index+3] == 255)
-        std::cout << "      Blue" << std::endl;
-    else 
-        std::cout << "      Green" << std::endl;
+    // if (this->levelData[index] == 99 & this->levelData[index+1] == 155 & this->levelData[index+2] == 255 & this->levelData[index+3] == 255)
+ 
+ 
+    //     std::cout << "      Blue" << std::endl;
+    // else 
+    //     std::cout << "      Green" << std::endl;
 
     
 
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
     //Console::WriteLine(this->levelData, width, height, 4);
     
