@@ -11,7 +11,7 @@
 class Player : public IDrawObject
 {
     public:
-        Player(Camera& camera, uint8_t* levelData);
+        Player(Camera& camera, uint8_t* levelData, int width, int height);
         // Player(GLint* m, GLint* texture);
         ~Player();
 
@@ -20,6 +20,8 @@ class Player : public IDrawObject
 
         void setPosition(const GLfloat x, const GLfloat y, const GLfloat z);
         const vec3& getPosition();
+
+        void updateLevel(uint8_t* levelData, int width, int height);
 
 
     private:
@@ -40,6 +42,8 @@ class Player : public IDrawObject
         mat4 rotationMatrix;
 
         Model* m;
-        uint8_t* levelData;
+        uint8_t* levelData = nullptr;
+        int width;
+        int height;
         
 };
