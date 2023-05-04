@@ -136,7 +136,9 @@ void Game::NewGame(int level)
     //     std::cout << (int)this->levelData[i] << std::endl;
     //  create player
     if (this->player == NULL)
-        this->player = new Player(this->world->camera, this->levelData);
+        this->player = new Player(this->world->camera, this->levelData, width, height);
+    else
+        this->player->updateLevel(this->levelData, width, height);
     if (this->portal == NULL)
         this->portal = new Portal(5.0, 1.0, 5.0, *this->player, this->camera);
 
