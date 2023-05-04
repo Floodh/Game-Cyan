@@ -21,6 +21,8 @@ class Player : public IDrawObject
         void setPosition(const GLfloat x, const GLfloat y, const GLfloat z);
         const vec3& getPosition();
 
+        void updateLevel(uint8_t* levelData, int width, int height);
+
 
     private:
         Camera &camera;
