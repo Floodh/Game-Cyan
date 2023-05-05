@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Portal::Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera)
+Portal::Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera, GLfloat* backgroundColor)
     : player{player}, transformMatrix{new GLfloat[16]}, camera{camera}
 {
 
@@ -42,7 +42,7 @@ Portal::Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, shape.indexCount*sizeof(GLuint), shape.indices, GL_STATIC_DRAW);    
 
     glUniformMatrix4fv(glGetUniformLocation(shape.shader, "projectionMatrix"), 1, GL_TRUE, this->camera.GetProjectionMatrix());
-    glUniform3fv(glGetUniformLocation(shape.shader, "eyePosition"), 1, this->camera.position);
+    glUniform3fv(glGetUniformLocation(shape.shader, "backgroundColor"), 1, backgroundColor);
 
 }
 
@@ -66,6 +66,7 @@ void Portal::Draw()
 {
     glUseProgram(this->shape.shader);
     glUniformMatrix4fv(glGetUniformLocation(this->shape.shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
+    glUniform3fv(glGetUniformLocation(shape.shader, "eyePosition"), 1, this->camera.position);
 
 	glBindVertexArray(this->shape.vertexArrayObjID);    // Select VAO
     glDrawElements(GL_TRIANGLES, this->shape.indexCount, GL_UNSIGNED_INT, 0L);

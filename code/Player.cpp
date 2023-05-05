@@ -55,10 +55,10 @@ void Player::Update(Keyboard* kb)
 
     // No need to normalize since all changes are size 1, also normalization generates a player bug when near edge
 
-    // if ( (movement.x != 0.0f) | (movement.y != 0.0f) | (movement.z != 0.0f) ) //    don't normalize a vector that has no direction
-    // {
-    //     movement = normalize(movement);
-    // }
+    if ( (movement.x != 0.0f) | (movement.y != 0.0f) | (movement.z != 0.0f) ) //    don't normalize a vector that has no direction
+    {
+        movement = normalize(movement);
+    }
     
     
     

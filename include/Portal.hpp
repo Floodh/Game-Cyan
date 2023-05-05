@@ -12,7 +12,7 @@ class Portal
 
     public:
 
-        Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera);
+        Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera, GLfloat* backgroundColor);
         void SetPosition(GLfloat x, GLfloat y, GLfloat z);
         void Draw();
         bool IsPlayerInside();

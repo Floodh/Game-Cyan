@@ -12,7 +12,7 @@ class Collectable
 
     public:
 
-        Collectable(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera, GLfloat* color);
+        Collectable(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera, GLfloat* color, GLfloat* backgroundColor);
         void SetPosition(GLfloat x, GLfloat y, GLfloat z);
         void Draw();
         bool IsPlayerInside();

@@ -140,7 +140,7 @@ void Game::NewGame(int level)
     else
         this->player->updateLevel(this->levelData, width, height);
     if (this->portal == NULL)
-        this->portal = new Portal(5.0, 1.0, 5.0, *this->player, this->camera);
+        this->portal = new Portal(5.0, 1.0, 5.0, *this->player, this->camera, this->backgroundColor);
 
     this->world->terrain.land.player = this->player;
 

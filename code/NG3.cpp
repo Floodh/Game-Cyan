@@ -21,17 +21,17 @@ void Game::NG3_Init()
     if (collectables == NULL)
         collectables = new Collectable[9]
         {
-            Collectable(8.5f, 1.0f, 1.5f, *this->player, this->camera, green),
-            Collectable(4.5f, 1.0f, 2.5f, *this->player, this->camera, green),
-            Collectable(3.5f, 1.0f, 2.5f, *this->player, this->camera, green),
-            Collectable(1.5f, 1.0f, 8.5f, *this->player, this->camera, green),
+            Collectable(8.5f, 1.0f, 1.5f, *this->player, this->camera, green, this->backgroundColor),
+            Collectable(4.5f, 1.0f, 2.5f, *this->player, this->camera, green, this->backgroundColor),
+            Collectable(3.5f, 1.0f, 2.5f, *this->player, this->camera, green, this->backgroundColor),
+            Collectable(1.5f, 1.0f, 8.5f, *this->player, this->camera, green, this->backgroundColor),
 
-            Collectable(3.5f, 1.0f, 6.5f, *this->player, this->camera, green),
-            Collectable(2.5f, 1.0f, 5.5f, *this->player, this->camera, green),
-            Collectable(1.5f, 1.0f, 6.5f, *this->player, this->camera, green),
-            Collectable(2.5f, 1.0f, 7.5f, *this->player, this->camera, green),
+            Collectable(3.5f, 1.0f, 6.5f, *this->player, this->camera, green, this->backgroundColor),
+            Collectable(2.5f, 1.0f, 5.5f, *this->player, this->camera, green, this->backgroundColor),
+            Collectable(1.5f, 1.0f, 6.5f, *this->player, this->camera, green, this->backgroundColor),
+            Collectable(2.5f, 1.0f, 7.5f, *this->player, this->camera, green, this->backgroundColor),
 
-            Collectable(5.5f, 1.0f, 8.5f, *this->player, this->camera, green)
+            Collectable(5.5f, 1.0f, 8.5f, *this->player, this->camera, green, this->backgroundColor)
         };
 
     for (int i = 0; i < 9; i++)
