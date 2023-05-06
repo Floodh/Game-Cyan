@@ -1,5 +1,9 @@
 #include "Player.hpp"
+
+
 #include <iostream>
+
+
 
 Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
 : camera{camera}, HP{100}, Points{0}, scale{0.3f}, levelData{levelData}, width{width}, height{height}

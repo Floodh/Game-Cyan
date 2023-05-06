@@ -20,7 +20,9 @@ struct Message
 };
 
 
-inline SafeQueue<Message> eventQueue;
+inline SafeQueue<Message> eventQueue{};
+inline SafeQueue<Message> sendMessageQue{};
+
 
 int clientThread();
 

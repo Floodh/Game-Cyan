@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
-
+#include "P2P.hpp"
 
 class PlayerOther : public Player
 {

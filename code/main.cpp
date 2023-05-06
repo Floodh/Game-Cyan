@@ -8,16 +8,22 @@
 #include <string>
 #include <iostream>
 
+#include <thread>
 
 #include "Terrain.hpp"
 #include "LoadBMP.hpp"
 #include "Console.hpp"
+#include "P2P.hpp"
 
+using namespace std;
 
 int main(int argc, char *argv[])
 {
     
     srand (time(NULL));
+
+    thread t{clientThread};
+
 
     SDL_Event event = { 0 };
     bool should_quit = false;
