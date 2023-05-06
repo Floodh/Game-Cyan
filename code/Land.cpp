@@ -17,8 +17,8 @@ Land::Land(Camera& camera, TheSun& theSun, uint8_t* levelData, int levelWidth, i
 
     this->shader = loadShaders("shader/land.vert", "shader/land.frag");
     //  world data contaisn information about the quads NOT the vertexes
-    int vertexHeight = levelHeight + 1;
-    int vertexWidth = levelWidth + 1;
+    // int vertexHeight = levelHeight + 1;
+    // int vertexWidth = levelWidth + 1;
 
     //  bgra
     //  world generation here

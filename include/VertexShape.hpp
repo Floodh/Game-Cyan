@@ -20,7 +20,7 @@ struct VertexShape
     GLfloat* vertices;
     GLfloat* colors;
     
-    GLuint shader = NULL;
+    GLuint shader = 0;
 
 };
 

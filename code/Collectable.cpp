@@ -21,7 +21,7 @@ Collectable::Collectable(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera
     
 
     //  finish the colors
-    for (int i = 0; i < this->shape.valueCount;)
+    for (GLuint i = 0; i < this->shape.valueCount;)
     {
         this->shape.colors[i++] = color[0];
         this->shape.colors[i++] = color[1];

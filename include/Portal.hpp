@@ -20,11 +20,12 @@ class Portal
     private:
 
         Player& player;
+        GLfloat* const transformMatrix;
         Camera& camera;
 
         VertexShape shape;
 
         GLfloat x,y,z;
-        GLfloat* const transformMatrix;
+        
 
 };

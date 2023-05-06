@@ -21,7 +21,7 @@ Portal::Portal(GLfloat x, GLfloat y, GLfloat z, Player& player, Camera& camera, 
     
 
     //  finish the colors
-    for (int i = 0; i < this->shape.valueCount;)
+    for (GLuint i = 0; i < this->shape.valueCount;)
     {
         this->shape.colors[i++] = 0.5f;
         this->shape.colors[i++] = 0.2f;

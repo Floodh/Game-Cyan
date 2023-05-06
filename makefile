@@ -24,6 +24,7 @@ sources += $(codeDir)LoadBMP.cpp
 sources += $(codeDir)MainMenu.cpp
 sources += $(codeDir)Console.cpp
 sources += $(codeDir)Player.cpp
+sources += $(codeDir)PlayerOther.cpp
 sources += $(codeDir)Portal.cpp
 sources += $(codeDir)Collectable.cpp
 sources += $(codeDir)VertexShape.cpp
