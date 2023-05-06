@@ -32,6 +32,7 @@ sources += $(codeDir)NG1.cpp
 sources += $(codeDir)NG2.cpp
 sources += $(codeDir)NG3.cpp
 sources += $(codeDir)NG4.cpp
+sources += $(codeDir)P2P.cpp
 
 compiled =  $(compiledDir)main.o 
 compiled += $(compiledDir)GL_utilities.o 
@@ -71,7 +72,7 @@ all : cyan
 ifdef OS
 #	Windows
 cyan : $(sources)
-	gcc -Wall -o output -m64 $(sources) -I$(headerDir) -I$(sdl2Include) -I$(glad) -lmingw32 -lSDL2main -lSDL2 -L$(sdl2LibWindows) -L$(sdl2Bin) -lopengl32 -lgdi32 -lstdc++
+	gcc -Wall -o output -m64 $(sources) -I$(headerDir) -I$(sdl2Include) -I$(glad) -lmingw32 -lSDL2main -lSDL2 -L$(sdl2LibWindows) -L$(sdl2Bin) -lopengl32 -lgdi32 -lstdc++ -lwsock32
 
 else
 #	Linux
