@@ -142,6 +142,13 @@ void Game::NewGame(int level)
     if (this->portal == NULL)
         this->portal = new Portal(5.0, 1.0, 5.0, *this->player, this->camera, this->backgroundColor);
 
+    if (this->playerOther == NULL)
+    {
+        this->playerOther = new PlayerOther(this->world->camera, this->levelData, width, height);
+        this->playerOther->setPosition(0.5, 0.5, 0.5);
+    }
+
+
     this->world->terrain.land.player = this->player;
 
     switch (this->currentLevel)
@@ -199,6 +206,8 @@ void Game::Update()
             if (this->portal != NULL)
                 if (this->portal->IsPlayerInside())
                     cout << "Player inside portal" << endl;
+            if (this->playerOther != NULL)
+                this->playerOther->Update();
             switch (this->currentLevel)
             {
                 case 1:
@@ -262,6 +271,11 @@ void Game::Draw()
                 this->player->Draw();
             if (this->portal != NULL)
                 this->portal->Draw();
+            if (this->playerOther != NULL)
+            {
+                this->playerOther->Draw();
+            }
+                
             switch (this->currentLevel)
             {
                 case 1:

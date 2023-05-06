@@ -14,6 +14,7 @@
 #include "Player.hpp"
 #include "Portal.hpp"
 #include "Collectable.hpp"
+#include "PlayerOther.hpp"
 
 #include <vector>
 #include <string>
@@ -69,6 +70,7 @@ class Game
 
         Player* player = nullptr;
         Portal* portal = nullptr;
+        PlayerOther* playerOther = nullptr;
 
         GLfloat* const backgroundColor = new GLfloat[3]{0.5f, 0.5f, 0.8f};
 
