@@ -32,6 +32,8 @@ void PlayerOther::Update()
         GLfloat x = *((GLfloat*)(&data[4]));
         GLfloat z = *((GLfloat*)(&data[5]));
 
+        this->setPosition(x, this->getPosition().y, z);
+
 
     }   
 
