@@ -347,6 +347,8 @@ void Game::UpdateMessage()
 {
 
     int* messageContent = new int[PKGSIZE];
+    for (int i = 0; i < PKGSIZE; i++)
+        messageContent[i] = 0;
 
     messageContent[0] = 0;
     messageContent[1] = 1;
