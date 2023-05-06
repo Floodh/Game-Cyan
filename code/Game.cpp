@@ -350,17 +350,17 @@ void Game::UpdateMessage()
     for (int i = 0; i < PKGSIZE; i++)
         messageContent[i] = 0;
 
-    messageContent[0] = 0;
-    messageContent[1] = 1;
+    // messageContent[0] = 0;
+    // messageContent[1] = 1;
     messageContent[2] = 0;      //  might not be needed
     messageContent[3] = this->currentLevel;
 
     //  player position
     if (this->player != NULL)
     {
-        messageContent[4] = this->player->getPosition().x;
-        messageContent[5] = this->player->getPosition().z;
-        messageContent[6] = 0;
+        messageContent[4] = *((int*)(&this->player->getPosition().x));
+        messageContent[5] = *((int*)(&this->player->getPosition().z));
+        messageContent[6] = 10;
     }
 
     sendMessageQue.Produce(Message{(const char*)messageContent});

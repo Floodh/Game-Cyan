@@ -14,14 +14,17 @@ int* generatePkg()
     if (sendMessageQue.Size() == 0)
         sendMessageQue.Produce(Message{m.message});
 
-    int* pkg = new int[PKGSIZE];
+    int* pkg = new int[PKGSIZE / 8];
+    for (int i = 2; i < PKGSIZE / 8; i++)
+        pkg[i] = 0;
+    
 
     pkg[0] = CLIENTNUMBER;
     pkg[1] = pkgNumber++;
-
     if (m.message != NULL)
-        for (int i = 2; i < PKGSIZE / 8; i++)
-            pkg[i] = m.message[i];
+        for (int i = 2; i < 7; i++)
+            pkg[i] = ((int*)m.message)[i];
+    pkg[8] = 999;
 
     cout << "pkg number = " << pkgNumber << endl;
 
