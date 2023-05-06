@@ -9,7 +9,8 @@ int* generatePkg()
 {
 
     Message m{NULL};
-    sendMessageQue.Consume(m);
+    if (sendMessageQue.Consume(m) == false)
+        return NULL;
     if (sendMessageQue.Size() == 0)
         sendMessageQue.Produce(Message{m.message});
 
@@ -63,13 +64,20 @@ int clientThread()
     {
         char message[BUFLEN];
 
-        Sleep(100);
-        printf("Sending message: ");
 
         //cin.getline(message, BUFLEN);
 
+        int* pkg = NULL;
+        while (pkg == NULL)
+        {
+            pkg = generatePkg();    //  will return NULL if game has not updated message que
+            Sleep(10);
+        }
+        printf("Sending message: ");
+
+
         // send the message
-        if (sendto(client_socket, (const char*)generatePkg(), PKGSIZE, 0, (sockaddr*)&server, sizeof(sockaddr_in)) == SOCKET_ERROR)
+        if (sendto(client_socket, (const char*)pkg, PKGSIZE, 0, (sockaddr*)&server, sizeof(sockaddr_in)) == SOCKET_ERROR)
         {
             printf("sendto() failed with error code: %d", WSAGetLastError());
             return 3;
