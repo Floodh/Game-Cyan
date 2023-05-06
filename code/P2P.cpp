@@ -71,7 +71,7 @@ int clientThread()
     {
         char message[BUFLEN];
 
-        Sleep(500);
+        Sleep(50);
         //cin.getline(message, BUFLEN);
 
         int* pkg = NULL;
