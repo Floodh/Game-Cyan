@@ -199,6 +199,7 @@ void Game::Update()
         }
 
         case GameState::Playing:
+
             if (this->world != NULL)
                 this->world->Update();
             if (this->player != NULL)
@@ -228,8 +229,12 @@ void Game::Update()
                     break;   
                 default:
                     break;
-            }                             
+            }    
+
+            UpdateMessage();
+
             break;
+
 
         default:
             throw runtime_error("Entered invalid gamestate in update function");
@@ -333,5 +338,29 @@ void Game::HandleEvent(const SDL_Event& event)
         default:
             break;
     }
+
+}
+
+
+
+void Game::UpdateMessage()
+{
+
+    int* messageContent = new int[PKGSIZE];
+
+    messageContent[0] = 0;
+    messageContent[1] = 1;
+    messageContent[2] = 0;      //  might not be needed
+    messageContent[3] = this->currentLevel;
+
+    //  player position
+    if (this->player != NULL)
+    {
+        messageContent[4] = this->player->getPosition().x;
+        messageContent[5] = this->player->getPosition().z;
+        messageContent[6] = 0;
+    }
+
+    sendMessageQue.Produce(Message{(const char*)messageContent});
 
 }

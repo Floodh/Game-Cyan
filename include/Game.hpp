@@ -15,6 +15,7 @@
 #include "Portal.hpp"
 #include "Collectable.hpp"
 #include "PlayerOther.hpp"
+#include "P2P.hpp"
 
 #include <vector>
 #include <string>
@@ -51,6 +52,8 @@ class Game
 
 
     private:
+
+        void UpdateMessage();
 
         //  
         int windowWidth, windowHeight;

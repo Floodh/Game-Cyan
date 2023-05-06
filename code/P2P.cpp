@@ -7,13 +7,20 @@ int pkgNumber = 0;
 
 int* generatePkg()
 {
-    int* pkg = new int[PKGSIZE];
 
+    Message m{NULL};
+    sendMessageQue.Consume(m);
+    if (sendMessageQue.Size() == 0)
+        sendMessageQue.Produce(Message{m.message});
+
+    int* pkg = new int[PKGSIZE];
 
     pkg[0] = CLIENTNUMBER;
     pkg[1] = pkgNumber++;
-    for (int i = 2; i < PKGSIZE / 8; i++)
-        pkg[i] = pkgNumber + i;
+
+    if (m.message != NULL)
+        for (int i = 2; i < PKGSIZE / 8; i++)
+            pkg[i] = m.message[i];
 
     cout << "pkg number = " << pkgNumber << endl;
 
@@ -55,9 +62,11 @@ int clientThread()
     while (true)
     {
         char message[BUFLEN];
+
+        Sleep(100);
         printf("Sending message: ");
 
-        cin.getline(message, BUFLEN);
+        //cin.getline(message, BUFLEN);
 
         // send the message
         if (sendto(client_socket, (const char*)generatePkg(), PKGSIZE, 0, (sockaddr*)&server, sizeof(sockaddr_in)) == SOCKET_ERROR)
