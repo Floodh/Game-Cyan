@@ -28,7 +28,14 @@ void PlayerOther::Update()
         {
             cout << "i = " << i << ", " << data[i++] << "," << data[i++] << "," << data[i++] << endl;
         }
-    }    
+
+        GLfloat x = *((GLfloat*)(&data[4]));
+        GLfloat z = *((GLfloat*)(&data[5]));
+
+
+    }   
+
+
 
 }
 
