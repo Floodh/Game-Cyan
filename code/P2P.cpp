@@ -15,6 +15,9 @@ int* generatePkg()
     if (sendMessageQue.Size() == 0)
         sendMessageQue.Produce(Message{m.message});
 
+    while (sendMessageQue.Size() > 2)
+        sendMessageQue.Consume(m);
+
     int* pkg = new int[PKGSIZE / 8];
     for (int i = 2; i < PKGSIZE / 8; i++)
         pkg[i] = 0;
