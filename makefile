@@ -32,7 +32,7 @@ sources += $(codeDir)NG1.cpp
 sources += $(codeDir)NG2.cpp
 sources += $(codeDir)NG3.cpp
 sources += $(codeDir)NG4.cpp
-sources += $(codeDir)P2P.cpp
+sources += $(codeDir)Client.cpp
 
 compiled =  $(compiledDir)main.o 
 compiled += $(compiledDir)GL_utilities.o 

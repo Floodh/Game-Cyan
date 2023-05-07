@@ -1,6 +1,6 @@
 //  client
 
-#include "P2P.hpp"
+#include "Client.hpp"
 
 using namespace std;
 

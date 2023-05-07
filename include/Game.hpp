@@ -15,7 +15,7 @@
 #include "Portal.hpp"
 #include "Collectable.hpp"
 #include "PlayerOther.hpp"
-#include "P2P.hpp"
+#include "Client.hpp"
 
 #include <vector>
 #include <string>

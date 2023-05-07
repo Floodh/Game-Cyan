@@ -13,7 +13,7 @@
 #include "Terrain.hpp"
 #include "LoadBMP.hpp"
 #include "Console.hpp"
-#include "P2P.hpp"
+#include "Client.hpp"
 
 using namespace std;
 
