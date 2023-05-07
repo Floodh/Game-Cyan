@@ -13,7 +13,9 @@
 #include "Terrain.hpp"
 #include "LoadBMP.hpp"
 #include "Console.hpp"
-#include "P2P.hpp"
+#ifdef _WIN32
+    #include "P2P.hpp"
+#endif
 
 using namespace std;
 
@@ -21,8 +23,9 @@ int main(int argc, char *argv[])
 {
     
     srand (time(NULL));
-
-    thread t{clientThread};
+    #ifdef _WIN32
+        thread t{clientThread};
+    #endif
 
 
     SDL_Event event = { 0 };

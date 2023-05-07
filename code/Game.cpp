@@ -207,8 +207,10 @@ void Game::Update()
             if (this->portal != NULL)
                 if (this->portal->IsPlayerInside())
                     cout << "Player inside portal" << endl;
+            #ifdef _WIN32
             if (this->playerOther != NULL)
                 this->playerOther->Update();
+            #endif
             switch (this->currentLevel)
             {
                 case 1:
@@ -230,9 +232,9 @@ void Game::Update()
                 default:
                     break;
             }    
-
+            #ifdef _WIN32
             UpdateMessage();
-
+            #endif
             break;
 
 
@@ -342,6 +344,7 @@ void Game::HandleEvent(const SDL_Event& event)
 }
 
 
+#ifdef _WIN32
 
 void Game::UpdateMessage()
 {
@@ -366,3 +369,4 @@ void Game::UpdateMessage()
     sendMessageQue.Produce(Message{(const char*)messageContent});
 
 }
+#endif

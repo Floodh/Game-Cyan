@@ -50,6 +50,7 @@ compiled += $(compiledDir)LoadBMP.o
 compiled += $(compiledDir)MainMenu.o
 compiled += $(compiledDir)Console.o
 compiled += $(compiledDir)Player.o
+compiled += $(compiledDir)PlayerOther.o
 compiled += $(compiledDir)Portal.o
 compiled += $(compiledDir)Collectable.o
 compiled += $(compiledDir)VertexShape.o
@@ -57,6 +58,7 @@ compiled += $(compiledDir)NG1.o
 compiled += $(compiledDir)NG2.o
 compiled += $(compiledDir)NG3.o
 compiled += $(compiledDir)NG4.o
+# compiled += $(compiledDir)P2P.o
 
 
 
@@ -127,6 +129,9 @@ $(compiledDir)Console.o: $(codeDir)Console.cpp
 $(compiledDir)Player.o: $(codeDir)Player.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Player.o $(codeDir)Player.cpp $(CINCLUDE)
 
+$(compiledDir)PlayerOther.o: $(codeDir)PlayerOther.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)PlayerOther.o $(codeDir)PlayerOther.cpp $(CINCLUDE)
+
 $(compiledDir)Portal.o: $(codeDir)Portal.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Portal.o $(codeDir)Portal.cpp $(CINCLUDE)
 
@@ -147,6 +152,9 @@ $(compiledDir)NG4.o: $(codeDir)NG4.cpp
 
 $(compiledDir)Collectable.o: $(codeDir)Collectable.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Collectable.o $(codeDir)Collectable.cpp $(CINCLUDE)
+
+# $(compiledDir)P2P.o: $(codeDir)P2P.cpp
+# 	$(CC) $(CFLAGS) -c -o $(compiledDir)P2P.o $(codeDir)P2P.cpp $(CINCLUDE)
 
 clean: 
 	rm $(compiledDir)*.o
