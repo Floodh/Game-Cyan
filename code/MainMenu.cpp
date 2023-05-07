@@ -82,10 +82,22 @@ void MainMenu::Update()
         // cout << "           upX = " << mouse.x << ", upY = " << mouse.y << endl;      
         if (IsSelectedButton(playButton))
         {
-            this->response = MainMenu_Play;
-            this->quitButton.area.y += BUTTONHEIGHT + BUTTONSPACING_Y;
-            this->map1Button.visible = true;
-            this->map1Button.enabled = true;
+            if (playButton.clicked == false)
+            {
+                playButton.clicked = true;
+                this->response = MainMenu_Play;
+                this->quitButton.area.y += BUTTONHEIGHT + BUTTONSPACING_Y;
+                this->map1Button.visible = true;
+                this->map1Button.enabled = true;
+            }
+            else
+            {
+                playButton.clicked = false;
+                this->response = MainMenu_None;
+                this->quitButton.area.y -= BUTTONHEIGHT + BUTTONSPACING_Y;
+                this->map1Button.visible = false;
+                this->map1Button.enabled = false;
+            }
         }
         else if (IsSelectedButton(map1Button))
         {
