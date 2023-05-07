@@ -131,6 +131,15 @@ Water::Water(Camera& camera, uint8_t* levelData, int levelWidth, int levelHeight
     }
 }
 
+int rainbowX;
+float colorR;
+float colorG;
+float colorB;
+
+float HSVlights(float rainbow) {
+    return rainbow/60;
+}
+
 void Water::Draw()
 {
     glUseProgram(shader);
@@ -145,10 +154,48 @@ void Water::Draw()
             this->randomYPosition0[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
         else if (howMuch == 1.0f)
             this->randomYPosition1[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
+
+        float rainbow = rainbowX/1000;
+
+        // Regular HSV rainbow
+        if (rainbow<60) {
+            colorR = 1;
+            colorG = HSVlights(rainbow);
+            colorB = 0;
+        } else if (rainbow<120) {
+            colorR = HSVlights(120-rainbow);
+            colorG = 1;
+            colorB = 0;
+        } else if (rainbow<180) {
+            colorR = 0;
+            colorG = 1;
+            colorB = HSVlights(rainbow-120);
+        } else if (rainbow<240) {
+            colorR = 0;
+            colorG = HSVlights(240-rainbow);
+            colorB = 1;
+        } else if (rainbow<300) {
+            colorR = HSVlights(rainbow-240);
+            colorG = 0;
+            colorB = 1;
+        } else {
+            colorR = 1;
+            colorG = 0;
+            colorB = HSVlights(360-rainbow);
+        }
+
+        if (rainbow == 360) {
+            rainbowX = 0;
+        }
+
+        rainbowX++;
+
+        this->colors[i*3 + 0] = colorR;
+        this->colors[i*3 + 1] = colorG;
+        this->colors[i*3 + 2] = colorB;
     }
-    
 
-
+   
 
     //  when camera is fixed, use this
     glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
@@ -163,6 +210,11 @@ void Water::Draw()
     glBufferData(GL_ARRAY_BUFFER, vertexCount*3*sizeof(GLfloat), vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(glGetAttribLocation(shader, "inPosition"), 3, GL_FLOAT, GL_FALSE, 0, 0); 
     glEnableVertexAttribArray(glGetAttribLocation(shader, "inPosition"));
+
+    glBindBuffer(GL_ARRAY_BUFFER, colorBufferObjID);
+    glBufferData(GL_ARRAY_BUFFER, vertexCount*3*sizeof(GLfloat), colors, GL_STATIC_DRAW);
+    glVertexAttribPointer(glGetAttribLocation(shader, "inColor"), 3, GL_FLOAT, GL_FALSE, 0, 0); 
+    glEnableVertexAttribArray(glGetAttribLocation(shader, "inColor"));
 
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0L);
 }
