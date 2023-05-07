@@ -37,7 +37,8 @@ Game::Game(int windowWidth, int windowHeight)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);     //  Z buffer
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
     
 
     // CREATE AND SDL WINDOW CONFIGURED FOR OPENGL:
@@ -70,6 +71,7 @@ Game::Game(int windowWidth, int windowHeight)
     //glEnable( GL_DEPTH_TEST );
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_FRAMEBUFFER_SRGB);
+    glEnable(GL_MULTISAMPLE);
 
     //  other
     this->keyboard = Keyboard();
