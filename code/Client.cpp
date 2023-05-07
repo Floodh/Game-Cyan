@@ -39,6 +39,7 @@ int* generatePkg()
 
 int clientThread()
 {
+#ifdef MULTIPLAYER
     system("title UDP Client");
 
     // initialise winsock
@@ -110,4 +111,5 @@ int clientThread()
 
     closesocket(client_socket);
     WSACleanup();
+#endif
 }
