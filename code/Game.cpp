@@ -38,6 +38,9 @@ Game::Game(int windowWidth, int windowHeight)
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 8);
+
     
 
     // CREATE AND SDL WINDOW CONFIGURED FOR OPENGL:
@@ -70,6 +73,8 @@ Game::Game(int windowWidth, int windowHeight)
     //glEnable( GL_DEPTH_TEST );
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_FRAMEBUFFER_SRGB);
+
+    glEnable(GL_MULTISAMPLE);
 
     //  other
     this->keyboard = Keyboard();
@@ -128,15 +133,10 @@ void Game::NewGame(int level)
         this->world->camera.SetLookAt(3.0, 1.0, 3.0);
     }
 
-    // for (int index = 0; index < width * height * 4; index +=4)
-    //     std::cout << "levelData: " << (int)this->levelData[index] << " levelData: "<< (int)this->levelData[index+1] << " levelData: " << (int)this->levelData[index+2] << std::endl;
 
-
-    // for (int i=0; i < width*height*4; i++)
-    //     std::cout << (int)this->levelData[i] << std::endl;
     //  create player
     if (this->player == NULL)
-        this->player = new Player(this->world->camera, this->levelData, width, height);
+        this->player = new Player(this->world->camera, this->levelData, width, height, 1.5f, 0.5f, 8.5f, this->backgroundColor);
     else
         this->player->updateLevel(this->levelData, width, height);
     if (this->portal == NULL)
@@ -211,6 +211,8 @@ void Game::Update()
             if (this->playerOther != NULL)
                 this->playerOther->Update();
             #endif
+
+
             switch (this->currentLevel)
             {
                 case 1:
@@ -246,6 +248,7 @@ void Game::Update()
 
     if (this->world != NULL)
         this->world->Update();
+
 
     //  keydown and keyup is only valid for one frame, unlike the pressed state
     camera.UpdateViewMatrix();
