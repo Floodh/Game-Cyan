@@ -17,6 +17,12 @@ using namespace std;
 #define top 0.55
 #define bottom -0.55
 
+//0.55*(32/9)
+
+
+// right = 0.55*(px/py)
+// left = -0.55*(px/py)
+
 Camera::Camera(Mouse& mouse)
     : 
         viewMatrix{new GLfloat[16]},
@@ -108,6 +114,13 @@ void Camera::UpdateViewMatrix()
     
     
 }
+
+void Camera::UpdateProjectionMatrix()
+{
+    //  todo
+
+}
+
 
 void Camera::SetPosition(const GLfloat x, const GLfloat y, const GLfloat z)
 {
