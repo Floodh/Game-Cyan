@@ -15,13 +15,7 @@
 #include "Portal.hpp"
 #include "Collectable.hpp"
 #include "PlayerOther.hpp"
-<<<<<<< HEAD
-#ifdef _WIN32
-    #include "P2P.hpp"
-#endif
-=======
 #include "Client.hpp"
->>>>>>> main
 
 #include <vector>
 #include <string>

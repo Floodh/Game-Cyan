@@ -37,15 +37,8 @@ Game::Game(int windowWidth, int windowHeight)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);     //  Z buffer
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-<<<<<<< HEAD
-
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 8);
-
-=======
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
->>>>>>> main
     
 
     // CREATE AND SDL WINDOW CONFIGURED FOR OPENGL:
@@ -142,7 +135,7 @@ void Game::NewGame(int level)
 
     //  create player
     if (this->player == NULL)
-        this->player = new Player(this->world->camera, this->levelData, width, height, 1.5f, 0.5f, 8.5f, this->backgroundColor);
+        this->player = new Player(this->world->camera, this->levelData, width, height, 0.0f, 0.0f, 0.0f, this->backgroundColor);
     else
         this->player->updateLevel(this->levelData, width, height);
     if (this->portal == NULL)
