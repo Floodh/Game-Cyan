@@ -31,20 +31,20 @@ Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
 Player::Player(Camera& camera, uint8_t* levelData, int width, int height, GLfloat x, GLfloat y, GLfloat z, GLfloat* backgroundColor)
 : camera{camera}, HP{100}, Points{0}, scale{1.0f}, levelData{levelData}, width{width}, height{height}
 {
-    this->shape = VertexShape_Diamond(x, y, z, 0.3f, 1.0f);
+    this->shape = VertexShape_Diamond(x, y, z, 0.2f, 1.5f);
     this->shape.shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->shader = 99;
     this->scaleMatrix = S(scale);
     this->rotationMatrix = IdentityMatrix();
-    this->position = {x, y, z};
+    this->position = {x, 0.785f, z};
 
 
      //  finish the colors
     for (GLuint i = 0; i < this->shape.valueCount;)
     {
-        this->shape.colors[i++] = 1.0f;
-        this->shape.colors[i++] = 0.5f;
-        this->shape.colors[i++] = 0.5f;
+        this->shape.colors[i++] = 255.0f;
+        this->shape.colors[i++] = 2.0f;
+        this->shape.colors[i++] = 2.0f;
     }
 
 
@@ -101,12 +101,7 @@ void Player::Update(Keyboard* kb)
         // movement.z += -cos(1.5f); 
     }
 
-    // No need to normalize since all changes are size 1, also normalization generates a player bug when near edge
-
-    // if ( (movement.x != 0.0f) | (movement.y != 0.0f) | (movement.z != 0.0f) ) //    don't normalize a vector that has no direction
-    // {
-    //     movement = normalize(movement);
-    // }
+    
     vec3 tmp_pos;
     if (this->shader != 99)
     {
@@ -114,7 +109,7 @@ void Player::Update(Keyboard* kb)
     }
     else
     {
-        tmp_pos = this->position + 0.5f * movement;
+        tmp_pos = this->position + 0.05f * movement;
     }  
 
     int z = floor(tmp_pos.z);
@@ -122,7 +117,6 @@ void Player::Update(Keyboard* kb)
     int index = (x*4+z*width*4);
 
     if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
-        // setPosition(tmp_pos.x, tmp_pos.y, tmp_pos.z);
         this->position += 0.05f * movement;
         
     
@@ -140,7 +134,7 @@ void Player::Update(Keyboard* kb)
     // // else
     
     camera.SetLookAt(position.x, position.y, position.z);
-    camera.SetPosition(position.x, position.y + 1.5f, position.z - 1.75f);
+    camera.SetPosition(position.x, position.y + 2.0f, position.z - 2.5f);
 }
 
 
