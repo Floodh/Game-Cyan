@@ -1,8 +1,15 @@
 #pragma once
 
+
+
 #include "SafeQue.hpp"
 #include <iostream>
+
+#ifdef _WIN32
+#define MULTIPLAYER //  not implemented for linux
 #include <winsock2.h>
+#endif
+
 
 #define SERVER "213.204.195.24"  // or "localhost" - ip address of UDP server
 #define BUFLEN 512  // max length of answer
@@ -10,6 +17,8 @@
 
 #define PKGSIZE ((1 + 1 +  1 + 1 + 20 * 3) * 8)
 #define CLIENTNUMBER 1
+
+
 
 struct Message
 {

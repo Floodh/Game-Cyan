@@ -13,9 +13,7 @@
 #include "Terrain.hpp"
 #include "LoadBMP.hpp"
 #include "Console.hpp"
-#ifdef _WIN32
-    #include "P2P.hpp"
-#endif
+#include "Client.hpp"
 
 using namespace std;
 

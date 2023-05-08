@@ -32,7 +32,7 @@ sources += $(codeDir)NG1.cpp
 sources += $(codeDir)NG2.cpp
 sources += $(codeDir)NG3.cpp
 sources += $(codeDir)NG4.cpp
-sources += $(codeDir)P2P.cpp
+sources += $(codeDir)Client.cpp
 
 compiled =  $(compiledDir)main.o 
 compiled += $(compiledDir)GL_utilities.o 
@@ -58,7 +58,7 @@ compiled += $(compiledDir)NG1.o
 compiled += $(compiledDir)NG2.o
 compiled += $(compiledDir)NG3.o
 compiled += $(compiledDir)NG4.o
-# compiled += $(compiledDir)P2P.o
+compiled += $(compiledDir)Client.o
 
 
 
@@ -153,8 +153,8 @@ $(compiledDir)NG4.o: $(codeDir)NG4.cpp
 $(compiledDir)Collectable.o: $(codeDir)Collectable.cpp
 	$(CC) $(CFLAGS) -c -o $(compiledDir)Collectable.o $(codeDir)Collectable.cpp $(CINCLUDE)
 
-# $(compiledDir)P2P.o: $(codeDir)P2P.cpp
-# 	$(CC) $(CFLAGS) -c -o $(compiledDir)P2P.o $(codeDir)P2P.cpp $(CINCLUDE)
+$(compiledDir)Client.o: $(codeDir)Client.cpp
+	$(CC) $(CFLAGS) -c -o $(compiledDir)Client.o $(codeDir)Client.cpp $(CINCLUDE)
 
 clean: 
 	rm $(compiledDir)*.o

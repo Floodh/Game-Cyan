@@ -21,6 +21,7 @@ class Camera
         //  update view matrix
         //  to avoid bugs, we should call this every frame
         void UpdateViewMatrix();
+        void UpdateProjectionMatrix();
 
         void SetPosition(const GLfloat x, const GLfloat y, const GLfloat z);
         void SetLookAt(const GLfloat x, const GLfloat y, const GLfloat z);

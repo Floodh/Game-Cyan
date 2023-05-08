@@ -1,9 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
-#ifdef _WIN32
-    #include "P2P.hpp"
-#endif
+#include "Client.hpp"
 
 class PlayerOther : public Player
 {

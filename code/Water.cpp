@@ -136,14 +136,14 @@ void Water::Draw()
     glUseProgram(shader);
 
     //  animate the vertexes
-    GLfloat howMuch = (0.5 * sin((GLfloat)this->frameCount / 45.0) + 0.5);
+    GLfloat howMuch = (0.5 * sin((GLfloat)this->frameCount / 35.0) + 0.5);
     //howMuch = (GLfloat)(this->frameCount % 75) / 74.0;
     for (GLuint i = 0; i < this->vertexCount; i++)
     {  
         this->vertices[(i * 3) + 1] = howMuch * this->randomYPosition0[i] + (1.0 - howMuch) * this->randomYPosition1[i];
-        if (howMuch == 0.0f)
+        if (howMuch <= 0.01f)
             this->randomYPosition0[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
-        else if (howMuch == 1.0f)
+        else if (howMuch >= 0.99f)
             this->randomYPosition1[i] = (((GLfloat)rand()) / RAND_MAX) * WATERLEVEL;
     }
     
