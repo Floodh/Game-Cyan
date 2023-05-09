@@ -16,6 +16,7 @@ class PlayerOther : public Player
 
 
         int loadedLevel = -1;
+        int* mostRecentPkg = NULL;
 
 
 };
