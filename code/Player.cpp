@@ -77,6 +77,11 @@ void Player::Update(Keyboard* kb)
         movement.z -= cos(this->radiantAngle);
     }
     
+    if (kb->GetKey(1073742049).keypress) //  Shift
+    {
+        movement = movement*1.75;
+    }
+    
     vec3 tmp_pos;
     tmp_pos = this->position + 0.05f * movement;
      
