@@ -28,11 +28,12 @@ class Player : public IDrawObject
         void updateLevel(uint8_t* levelData, int width, int height);
         void setColor(GLfloat R, GLfloat G, GLfloat B);
 
+        GLfloat radiantAngle = 0.0;
 
     private:
         Camera &camera;
         vec3 position;
-        GLfloat radiantAngle = 0.0;
+        
 
         // Stats        
         int HP;

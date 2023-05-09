@@ -30,9 +30,11 @@ void PlayerOther::Update()
 
         GLfloat x = *((GLfloat*)(&data[4]));
         GLfloat z = *((GLfloat*)(&data[5]));
+        GLfloat y = *((GLfloat*)(&data[6]));
+        GLfloat rotation = *((GLfloat*)(&data[7]));
 
-        this->setPosition(x, this->getPosition().y, z);
-
+        this->setPosition(x, y, z);
+        this->radiantAngle = rotation;
 
     }   
 

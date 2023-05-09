@@ -26,9 +26,8 @@ int* generatePkg()
     pkg[0] = CLIENTNUMBER;
     pkg[1] = pkgNumber++;
     if (m.message != NULL)
-        for (int i = 2; i < 7; i++)
+        for (int i = 2; i < 12; i++)
             pkg[i] = ((int*)m.message)[i];
-    pkg[8] = 999;
 
     cout << "pkg number = " << pkgNumber << endl;
 

@@ -87,7 +87,7 @@ void Player::Update(Keyboard* kb)
 
     if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
         this->position += 0.05f * movement;
-    
+    //
 	rotationMatrix[0] =	cos(this->radiantAngle / 1.0);
 	rotationMatrix[2] = sin(this->radiantAngle / 1.0);
     rotationMatrix[8] = -sin(this->radiantAngle / 1.0);
