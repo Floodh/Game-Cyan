@@ -111,6 +111,9 @@ void Player::Update(Keyboard* kb)
     camera.SetPosition(position.x - sin(this->radiantAngle) * 3.5, position.y + 1.4f, position.z - cos(this->radiantAngle) * 3.5);
 
 
+    std::cout << "Angle = " << this->radiantAngle << std::endl;
+
+
 }
 
 

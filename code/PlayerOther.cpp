@@ -17,16 +17,16 @@ void PlayerOther::Update()
     while(eventQueue.Consume(event)) 
     {
         // Process the event
-        cout << endl << "Event message: {" << event.message << "}" << endl;
+        //cout << endl << "Event message: {" << event.message << "}" << endl;
 
         int* data = (int*)event.message;
-        cout << "Answer = '" << data[0] << "," << data[1] << "\n";
+        // cout << "Answer = '" << data[0] << "," << data[1] << "\n";
 
-        cout << "status =  " << data[2] << ", level loaded = " << data[3] << endl;
-        for (int i = 4; i < PKGSIZE / 8;)
-        {
-            cout << "i = " << i << ", " << data[i++] << "," << data[i++] << "," << data[i++] << endl;
-        }
+        // cout << "status =  " << data[2] << ", level loaded = " << data[3] << endl;
+        // for (int i = 4; i < PKGSIZE / 8;)
+        // {
+        //     cout << "i = " << i << ", " << data[i++] << "," << data[i++] << "," << data[i++] << endl;
+        // }
 
         int level = data[3];
         GLfloat x = *((GLfloat*)(&data[4]));

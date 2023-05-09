@@ -7,7 +7,7 @@ void Game::NG4_Init()
 
     this->portal->SetPosition(5.5, 1.0, 6.5);
     this->player->setPosition(5.5, this->player->getPosition().y, 1.5);
-
+    this->player->radiantAngle = 0.1;
 
     //  5.5, 2.5    #1
     //  7.5, 2.5    #2

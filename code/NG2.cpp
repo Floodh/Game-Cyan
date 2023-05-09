@@ -7,6 +7,7 @@ void Game::NG2_Init()
 
     this->portal->SetPosition(6.5, 1.0, 6.5);
     this->player->setPosition(2.5, this->player->getPosition().y, 2.5);
+    this->player->radiantAngle = 0.275;
 
 }
 

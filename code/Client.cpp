@@ -71,14 +71,14 @@ int clientThread()
     {
         char message[BUFLEN];
 
-        Sleep(50);
+        Sleep(23);
         //cin.getline(message, BUFLEN);
 
         int* pkg = NULL;
         while (pkg == NULL)
         {
             pkg = generatePkg();    //  will return NULL if game has not updated message que
-            Sleep(10);
+            Sleep(23);
         }
         printf("Sending message: ");
 

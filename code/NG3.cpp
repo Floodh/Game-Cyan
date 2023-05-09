@@ -16,6 +16,7 @@ void Game::NG3_Init()
 
     this->portal->SetPosition(8.5, 1.0, 6.5);
     this->player->setPosition(7.5, this->player->getPosition().y, 4.5);
+    this->player->radiantAngle = 3.4;
 
 
     if (collectables == NULL)
