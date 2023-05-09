@@ -53,7 +53,6 @@ Player::Player(Camera& camera, uint8_t* levelData, int width, int height, GLfloa
 Player::~Player()
 {}
 
-
 void Player::Update(Keyboard* kb)
 {
     vec3 movement{0.0f, 0.0f, 0.0f};
@@ -79,17 +78,28 @@ void Player::Update(Keyboard* kb)
     
     if (kb->GetKey(1073742049).keypress) //  Shift
     {
-        movement = movement*1.75;
+        movement *= 1.75;
     }
 
-    if (kb->GetKey(32).keypress && position.y <= 1.0f) //  Space
+    if (kb->GetKey(32).keypress) //  Space
     {
-        position.y += 0.02f;
+        movement *= 0.8;
+        position.y += ((1.0f)/(94.0f*position.y-65.0f))-0.02f;
     } 
-    else if (position.y >= 0.785f)
-    {
-        position.y -= 0.02f;
+    else if (position.y > 0.785f)
+    {  
+        movement *= 1.4;
+        position.y -= (((1.0f)/(96.0f*position.y-65.0f))-0.02f)*0.9;
     }
+
+    if (position.y < 0.785f)
+    {
+        position.y = 0.785f;
+    }
+    else if (position.y > 1.15f)
+    {
+        position.y = 1.15f;
+    } 
     
     vec3 tmp_pos;
     tmp_pos = this->position + 0.05f * movement;
