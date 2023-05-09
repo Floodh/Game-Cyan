@@ -106,13 +106,23 @@ bool Game::NG3_Update()
         collectedData = this->playerOther->mostRecentPkg[8];
 
     cout << "Collectables data: " << collectedData << endl;
-    for (int i = 0; i < this->numberOfCollectables; i++)
+    for (int i = this->numberOfCollectables - 1; i > -1 ; i--)
     {
-        int isTaken = collectedData && 0b1;
+        int isTaken = collectedData & 0b1;
+        if (isTaken == true)
+        {
+            if (collectables[i].canBeCollected == true)
+            if (collectables[i].isCollected == false)
+            {
+                collectables[i].canBeCollected = false;
+                collectables[i].isCollected = true;
+                collectedCount++;
+            }
+        }
         collectedData = collectedData >> 1;
         cout << isTaken << ", ";
     }
-    cout << endl;
+    //cout << endl;
 
     if (collectedCount >= 9)
         showPortal = true; 
