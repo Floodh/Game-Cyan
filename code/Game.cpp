@@ -373,6 +373,16 @@ void Game::UpdateMessage()
         messageContent[5] = *((int*)(&this->player->getPosition().z));
         messageContent[6] = *((int*)(&this->player->getPosition().y));
         messageContent[7] = *((int*)(&this->player->radiantAngle));
+
+        messageContent[8] = 0;
+        for (int i = 0; i < numberOfCollectables; i++)
+        {
+            messageContent[8] = messageContent[8] << 1;
+            if (collectables[i].isCollected == true)
+                messageContent[8] += 1;
+        }
+
+
     }
 
     sendMessageQue.Produce(Message{(const char*)messageContent});

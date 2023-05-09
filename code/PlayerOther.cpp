@@ -19,6 +19,7 @@ void PlayerOther::Update()
         // Process the event
         //cout << endl << "Event message: {" << event.message << "}" << endl;
 
+        //free(mostRecentPkg);
         int* data = (int*)event.message;
         // cout << "Answer = '" << data[0] << "," << data[1] << "\n";
 
@@ -41,6 +42,8 @@ void PlayerOther::Update()
         rotationMatrix[2] = sin(this->radiantAngle / 1.0);
         rotationMatrix[8] = -sin(this->radiantAngle / 1.0);
         rotationMatrix[10] = cos(this->radiantAngle / 1.0);
+
+        mostRecentPkg = data;
     }   
 
 #endif

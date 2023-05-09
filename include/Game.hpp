@@ -82,6 +82,8 @@ class Game
     //  NewGames
 
         int const totalLevels = 4;
+        Collectable* collectables = NULL;
+        int numberOfCollectables = 0;
 
         void NG1_Init();
         bool NG1_Update();
