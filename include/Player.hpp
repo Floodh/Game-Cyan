@@ -9,6 +9,7 @@
 #include "VertexShape.hpp"
 
 
+
 #define PLAYERTURNSPEED 0.055f
 
 class Player : public IDrawObject
@@ -25,6 +26,7 @@ class Player : public IDrawObject
         const vec3& getPosition();
 
         void updateLevel(uint8_t* levelData, int width, int height);
+        void setColor(GLfloat R, GLfloat G, GLfloat B);
 
 
     private:
