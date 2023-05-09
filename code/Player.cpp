@@ -6,9 +6,9 @@
 
 
 Player::Player(Camera& camera, uint8_t* levelData, int width, int height)
-: camera{camera}, HP{100}, Points{0}, scale{0.3f}, levelData{levelData}, width{width}, height{height}
+: camera{camera}, HP{100}, Points{0}, scale{0.5f}, levelData{levelData}, width{width}, height{height}
 {
-    this->position = {2.0f, 0.5f*(scale+1.0f), 1.5f};
+    this->position = {2.0f, 0.5f*(scale+0.5f), 1.5f};
 
     this->shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->scaleMatrix = S(scale);
