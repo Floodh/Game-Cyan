@@ -73,8 +73,6 @@ Game::Game(int windowWidth, int windowHeight)
     glEnable(GL_FRAMEBUFFER_SRGB);
     glEnable(GL_MULTISAMPLE);
 
-    glEnable(GL_MULTISAMPLE);
-
     //  other
     this->keyboard = Keyboard();
 
@@ -135,15 +133,22 @@ void Game::NewGame(int level)
 
     //  create player
     if (this->player == NULL)
+    {
+
         this->player = new Player(this->world->camera, this->levelData, width, height, 0.0f, 0.0f, 0.0f, this->backgroundColor);
+    }
     else
+    {
         this->player->updateLevel(this->levelData, width, height);
+
+    }
     if (this->portal == NULL)
         this->portal = new Portal(5.0, 1.0, 5.0, *this->player, this->camera, this->backgroundColor);
 
     if (this->playerOther == NULL)
     {
         this->playerOther = new PlayerOther(this->world->camera, this->levelData, width, height, 0.0f, 0.0f, 0.0f, this->backgroundColor);
+        this->playerOther->setColor(1.0f, 0.0f, 0.0f);
         this->playerOther->setPosition(0.5, this->playerOther->getPosition().y, 0.5);
     }
 
