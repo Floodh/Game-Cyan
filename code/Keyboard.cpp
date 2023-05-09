@@ -18,6 +18,7 @@ Keyboard::Keyboard()
     this->keys.push_back((SDL_KeyCode)(100));           //  D
 
     this->keys.push_back((SDL_KeyCode)(1073742049));    //  shit
+    this->keys.push_back((SDL_KeyCode)(32));    //  space
 }
 
 void Keyboard::HandleKeydown(const SDL_Keycode eventKey)
