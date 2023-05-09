@@ -12,7 +12,12 @@ Player::Player(Camera& camera, uint8_t* levelData, int width, int height, GLfloa
     this->shape = VertexShape_Diamond(x, y, z, 0.2f, 1.5f);
     this->shape.shader = loadShaders("shader/player.vert", "shader/player.frag");
     this->scaleMatrix = S(scale);
-    this->rotationMatrix = IdentityMatrix();
+    this->rotationMatrix = new GLfloat[16]{
+		cos(this->radiantAngle), 0.0f, sin(this->radiantAngle), 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		-sin(this->radiantAngle), 0.0f, cos(this->radiantAngle), 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f};
+
     this->position = {x, 0.785f, z};
 
 
@@ -57,27 +62,24 @@ void Player::Update(Keyboard* kb)
 {
     vec3 movement{0.0f, 0.0f, 0.0f};
 
+    if (kb->GetKey(97).keypress) //  A
+        this->radiantAngle += PLAYERTURNSPEED;
+    if (kb->GetKey(100).keypress) //  D
+        this->radiantAngle -= PLAYERTURNSPEED;
+
+
+    
     if (kb->GetKey(119).keypress) //  W
     {
-        // movement.x += sin(0.0f);
-        movement.z += 1;//cos(0.0f);
-    }
-    if (kb->GetKey(115).keypress) //  S
-    {
-        // movement.x += -sin(0.0f);
-        movement.z += -1;//-cos(0.0f);
-    }
-     if (kb->GetKey(97).keypress) //  A
-    {
-        movement.x += 1;//sin(1.5f);
-        // movement.z += cos(1.5f);
-    }
-    if (kb->GetKey(100).keypress) //  D
-    {
-        movement.x += -1;//-sin(1.5f);
-        // movement.z += -cos(1.5f); 
+        movement.x += sin(this->radiantAngle);
+        movement.z += cos(this->radiantAngle);
     }
 
+    if (kb->GetKey(115).keypress) //  S
+    {
+        movement.x -= sin(this->radiantAngle);
+        movement.z -= cos(this->radiantAngle);
+    }
     
     vec3 tmp_pos;
     tmp_pos = this->position + 0.05f * movement;
@@ -89,10 +91,16 @@ void Player::Update(Keyboard* kb)
 
     if ((int)this->levelData[index] == 75 && (int)this->levelData[index+1] == 105 && (int)this->levelData[index+2] == 47)
         this->position += 0.05f * movement;
-        
+    
+	rotationMatrix[0] =	cos(this->radiantAngle / 1.0);
+	rotationMatrix[2] = sin(this->radiantAngle / 1.0);
+    rotationMatrix[8] = -sin(this->radiantAngle / 1.0);
+    rotationMatrix[10] = cos(this->radiantAngle / 1.0);
     
     camera.SetLookAt(position.x, position.y, position.z);
-    camera.SetPosition(position.x, position.y + 2.0f, position.z - 2.5f);
+    camera.SetPosition(position.x - sin(this->radiantAngle) * 3.5, position.y + 1.4f, position.z - cos(this->radiantAngle) * 3.5);
+
+
 }
 
 
@@ -101,7 +109,7 @@ void Player::Draw()
 
     glUseProgram(this->shape.shader);
     glUniformMatrix4fv(glGetUniformLocation(this->shape.shader, "viewMatrix"), 1, GL_TRUE, this->camera.GetViewMatrix());
-    glUniformMatrix4fv(glGetUniformLocation(this->shape.shader, "rotationMatrix"), 1, GL_TRUE, this->rotationMatrix.m);
+    glUniformMatrix4fv(glGetUniformLocation(this->shape.shader, "rotationMatrix"), 1, GL_TRUE, this->rotationMatrix);
 
     glUniform3fv(glGetUniformLocation(this->shape.shader, "eyePosition"), 1, this->camera.position);
     glUniformMatrix4fv(glGetUniformLocation(this->shape.shader, "transformationMatrix"), 1, GL_TRUE, T(this->position.x, this->position.y, this->position.z).m);

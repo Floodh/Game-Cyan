@@ -9,6 +9,8 @@
 #include "VertexShape.hpp"
 
 
+#define PLAYERTURNSPEED 0.055f
+
 class Player : public IDrawObject
 {
     public:
@@ -28,6 +30,7 @@ class Player : public IDrawObject
     private:
         Camera &camera;
         vec3 position;
+        GLfloat radiantAngle = 0.0;
 
         // Stats        
         int HP;
@@ -40,7 +43,7 @@ class Player : public IDrawObject
         unsigned int vertexArrayObjID;
         GLfloat scale;
         mat4 scaleMatrix;
-        mat4 rotationMatrix;
+        GLfloat*  rotationMatrix;
 
         VertexShape shape;
         uint8_t* levelData = nullptr;

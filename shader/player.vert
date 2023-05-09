@@ -17,5 +17,5 @@ void main(void)
 {
     gl_Position = projectionMatrix * viewMatrix * transformationMatrix * rotationMatrix * scaleMatrix * vec4(inPosition, 1.0);
 	fragColor = inColor;
-    eyeRelativePosition = inPosition - eyePosition;
+    eyeRelativePosition = (transformationMatrix * rotationMatrix * vec4(inPosition, 1.0)).xyz - eyePosition;
 }
