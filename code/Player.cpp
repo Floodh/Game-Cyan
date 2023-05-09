@@ -17,12 +17,13 @@ Player::Player(Camera& camera, uint8_t* levelData, int width, int height, GLfloa
 
 
      //  finish the colors
-    for (GLuint i = 0; i < this->shape.valueCount;)
-    {
-        this->shape.colors[i++] = 255.0f;
-        this->shape.colors[i++] = 2.0f;
-        this->shape.colors[i++] = 2.0f;
-    }
+    setColor(255.0f, 2.0f, 2.0f);
+    // for (GLuint i = 0; i < this->shape.valueCount;)
+    // {
+    //     this->shape.colors[i++] = 255.0f;
+    //     this->shape.colors[i++] = 2.0f;
+    //     this->shape.colors[i++] = 2.0f;
+    // }
 
 
     glBindBuffer(GL_ARRAY_BUFFER, shape.vertexBufferObjID);
@@ -137,4 +138,16 @@ void Player::updateLevel(uint8_t* levelData, int width, int height)
 const vec3& Player::getPosition()
 {
     return this->position;
+}
+
+void Player::setColor(GLfloat R, GLfloat G, GLfloat B)
+{
+    for (GLuint i = 0; i < this->shape.valueCount;)
+    {
+        this->shape.colors[i++] = R;
+        this->shape.colors[i++] = G;
+        this->shape.colors[i++] = B; 
+    } 
+    glBindBuffer(GL_ARRAY_BUFFER, shape.colorBufferObjID);
+    glBufferData(GL_ARRAY_BUFFER, shape.vertexCount*3*sizeof(GLfloat), shape.colors, GL_STATIC_DRAW);
 }
