@@ -6,14 +6,13 @@ using namespace std;
 //  special update function to handle the player position
 //  being determined by input from connection
 
-PlayerOther::PlayerOther(Camera& camera, uint8_t* levelData, int width, int height)
-    : Player(camera, levelData, width, height)
-{
+PlayerOther::PlayerOther(Camera& camera, uint8_t* levelData, int width, int height, GLfloat x, GLfloat y, GLfloat z, GLfloat* backgroundColor)
+    : Player(camera, levelData, width, height, x, y, z, backgroundColor)
+{}
 
-}
-#ifdef _WIN32
 void PlayerOther::Update()
 {
+#ifdef _WIN32
     Message event{NULL};
     while(eventQueue.Consume(event)) 
     {
@@ -37,10 +36,9 @@ void PlayerOther::Update()
 
     }   
 
-
-
-}
 #endif
+}
+
 
 
 void PlayerOther::AddConnection()

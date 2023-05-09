@@ -143,7 +143,7 @@ void Game::NewGame(int level)
 
     if (this->playerOther == NULL)
     {
-        this->playerOther = new PlayerOther(this->world->camera, this->levelData, width, height);
+        this->playerOther = new PlayerOther(this->world->camera, this->levelData, width, height, 0.0f, 0.0f, 0.0f, this->backgroundColor);
         this->playerOther->setPosition(0.5, this->playerOther->getPosition().y, 0.5);
     }
 

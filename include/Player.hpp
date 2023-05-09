@@ -12,7 +12,6 @@
 class Player : public IDrawObject
 {
     public:
-        Player(Camera& camera, uint8_t* levelData, int width, int height);
         Player(Camera& camera, uint8_t* levelData, int width, int height, GLfloat x, GLfloat y, GLfloat z, GLfloat* backgroundColor);
         // Player(GLint* m, GLint* texture);
         ~Player();
@@ -34,7 +33,7 @@ class Player : public IDrawObject
         int HP;
         int Points;
 
-        GLuint shader;
+
         GLuint numVertices;
         GLfloat* pyramidVertices;
         GLfloat* colors;
@@ -43,7 +42,6 @@ class Player : public IDrawObject
         mat4 scaleMatrix;
         mat4 rotationMatrix;
 
-        Model* m;
         VertexShape shape;
         uint8_t* levelData = nullptr;
         int width;
