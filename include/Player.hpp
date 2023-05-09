@@ -30,7 +30,7 @@ class Player : public IDrawObject
 
         GLfloat radiantAngle = 0.0;
 
-    private:
+    protected:
         Camera &camera;
         vec3 position;
         

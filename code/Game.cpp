@@ -373,7 +373,6 @@ void Game::UpdateMessage()
         messageContent[5] = *((int*)(&this->player->getPosition().z));
         messageContent[6] = *((int*)(&this->player->getPosition().y));
         messageContent[7] = *((int*)(&this->player->radiantAngle));
-
     }
 
     sendMessageQue.Produce(Message{(const char*)messageContent});

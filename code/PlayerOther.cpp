@@ -37,7 +37,10 @@ void PlayerOther::Update()
         this->loadedLevel = level;
         this->setPosition(x, y, z);
         this->radiantAngle = rotation;
-
+        rotationMatrix[0] =	cos(this->radiantAngle / 1.0);
+        rotationMatrix[2] = sin(this->radiantAngle / 1.0);
+        rotationMatrix[8] = -sin(this->radiantAngle / 1.0);
+        rotationMatrix[10] = cos(this->radiantAngle / 1.0);
     }   
 
 #endif
