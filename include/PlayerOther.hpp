@@ -15,5 +15,8 @@ class PlayerOther : public Player
         void AddConnection();
 
 
+        int loadedLevel = -1;
+
+
 };
 
