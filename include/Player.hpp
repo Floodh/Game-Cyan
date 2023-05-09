@@ -6,12 +6,14 @@
 #include "LittleOBJLoader.h"
 #include "VectorUtils4.h"
 #include "Keyboard.hpp"
+#include "VertexShape.hpp"
 
 
 class Player : public IDrawObject
 {
     public:
         Player(Camera& camera, uint8_t* levelData, int width, int height);
+        Player(Camera& camera, uint8_t* levelData, int width, int height, GLfloat x, GLfloat y, GLfloat z, GLfloat* backgroundColor);
         // Player(GLint* m, GLint* texture);
         ~Player();
 
@@ -42,6 +44,7 @@ class Player : public IDrawObject
         mat4 rotationMatrix;
 
         Model* m;
+        VertexShape shape;
         uint8_t* levelData = nullptr;
         int width;
         int height;

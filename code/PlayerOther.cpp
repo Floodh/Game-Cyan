@@ -11,7 +11,7 @@ PlayerOther::PlayerOther(Camera& camera, uint8_t* levelData, int width, int heig
 {
 
 }
-
+#ifdef _WIN32
 void PlayerOther::Update()
 {
     Message event{NULL};
@@ -40,6 +40,7 @@ void PlayerOther::Update()
 
 
 }
+#endif
 
 
 void PlayerOther::AddConnection()
