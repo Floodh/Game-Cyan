@@ -75,11 +75,6 @@ void Player::Update(Keyboard* kb)
         movement.x -= sin(this->radiantAngle);
         movement.z -= cos(this->radiantAngle);
     }
-    
-    if (kb->GetKey(1073742049).keypress) //  Shift
-    {
-        movement *= 1.75;
-    }
 
     if (kb->GetKey(32).keypress) //  Space
     {
@@ -88,8 +83,8 @@ void Player::Update(Keyboard* kb)
     } 
     else if (position.y > 0.785f)
     {  
-        movement *= 1.4;
-        position.y -= (((1.0f)/(96.0f*position.y-65.0f))-0.02f)*0.9;
+        movement *= 2;
+        position.y -= ((1.0f)/(80.0f*position.y-55.0f))*0.2;
     }
 
     if (position.y < 0.785f)
