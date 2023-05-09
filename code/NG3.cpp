@@ -41,6 +41,7 @@ void Game::NG3_Init()
     }
 
     collectedCount = 0;
+    showPortal = false;
 
 
     //  8.5, 1.5
@@ -75,6 +76,9 @@ bool Game::NG3_Update()
             collectedCount++;
         }
     }
+
+    if (collectedCount >= 9)
+        showPortal = true; 
 
     return false;
 

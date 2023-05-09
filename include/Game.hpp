@@ -77,7 +77,7 @@ class Game
 
         GLfloat* const backgroundColor = new GLfloat[3]{0.5f, 0.5f, 0.8f};
 
-
+        bool showPortal = true;
 
     //  NewGames
 

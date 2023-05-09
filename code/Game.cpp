@@ -284,7 +284,8 @@ void Game::Draw()
             if (this->player != NULL)
                 this->player->Draw();
             if (this->portal != NULL)
-                this->portal->Draw();
+                if (this->showPortal)
+                    this->portal->Draw();
             if (this->playerOther != NULL)
                 if (this->playerOther->loadedLevel == this->currentLevel)
                     this->playerOther->Draw();
