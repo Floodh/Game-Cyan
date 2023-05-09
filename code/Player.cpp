@@ -81,6 +81,15 @@ void Player::Update(Keyboard* kb)
     {
         movement = movement*1.75;
     }
+
+    if (kb->GetKey(32).keypress && position.y <= 1.0f) //  Space
+    {
+        position.y += 0.02f;
+    } 
+    else if (position.y >= 0.785f)
+    {
+        position.y -= 0.02f;
+    }
     
     vec3 tmp_pos;
     tmp_pos = this->position + 0.05f * movement;
