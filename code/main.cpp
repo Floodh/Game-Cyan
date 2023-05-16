@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     //
     try {
 
-        Game game{1000,1000};
+        Game game{2100, 1340};
         game.NewGame(0);
 
 

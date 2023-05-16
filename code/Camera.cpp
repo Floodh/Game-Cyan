@@ -12,8 +12,8 @@ using namespace std;
 
 #define near 1.4
 #define far 60.0
-#define right 0.55
-#define left -0.55
+#define right 0.862
+#define left -0.862
 #define top 0.55
 #define bottom -0.55
 
